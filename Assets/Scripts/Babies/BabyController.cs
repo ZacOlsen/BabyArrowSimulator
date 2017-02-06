@@ -96,6 +96,10 @@ public class BabyController : MonoBehaviour {
 
 	private Transform babyModel;
 
+	private bool onTreadmill;
+
+	[SerializeField] private GameObject fractalizedBaby = null;
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -149,7 +153,7 @@ public class BabyController : MonoBehaviour {
 
 	protected void FixedUpdate () {
 
-		if (!grounded) {
+		if (!grounded && !onTreadmill) {
 			babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
 				Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y), 0, 0);
 		}
@@ -357,6 +361,8 @@ public class BabyController : MonoBehaviour {
 
 		bm.OutOfBabies ();
 		Destroy (gameObject);
+
+		Instantiate (fractalizedBaby, transform.position, transform.rotation);
 	}
 
 	private void SwitchToPreviousBaby () {
@@ -379,6 +385,10 @@ public class BabyController : MonoBehaviour {
 		return current;
 	}
 
+	public void SetOnTreadmill (bool treadmill) {
+		onTreadmill = treadmill;
+	}
+
 	protected void OnCollisionEnter (Collision other) {
 		
 		if (!enabled) {
@@ -399,6 +409,15 @@ public class BabyController : MonoBehaviour {
 		} else if (other.collider.CompareTag ("Wall")) {
 
 //			rb.velocity = new Vector3 (0, -other.relativeVelocity.y, 0);
+	
+		} else if (other.collider.CompareTag ("Trampoline")) {
+			
+			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal)
+				* other.collider.GetComponent<Trampoline> ().GetEnergyConserved ();
+
+			if (rb.velocity.y < 1) {
+				Invoke ("EndMotion", slideTime);
+			}
 		}
 	}
 }

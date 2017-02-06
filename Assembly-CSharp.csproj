@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{254A2719-ABF2-2B95-DD18-F5126134C159}</ProjectGuid>
+    <ProjectGuid>{514AFB19-B286-2E38-D601-8EA0FDF87F1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -55,6 +55,9 @@
      <Compile Include="Assets\Scripts\CameraLevelPreview.cs" />
      <Compile Include="Assets\Scripts\Death.cs" />
      <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Balloon.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Trampoline.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\Treadmill.cs" />
      <Compile Include="Assets\Scripts\TutorialController.cs" />
      <Compile Include="Assets\Scripts\Victory.cs" />
      <None Include="Assets\Game File IO\Mission_Unlocks.txt" />

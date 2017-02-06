@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Start Menu.unity
+- path: Assets/Scenes/Baby Test.unity
   isLoaded: 1
   isActive: 1

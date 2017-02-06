@@ -23,6 +23,14 @@ public class BouncyBaby : BabyController {
 				
 				Invoke ("EndMotion", slideTime);
 			}
+
+		} else if (other.collider.CompareTag ("Trampoline")) {
+
+			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
+
+			if (rb.velocity.y < 1) {
+				Invoke ("EndMotion", slideTime);
+			}
 		}
 	}
 }
