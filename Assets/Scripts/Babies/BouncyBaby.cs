@@ -1,0 +1,28 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BouncyBaby : BabyController {
+
+	[SerializeField] private int numberOfBounces = 2;
+	[SerializeField] [Range(0, 1)] private float energyConserved = .66f;
+
+	protected new void OnCollisionEnter (Collision other) {
+
+		if (!enabled) {
+			return;
+		}
+
+		if (other.collider.CompareTag ("Floor") || other.collider.CompareTag ("Wall")) {
+
+			if (numberOfBounces > 0) {
+
+				rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
+				numberOfBounces--;
+			
+			} else {
+				
+				Invoke ("EndMotion", slideTime);
+			}
+		}
+	}
+}

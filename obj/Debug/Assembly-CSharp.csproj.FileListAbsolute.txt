@@ -1,0 +1,81 @@
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.xml
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.xml
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.dll
+C:\Users\Default.SixCore-PC\Documents\Unity Projects\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.pdb
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.iOS.Extensions.Common.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.VR.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Analytics.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.VR.xml
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.dll
+C:\Users\GameDesign\Desktop\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.HoloLens.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.VR.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEditor.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.Analytics.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.HoloLens.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\Temp\bin\Debug\UnityEngine.VR.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\obj\Debug\Assembly-CSharp.pdb
