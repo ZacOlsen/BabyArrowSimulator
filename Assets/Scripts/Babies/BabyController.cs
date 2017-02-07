@@ -100,6 +100,8 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private GameObject fractalizedBaby = null;
 
+	[SerializeField] private float timeTilFractalizedDestroyed = 5f;
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -358,15 +360,17 @@ public class BabyController : MonoBehaviour {
 		if (current) {
 			SwitchToPreviousBaby ();
 		}
-
+			
 		bm.OutOfBabies ();
 		Destroy (gameObject);
 
-		Instantiate (fractalizedBaby, transform.position, transform.rotation);
+		Destroy(Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
 	}
 
 	private void SwitchToPreviousBaby () {
-		
+
+		Debug.Log ("hi");
+
 		Vector3 camOffsets = Camera.main.transform.localPosition;
 		Camera.main.transform.parent = previousBaby.transform.FindChild ("Vertical Rotation").transform;
 		Camera.main.transform.localPosition = camOffsets;
