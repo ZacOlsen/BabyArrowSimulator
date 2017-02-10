@@ -69,6 +69,8 @@ public class BabyController : MonoBehaviour {
 	 */
 	private float chargeBarIniY;
 
+	[SerializeField] private float maxArcDistance = 30f;
+
 	/**
 	 * the gameobject used to create the aiming arc
 	 */
@@ -216,7 +218,7 @@ public class BabyController : MonoBehaviour {
 			Rigidbody rig = baby.GetComponent<Rigidbody> ();
 
 			if (soldier) {
-				baby.GetComponent<SoldierBaby> ().SetStraightDuration (launchSpeed / maxLaunchSpeed);
+				baby.GetComponent<SoldierBaby> ().SetStraightDuration (1);//launchSpeed / maxLaunchSpeed);
 			}
 
 			rig.velocity = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed));
@@ -276,6 +278,10 @@ public class BabyController : MonoBehaviour {
 		float initialXVel = launchSpeed * Mathf.Cos (vertRotation.localEulerAngles.x * Mathf.Deg2Rad);
 		float distance = time * initialXVel;
 
+		if (distance > maxArcDistance) {
+			time = maxArcDistance / initialXVel;
+		}
+
 		Vector3 landPos = transform.TransformDirection (new Vector3 (0, 0, distance));
 		landPos += launchStartPos.position;
 
@@ -322,14 +328,14 @@ public class BabyController : MonoBehaviour {
 		float angleHor = Mathf.Atan2 (physicsPos.x - transform.position.x, physicsPos.z - transform.position.z) * Mathf.Rad2Deg;
 		float angleVert = 90;
 
-		angleVert -= Mathf.Atan2 (physicsPos.y - transform.position.y, Vector2.Distance(new Vector2(physicsPos.x, physicsPos.z),
-			new Vector2(transform.position.x, transform.position.z))) * Mathf.Rad2Deg;
+		angleVert -= Mathf.Atan2 (physicsPos.y - transform.position.y, Vector2.Distance (new Vector2 (physicsPos.x, physicsPos.z),
+			new Vector2 (transform.position.x, transform.position.z))) * Mathf.Rad2Deg;
 
 		arcPieces [0].SetActive (true);
 		arcPieces [0].transform.position = (transform.position + physicsPos) / 2;
-		arcPieces [0].transform.rotation = Quaternion.Euler(new Vector3(angleVert, angleHor, 0));
-		arcPieces [0].transform.localScale = new Vector3(arcPieces[0].transform.localScale.x, 
-			Vector3.Distance(transform.position, physicsPos) / 2, arcPieces[0].transform.localScale.z);
+		arcPieces [0].transform.rotation = Quaternion.Euler (new Vector3 (angleVert, angleHor, 0));
+		arcPieces [0].transform.localScale = new Vector3 (arcPieces[0].transform.localScale.x, 
+			Vector3.Distance (transform.position, physicsPos) / 2, arcPieces[0].transform.localScale.z);
 
 		for (int i = 1; i < NUMBER_OF_ARC_PIECES; i++) {
 			arcPieces [i].SetActive (false);

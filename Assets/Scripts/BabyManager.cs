@@ -84,22 +84,31 @@ public class BabyManager : MonoBehaviour {
 		int previous = currentIndex;
 		currentIndex += increment;
 
-		while (currentIndex != previous) {
+		if (currentIndex >= babies.Length) {
+			currentIndex = 0;
+		}
 
-			if (currentIndex >= babies.Length) {
-				currentIndex = 0;
-			}
+		if (currentIndex < 0) {
+			currentIndex = babies.Length - 1;
+		}
 
-			if (currentIndex < 0) {
-				currentIndex = babies.Length - 1;
-			}
-
+		do {
+			
 			if (babiesTable [currentIndex] == 0) {
 				currentIndex += increment;	
 			} else {
 				break;
 			}
-		}
+
+			if (currentIndex >= babies.Length) {
+				currentIndex = 0;
+			}
+			
+			if (currentIndex < 0) {
+				currentIndex = babies.Length - 1;
+			}
+		
+		} while (currentIndex != previous);
 
 		if (currentIndex >= babies.Length) {
 			currentIndex = 0;
@@ -205,7 +214,6 @@ public class BabyManager : MonoBehaviour {
 		}
 
 		ShowDefeat ();
-
 		return true;
 	}
 

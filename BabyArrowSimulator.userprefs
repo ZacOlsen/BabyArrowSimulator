@@ -4,11 +4,14 @@
     <Files>
       <File FileName="Assets\Scripts\Obstacles\Balloon.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Obstacles\Trampoline.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Babies\BabyController.cs" Line="104" Column="1" />
+      <File FileName="Assets\Scripts\Babies\BabyController.cs" Line="221" Column="63" />
       <File FileName="Assets\Scripts\Babies\BouncyBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Babies\StickyBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Obstacles\Treadmill.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Death.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BabyManager.cs" Line="93" Column="4" />
+      <File FileName="Assets\Scripts\Babies\NeoBaby.cs" Line="41" Column="4" />
+      <File FileName="Assets\Scripts\Babies\SoldierBaby.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
