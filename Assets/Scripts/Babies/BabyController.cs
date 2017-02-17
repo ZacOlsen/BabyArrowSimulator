@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class BabyController : MonoBehaviour {
 
@@ -219,11 +220,14 @@ public class BabyController : MonoBehaviour {
 
 			Rigidbody rig = baby.GetComponent<Rigidbody> ();
 
+			Vector3 vel = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed));
+		
 			if (soldier) {
-				baby.GetComponent<SoldierBaby> ().SetStraightDuration (Mathf.Sqrt(launchSpeed / maxLaunchSpeed));
-			}
+				baby.GetComponent<SoldierBaby> ().SetStats (1, vel);
 
-			rig.velocity = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed));
+			} else {
+				rig.velocity = vel;
+			}
 
 			baby.GetComponent<BabyController> ().rotationY = rotationY;
 
@@ -233,9 +237,7 @@ public class BabyController : MonoBehaviour {
 			Destroy (GetComponentInChildren<Camera>().gameObject);
 			launchSpeed = 0;
 
-			if (!(this is NeoBaby)) {
-				this.enabled = false;
-			}
+			this.enabled = false;
 
 			current = false;
 		}
@@ -351,10 +353,7 @@ public class BabyController : MonoBehaviour {
 		bm.ChangeUI (true);
 
 		rb.velocity = Vector3.zero;
-		rb.isKinematic = true;
 		grounded = true;
-
-		Destroy (col);
 
 		babyModel.transform.localRotation = Quaternion.identity;
 
@@ -365,6 +364,18 @@ public class BabyController : MonoBehaviour {
 		if (bm.OutOfBabies ()) {
 			this.enabled = false;
 		}
+
+		StartCoroutine ("FixCollision");
+	}
+
+	private IEnumerator FixCollision () {
+
+		yield return new WaitForFixedUpdate ();
+		yield return new WaitForFixedUpdate ();
+		yield return new WaitForFixedUpdate ();
+		yield return new WaitForFixedUpdate ();
+		rb.isKinematic = true;
+		Destroy (col);
 	}
 
 	public void Die () {
@@ -376,10 +387,12 @@ public class BabyController : MonoBehaviour {
 		bm.OutOfBabies ();
 		Destroy (gameObject);
 
-		Destroy(Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
+		Destroy (Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
 	}
 
 	private void SwitchToPreviousBaby () {
+
+		bm.ChangeUI (true);
 
 		Vector3 camOffsets = Camera.main.transform.localPosition;
 		Camera.main.transform.parent = previousBaby.transform.FindChild ("Vertical Rotation").transform;

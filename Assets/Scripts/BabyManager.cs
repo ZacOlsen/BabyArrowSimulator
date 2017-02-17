@@ -128,6 +128,7 @@ public class BabyManager : MonoBehaviour {
 	public void RetryLevel () {
 
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
+		Time.timeScale = 1;
 	}
 
 	public void GotToMainMenu () {

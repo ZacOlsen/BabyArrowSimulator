@@ -137,6 +137,5 @@ C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\obj\Debug\Assembly-CSharp.dll
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\obj\Debug\Assembly-CSharp.pdb
-C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\nunit.framework.dll
-C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.TestRunner.dll
-C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.TestRunner.xml
+C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
+C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
