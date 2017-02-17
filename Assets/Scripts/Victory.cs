@@ -8,7 +8,7 @@ public class Victory : MonoBehaviour {
 
 		if (other.CompareTag ("Baby")) {
 
-			BabyController baby = other.transform.parent.GetComponent<BabyController> ();
+			BabyController baby = other.transform.parent.parent.GetComponent<BabyController> ();
 
 			if (baby.IsCurrent ()) {
 				GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ShowVictory ();

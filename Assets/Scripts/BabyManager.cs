@@ -240,4 +240,12 @@ public class BabyManager : MonoBehaviour {
 	public bool NextIsSoldierBaby () {
 		return isOnSoldierBaby;
 	}
+
+	public void ChangeUI (bool shown) {
+
+		for (int i = 0; i < babies.Length; i++) {
+			babyImages [i].enabled = shown;
+			numbersToDisplay [i].enabled = shown;
+		}
+	}
 }

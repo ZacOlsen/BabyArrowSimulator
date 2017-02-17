@@ -53,7 +53,7 @@ public class NeoBaby : BabyController {
 		}
 
 		if (aiming) {
-			UpdateAimArc ();
+			UpdateAimArc (!grounded);
 		}
 
 		if (Input.GetMouseButtonUp (0) && aiming) {

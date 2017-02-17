@@ -208,6 +208,8 @@ public class BabyController : MonoBehaviour {
 
 		if (baby != null) {
 
+			bm.ChangeUI (false);
+
 			baby = ((GameObject) Instantiate (baby, launchStartPos.position, transform.rotation));
 			baby.transform.FindChild ("Vertical Rotation").transform.localRotation = vertRotation.localRotation;
 
@@ -218,7 +220,7 @@ public class BabyController : MonoBehaviour {
 			Rigidbody rig = baby.GetComponent<Rigidbody> ();
 
 			if (soldier) {
-				baby.GetComponent<SoldierBaby> ().SetStraightDuration (1);//launchSpeed / maxLaunchSpeed);
+				baby.GetComponent<SoldierBaby> ().SetStraightDuration (Mathf.Sqrt(launchSpeed / maxLaunchSpeed));
 			}
 
 			rig.velocity = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed));
@@ -254,7 +256,7 @@ public class BabyController : MonoBehaviour {
 	/**
 	 * Updates the aiming arc based on the amount charged and the angle the player is looking at.
 	 */
-	protected void UpdateAimArc () {
+	protected void UpdateAimArc (bool regularArc = false) {
 
 		launchX = Mathf.Clamp(launchX + launchIterationSize, -1, 1);
 		launchSpeed = maxLaunchSpeed * Mathf.Pow (launchX, 2); 
@@ -265,7 +267,7 @@ public class BabyController : MonoBehaviour {
 
 		UpdateChargeBar ();
 
-		if (bm.NextIsSoldierBaby ()) {
+		if (bm.NextIsSoldierBaby () && !regularArc) {
 			SoldierBabyArc ();
 			return;
 		}
@@ -276,20 +278,22 @@ public class BabyController : MonoBehaviour {
 			4 * -Physics.gravity.y / 2 * -(transform.position.y))) / -Physics.gravity.y;
 
 		float initialXVel = launchSpeed * Mathf.Cos (vertRotation.localEulerAngles.x * Mathf.Deg2Rad);
-		float distance = time * initialXVel;
 
-		if (distance > maxArcDistance) {
-			time = maxArcDistance / initialXVel;
+		float distance = 0;
+		for (float i = .1f; i < time; i += .01f) {
+			
+			distance = Mathf.Sqrt (Mathf.Pow(initialXVel * i, 2) + Mathf.Pow(.5f * -Physics.gravity.y * i * i + initialYVel * i + transform.position.y, 2));
+			if (distance > maxArcDistance) {
+				time = i;
+			}
 		}
-
-		Vector3 landPos = transform.TransformDirection (new Vector3 (0, 0, distance));
-		landPos += launchStartPos.position;
+			
+		Vector3 landPos = transform.TransformDirection (new Vector3 (0, 0, distance)) + launchStartPos.position;
 
 /**	Debug Code creates straight line aiming
  		float angle = Mathf.Atan2 (landPos.x - transform.position.x, landPos.z - transform.position.z) * Mathf.Rad2Deg;
 		Transform arc = ((GameObject) Instantiate (aimArc, (landPos + transform.position) / 2, 
 			Quaternion.Euler(new Vector3(90, angle, 0)))).transform;
-		 
 		arc.localScale = new Vector3 (arc.localScale.x, distance / 2, arc.localScale.z); */
 
 		Vector3 previousPoint = transform.position;
@@ -308,8 +312,8 @@ public class BabyController : MonoBehaviour {
 			float angleHor = Mathf.Atan2 (landPos.x - transform.position.x, landPos.z - transform.position.z) * Mathf.Rad2Deg;
 			float angleVert = 90;
 							
-			angleVert -= Mathf.Atan2 (point.y - previousPoint.y, Vector2.Distance(new Vector2(point.x, point.z),
-				new Vector2(previousPoint.x, previousPoint.z))) * Mathf.Rad2Deg;
+			angleVert -= Mathf.Atan2 (point.y - previousPoint.y, Vector2.Distance (new Vector2 (point.x, point.z),
+				new Vector2 (previousPoint.x, previousPoint.z))) * Mathf.Rad2Deg;
 
 			arcPieces [counter].SetActive (true);
 			arcPieces [counter].transform.position = (point + previousPoint) / 2;
@@ -344,6 +348,8 @@ public class BabyController : MonoBehaviour {
 
 	protected void EndMotion () {
 
+		bm.ChangeUI (true);
+
 		rb.velocity = Vector3.zero;
 		rb.isKinematic = true;
 		grounded = true;
@@ -374,8 +380,6 @@ public class BabyController : MonoBehaviour {
 	}
 
 	private void SwitchToPreviousBaby () {
-
-		Debug.Log ("hi");
 
 		Vector3 camOffsets = Camera.main.transform.localPosition;
 		Camera.main.transform.parent = previousBaby.transform.FindChild ("Vertical Rotation").transform;
