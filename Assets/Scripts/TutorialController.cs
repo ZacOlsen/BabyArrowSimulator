@@ -7,25 +7,36 @@ public class TutorialController : MonoBehaviour {
 	[SerializeField] private string[] messages = null;
 	[SerializeField] private Sprite[] images = null;
 
+	[SerializeField] private GameObject tempWall = null;
+	[SerializeField] private bool defaultlyActive = false;
+
 	private int index;
 
 	private Text textBox;
 	private RawImage image;
 
-	void Start () {
+	private void Start () {
 	
-		textBox = GetComponentInChildren<Text> ();
-		image = transform.FindChild ("Image").GetComponent<RawImage> ();
+		if (defaultlyActive) {
+			ShowTutorial ();
+		}
+	}
 
+	private void ShowTutorial () {
+
+		textBox = GameObject.Find ("Text").GetComponent<Text> ();
+		image = GameObject.Find ("Image").GetComponent<RawImage> ();
+		
 		textBox.text = messages [index];
 		image.texture = images [index].texture;
-
+		
 		Time.timeScale = 0;
+		defaultlyActive = true;
 	}
 	
-	void Update () {
+	private void Update () {
 	
-		if (Input.GetMouseButtonDown(0)) {
+		if (defaultlyActive && Input.GetMouseButtonDown(0)) {
 
 			index++;
 
@@ -33,12 +44,24 @@ public class TutorialController : MonoBehaviour {
 				
 				gameObject.SetActive (false);
 				Time.timeScale = 1f;
+
+				if (tempWall != null) {
+					Destroy (tempWall);
+				}
+
 				Destroy (this);
 				return;
 			}
 
 			textBox.text = messages [index];
 			image.texture = images [index].texture;
+		}
+	}
+
+	private void OnTriggerEnter (Collider other) {
+
+		if (other.CompareTag ("Baby")) {
+			ShowTutorial ();
 		}
 	}
 }

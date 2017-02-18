@@ -184,7 +184,6 @@ public class BabyController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown (1)) {
-			aiming = false;
 			ResetShootState ();
 		}
 
@@ -201,8 +200,10 @@ public class BabyController : MonoBehaviour {
 
 	protected void ResetShootState () {
 
+		aiming = false;
 		launchX = -launchIterationSize;
 		UpdateAimArc ();
+		DisableAimArc();
 	}
 
 	protected void ShootBaby (GameObject baby, bool soldier = false) {
@@ -240,6 +241,7 @@ public class BabyController : MonoBehaviour {
 			this.enabled = false;
 
 			current = false;
+			ResetShootState ();
 		}
 	}
 
@@ -348,6 +350,13 @@ public class BabyController : MonoBehaviour {
 		}
 	}
 
+	protected void DisableAimArc () {
+
+		for (int i = 0; i < arcPieces.Length; i++) {
+			arcPieces [i].SetActive (false);
+		}
+	}
+
 	protected void EndMotion () {
 
 		bm.ChangeUI (true);
@@ -428,11 +437,7 @@ public class BabyController : MonoBehaviour {
 			Invoke ("EndMotion", slideTime);
 			
 			//make the aiming arc invisible
-			//might be moved to launch method
-			for (int i = 0; i < arcPieces.Length; i++) {
-//				arcPieces [i].SetActive (false);
-			}
-			
+
 		} else if (other.collider.CompareTag ("Wall")) {
 
 //			rb.velocity = new Vector3 (0, -other.relativeVelocity.y, 0);
