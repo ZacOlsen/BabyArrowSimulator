@@ -9,4 +9,11 @@ public class Death : MonoBehaviour {
 			other.transform.parent.parent.GetComponent<BabyController> ().Die ();
 		}
 	}
+
+	private void OnCollisionEnter (Collision other) {
+
+		if (other.gameObject.CompareTag ("Baby")) {
+			other.transform.GetComponent<BabyController> ().Die ();
+		}
+	}
 }
