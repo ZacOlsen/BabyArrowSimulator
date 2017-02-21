@@ -202,8 +202,8 @@ public class BabyController : MonoBehaviour {
 
 		aiming = false;
 		launchX = -launchIterationSize;
-		UpdateAimArc ();
-		DisableAimArc();
+		//uncommenting this line will make the aim arc invis on launch and right click
+//		DisableAimArc();
 	}
 
 	protected void ShootBaby (GameObject baby, bool soldier = false) {
@@ -224,7 +224,7 @@ public class BabyController : MonoBehaviour {
 			Vector3 vel = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed));
 		
 			if (soldier) {
-				baby.GetComponent<SoldierBaby> ().SetStats (1, vel);
+				baby.GetComponent<SoldierBaby> ().SetStats (launchSpeed / maxLaunchSpeed, vel);
 
 			} else {
 				rig.velocity = vel;
