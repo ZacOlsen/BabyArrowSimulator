@@ -101,6 +101,8 @@ public class BabyController : MonoBehaviour {
 
 	private bool onTreadmill;
 
+	private bool hitGround;
+
 	[SerializeField] private GameObject fractalizedBaby = null;
 
 	[SerializeField] private float timeTilFractalizedDestroyed = 5f;
@@ -161,6 +163,10 @@ public class BabyController : MonoBehaviour {
 		if (!grounded && !onTreadmill) {
 			babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
 				Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y), 0, 0);
+		
+		} else if (!grounded && hitGround) {
+			Debug.Log ("hi");
+			babyModel.localEulerAngles = new Vector3 (90, 0, 0);
 		}
 	}
 
@@ -359,22 +365,27 @@ public class BabyController : MonoBehaviour {
 
 	protected void EndMotion () {
 
-		bm.ChangeUI (true);
+		if (!grounded) {
 
-		rb.velocity = Vector3.zero;
-		grounded = true;
+			Debug.Log (name);
 
-		babyModel.transform.localRotation = Quaternion.identity;
+			bm.ChangeUI (true);
 
-		if (current) {
-			previousBaby = gameObject;
+			rb.velocity = Vector3.zero;
+			grounded = true;
+
+			babyModel.transform.localRotation = Quaternion.identity;
+
+			if (current) {
+				previousBaby = gameObject;
+			}
+
+			if (bm.OutOfBabies ()) {
+				this.enabled = false;
+			}
+
+			StartCoroutine ("FixCollision");
 		}
-
-		if (bm.OutOfBabies ()) {
-			this.enabled = false;
-		}
-
-		StartCoroutine ("FixCollision");
 	}
 
 	private IEnumerator FixCollision () {
@@ -435,7 +446,8 @@ public class BabyController : MonoBehaviour {
 		if (other.collider.CompareTag ("Floor")) {
 			//stop their movement and delete their collider
 			Invoke ("EndMotion", slideTime);
-			
+			hitGround = true;
+
 			//make the aiming arc invisible
 
 		} else if (other.collider.CompareTag ("Wall")) {
@@ -449,6 +461,7 @@ public class BabyController : MonoBehaviour {
 
 			if (rb.velocity.y < 1) {
 				Invoke ("EndMotion", slideTime);
+				hitGround = true;
 			}
 		}
 	}
