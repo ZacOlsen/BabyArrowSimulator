@@ -41,6 +41,8 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private float launchIterationSize = .02f;
 
+	[SerializeField][Range(0, 1)] private float initialCharge = .5f;
+
 	private float launchX = 0;
 
 	/**
@@ -68,7 +70,7 @@ public class BabyController : MonoBehaviour {
 	/**
 	 * the initial elevation on the screen of the charge bar
 	 */
-	private float chargeBarIniY;
+	private float chargeBarIniX;
 
 	[SerializeField] private float maxArcDistance = 30f;
 
@@ -122,7 +124,7 @@ public class BabyController : MonoBehaviour {
 		rb.freezeRotation = true;
 
 		chargeBar = ((RectTransform) GameObject.Find ("Charge Foreground").transform);
-		chargeBarIniY = chargeBar.localPosition.y;
+		chargeBarIniX = chargeBar.localPosition.x;
 
 		vertRotation = transform.FindChild ("Vertical Rotation");
 		launchStartPos = vertRotation.FindChild ("Launch Start Pos");
@@ -187,6 +189,7 @@ public class BabyController : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0)) {
 			aiming = true;
+			launchX = initialCharge;
 		}
 
 		if (Input.GetMouseButtonDown (1)) {
@@ -207,7 +210,10 @@ public class BabyController : MonoBehaviour {
 	protected void ResetShootState () {
 
 		aiming = false;
-		launchX = -launchIterationSize;
+		launchSpeed = 0;
+		UpdateChargeBar ();
+		launchX = initialCharge;
+
 		//uncommenting this line will make the aim arc invis on launch and right click
 //		DisableAimArc();
 	}
@@ -238,7 +244,7 @@ public class BabyController : MonoBehaviour {
 
 			baby.GetComponent<BabyController> ().rotationY = rotationY;
 
-			chargeBar.localPosition = new Vector3 (chargeBar.localPosition.x, chargeBarIniY, chargeBar.localPosition.z);
+			chargeBar.localPosition = new Vector3 (chargeBarIniX, chargeBar.localPosition.y, chargeBar.localPosition.z);
 			chargeBar.localScale = Vector3.one;
 
 			Destroy (GetComponentInChildren<Camera>().gameObject);
@@ -258,9 +264,9 @@ public class BabyController : MonoBehaviour {
 
 		float percent = launchSpeed / maxLaunchSpeed;
 
-		chargeBar.localScale = new Vector3 (1, percent, 1);
-		chargeBar.localPosition = new Vector3 (chargeBar.localPosition.x, 
-			chargeBarIniY - (chargeBar.rect.height - chargeBar.rect.height * percent) / 2f, chargeBar.localPosition.z);
+		chargeBar.localScale = new Vector3 (percent, 1, 1);
+		chargeBar.localPosition = new Vector3 (chargeBarIniX - (chargeBar.rect.width - chargeBar.rect.width * percent) / 2f, 
+			chargeBar.localPosition.y, chargeBar.localPosition.z);
 	}
 		
 	/**

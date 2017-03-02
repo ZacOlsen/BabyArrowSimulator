@@ -5,25 +5,26 @@ using System.Collections;
 
 public class BabyManager : MonoBehaviour {
 
-	//0 = default
-	//1 = bouncy
-	//2 = sticky
-	//3 = neo
 	[SerializeField] private GameObject[] babies = null;
+	[SerializeField] private Sprite[] babyImages = null;
 	[SerializeField] private int[] babiesTable = null;
 	private int[] babiesUsedNum;
 	private int currentIndex;
 
-	[SerializeField] private Color highlighted = Color.white;
-	[SerializeField] private Color unhighlighted = Color.black;
+//	[SerializeField] private Color highlighted = Color.white;
+//	[SerializeField] private Color unhighlighted = Color.black;
 
 	[SerializeField] private string mainMenuSceneName = "";
 	[SerializeField] private string nextLevelSceneName = "";
 	private GameObject menuBackground;
 
-	private GameObject babySelector;
-	private RawImage[] babyImages;
-	private Text[] numbersToDisplay;
+	private RawImage currentBabySelected;
+	private Text currentBabyNumbers;
+	private Text totalBabyNumbers;
+
+	[SerializeField] private GameObject babyMenuTemplate = null;
+	private RawImage[] babyMenuImages;
+	private Text[] babyMenuNumbers;
 
 	private Text levelTime;
 	private bool levelOver;
@@ -34,23 +35,33 @@ public class BabyManager : MonoBehaviour {
 
 		babiesUsedNum = new int [babiesTable.Length];
 
-		menuBackground = GameObject.Find ("Menu Background");
-		menuBackground.SetActive (false);
+		currentBabySelected = GameObject.Find ("Current Baby").GetComponent<RawImage> ();
+		currentBabyNumbers = GameObject.Find ("Current Numbers").GetComponent<Text> ();
+		totalBabyNumbers = GameObject.Find ("Total Numbers").GetComponent<Text> ();
 
-		babySelector = GameObject.Find ("Baby Selector");
-		babyImages = new RawImage[babies.Length];
-		numbersToDisplay = new Text[babies.Length];
+		babyMenuImages = new RawImage [babies.Length];
+		babyMenuNumbers = new Text [babies.Length];
+		UpdateNumberDisplay (currentIndex);
 
-		for (int i = 0; i < babies.Length; i++) {
+		GameObject babiesUsed = GameObject.Find ("Babies Used");
+		for (int i = 0; i < babyMenuImages.Length; i++) {
 
-			babyImages[i] = babySelector.transform.GetChild (i).GetComponent<RawImage> ();
-			numbersToDisplay [i] = babySelector.transform.GetChild (i).GetComponentInChildren<Text> ();
+			GameObject go = (GameObject)Instantiate (babyMenuTemplate);
+			go.transform.SetParent (babiesUsed.transform);
+			go.transform.localPosition = new Vector3 (i * 100f - 200f, 0, 0);
 
-			babyImages [i].color = i == 0 ? highlighted : unhighlighted;
-			UpdateNumberDisplay (i);
+			babyMenuImages [i] = go.GetComponent<RawImage> ();
+			babyMenuImages [i].texture = babyImages [i].texture;
+
+			babyMenuNumbers [i] = go.GetComponentInChildren<Text> ();
+			babyMenuNumbers [i].text = "x" + babiesUsedNum [i];
 		}
 
+
 		levelTime = GameObject.Find ("Level Time").GetComponent<Text> ();
+
+		menuBackground = GameObject.Find ("Menu Background");
+		menuBackground.SetActive (false);
 	}
 
 	private void Update () {
@@ -114,30 +125,35 @@ public class BabyManager : MonoBehaviour {
 			currentIndex = 0;
 		}
 
-		babyImages [previous].color = unhighlighted;
-		babyImages [currentIndex].color = highlighted;
+		currentBabySelected.texture = babyImages [currentIndex].texture;
+		currentBabyNumbers.text = "x" + babiesTable [currentIndex];
 
 		isOnSoldierBaby = babies[currentIndex].GetComponent<SoldierBaby>() != null;
 	}
 
 	private void UpdateNumberDisplay (int index) {
 
-		numbersToDisplay [index].text = "x" + babiesTable [index];
+		currentBabyNumbers.text = "x" + babiesTable [index];
+
+		int sum = 0;
+		for (int i = 0; i < babiesTable.Length; i++) {
+			sum += babiesTable [i];
+		}
+
+		totalBabyNumbers.text = "x" + sum;
 	}
 
 	public void RetryLevel () {
-
+		
 		SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 		Time.timeScale = 1;
 	}
 
 	public void GotToMainMenu () {
-
 		SceneManager.LoadScene (mainMenuSceneName);
 	}
 
 	public void GoToNextLevel () {
-
 		SceneManager.LoadScene (nextLevelSceneName);
 	}
 
@@ -147,15 +163,15 @@ public class BabyManager : MonoBehaviour {
 
 		levelTime.rectTransform.SetParent (GameObject.Find ("Canvas").transform);
 
-		levelTime.rectTransform.anchorMax = new Vector2 (.5f, 1f);
-		levelTime.rectTransform.anchorMin = new Vector2 (.5f, 1f);
+		levelTime.rectTransform.anchorMax = new Vector2 (1f, 1f);
+		levelTime.rectTransform.anchorMin = new Vector2 (1f, 1f);
 
-		levelTime.rectTransform.anchoredPosition = new Vector2 (0, -15);
+		levelTime.rectTransform.anchoredPosition = new Vector2 (-90, -15);
+		levelTime.alignment = TextAnchor.MiddleRight;
 
-		for (int i = 0; i < babies.Length; i++) {
-			babyImages [i].enabled = true;
-			numbersToDisplay [i].enabled = true;
-		}
+		currentBabySelected.enabled = true;
+		currentBabyNumbers.enabled = true;
+		totalBabyNumbers.enabled = true;
 
 		GameObject.Find ("Canvas").transform.FindChild ("Charge Background").gameObject.SetActive (true);
 	}
@@ -166,10 +182,9 @@ public class BabyManager : MonoBehaviour {
 			return;
 		}
 
-		for (int i = 0; i < babies.Length; i++) {
-			babyImages [i].enabled = false;
-			numbersToDisplay [i].enabled = false;
-		}
+		currentBabySelected.enabled = false;
+		currentBabyNumbers.enabled = false;
+		totalBabyNumbers.enabled = false;
 			
 		menuBackground.SetActive (true);
 
@@ -184,6 +199,7 @@ public class BabyManager : MonoBehaviour {
 		levelTime.rectTransform.anchorMin = new Vector2 (.5f, 1f);
 
 		levelTime.rectTransform.anchoredPosition = new Vector2 (0, -50);
+		levelTime.alignment = TextAnchor.MiddleCenter;
 
 		GameObject.Find ("Charge Background").SetActive (false);
 
@@ -244,9 +260,9 @@ public class BabyManager : MonoBehaviour {
 
 	public void ChangeUI (bool shown) {
 
-		for (int i = 0; i < babies.Length; i++) {
-			babyImages [i].enabled = shown;
-			numbersToDisplay [i].enabled = shown;
-		}
+		currentBabySelected.enabled = shown;
+		currentBabyNumbers.enabled = shown;
+		totalBabyNumbers.enabled = shown;
+
 	}
 }
