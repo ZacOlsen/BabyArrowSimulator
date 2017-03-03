@@ -9,8 +9,8 @@ public class StickyBaby : BabyController {
 			return;
 		}
 
-		if (other.collider.CompareTag ("Floor") || other.collider.CompareTag ("Wall") || 
-			other.collider.CompareTag ("Trampoline")) {
+		if (other.collider.CompareTag ("Floor") || other.collider.CompareTag ("Wall") ||
+		    other.collider.CompareTag ("Trampoline")) {
 
 			EndMotion ();
 
@@ -18,6 +18,7 @@ public class StickyBaby : BabyController {
 
 			transform.parent = other.collider.transform;
 			EndMotion ();
+		
 		}
 	}
 }

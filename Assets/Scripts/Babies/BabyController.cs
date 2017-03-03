@@ -124,7 +124,7 @@ public class BabyController : MonoBehaviour {
 		rb.freezeRotation = true;
 
 		chargeBar = ((RectTransform) GameObject.Find ("Charge Foreground").transform);
-		chargeBarIniX = chargeBar.localPosition.x;
+		chargeBarIniX = 0;//chargeBar.localPosition.x;
 
 		vertRotation = transform.FindChild ("Vertical Rotation");
 		launchStartPos = vertRotation.FindChild ("Launch Start Pos");
@@ -162,27 +162,34 @@ public class BabyController : MonoBehaviour {
 
 	protected void FixedUpdate () {
 
-		if (!grounded && !onTreadmill) {
-			babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
+		if (!grounded) {
+
+			if (!onTreadmill) {
+				babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
 				Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y), 0, 0);
-		
-		} else if (!grounded && hitGround) {
-			Debug.Log ("hi");
-			babyModel.localEulerAngles = new Vector3 (90, 0, 0);
+			}
+
+			if (hitGround) {
+				babyModel.localEulerAngles = new Vector3 (90, 0, 0);
+			}
 		}
 	}
 
 	protected void UpdateLooking () {
 
 		float x = 0;
-		if (grounded || this is NeoBaby) {
-			x = Input.GetAxis ("Mouse X") * sensitivity;
-		}
+		x = Input.GetAxis ("Mouse X") * sensitivity;
 
 		rotationY -= Input.GetAxis ("Mouse Y") * sensitivity;
 
-		transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
-		vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
+		if (grounded || aiming) {
+			
+			transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
+			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
+
+		} else {
+			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), vertRotation.transform.localEulerAngles.y + x, 0);
+		}
 	}
 
 	protected void Aim () {
@@ -265,7 +272,7 @@ public class BabyController : MonoBehaviour {
 		float percent = launchSpeed / maxLaunchSpeed;
 
 		chargeBar.localScale = new Vector3 (percent, 1, 1);
-		chargeBar.localPosition = new Vector3 (chargeBarIniX - (chargeBar.rect.width - chargeBar.rect.width * percent) / 2f, 
+		chargeBar.localPosition = new Vector3 (chargeBarIniX - ((chargeBar.rect.width - chargeBar.rect.width * percent) / 2f), 
 			chargeBar.localPosition.y, chargeBar.localPosition.z);
 	}
 		
@@ -382,6 +389,11 @@ public class BabyController : MonoBehaviour {
 
 			babyModel.transform.localRotation = Quaternion.identity;
 
+			if (vertRotation != null) {
+				transform.eulerAngles = new Vector3 (0, vertRotation.eulerAngles.y, 0);
+				vertRotation.localEulerAngles = new Vector3 (vertRotation.localEulerAngles.x, 0, 0);
+			}
+
 			if (current) {
 				previousBaby = gameObject;
 			}
@@ -405,6 +417,8 @@ public class BabyController : MonoBehaviour {
 	}
 
 	public void Die () {
+
+	//	ResetShootState ();
 
 		if (current) {
 			SwitchToPreviousBaby ();
