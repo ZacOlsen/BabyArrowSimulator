@@ -27,7 +27,7 @@ public class BabyController : MonoBehaviour {
 	/**
 	 * used to store the vertical rotation so the model doesn't rotate
 	 */
-	private Transform vertRotation;
+	protected Transform vertRotation;
 
 	/**
 	 * the initial position of the baby being launched

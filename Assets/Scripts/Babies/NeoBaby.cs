@@ -44,6 +44,12 @@ public class NeoBaby : BabyController {
 	protected new void Aim () {
 
 		if (Input.GetMouseButtonDown (0)) {
+
+			if (!grounded) {
+				transform.eulerAngles = new Vector3 (0, vertRotation.eulerAngles.y, 0);
+				vertRotation.eulerAngles = new Vector3 (vertRotation.eulerAngles.x, 0, 0);
+			}
+
 			aiming = true;
 		}
 
@@ -62,6 +68,7 @@ public class NeoBaby : BabyController {
 				bool soldier = bm.NextIsSoldierBaby ();
 				ShootBaby (bm.GetNextBaby (), soldier);
 			} else {
+				Debug.Log (grounded);
 				ShootBaby (regularBaby);
 			}
 		}
