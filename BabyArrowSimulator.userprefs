@@ -1,14 +1,26 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TutorialController.cs">
     <Files>
       <File FileName="Assets\Scripts\Babies\BabyController.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Babies\BabyController.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Babies\BabyController.cs" Line="231" Column="2" />
+>>>>>>> origin/master
       <File FileName="Assets\Scripts\Babies\BouncyBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Babies\StickyBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BabyManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Babies\NeoBaby.cs" Line="76" Column="2" />
+      <File FileName="Assets\Scripts\Babies\NeoBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Babies\SoldierBaby.cs" Line="1" Column="1" />
+<<<<<<< HEAD
       <File FileName="Assets\Scripts\TutorialController.cs" Line="20" Column="3" />
+=======
+      <File FileName="Assets\Scripts\TutorialController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Obstacles\PushInArea.cs" Line="23" Column="3" />
+>>>>>>> origin/master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
