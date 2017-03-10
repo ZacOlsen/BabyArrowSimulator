@@ -173,6 +173,10 @@ public class BabyController : MonoBehaviour {
 				babyModel.localEulerAngles = new Vector3 (90, 0, 0);
 			}
 		}
+
+		if (rb.velocity.magnitude < .01f) {
+			EndMotion ();
+		}
 	}
 
 	protected void UpdateLooking () {
