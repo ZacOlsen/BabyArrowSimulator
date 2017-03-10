@@ -14,16 +14,21 @@ public class TutorialController : MonoBehaviour {
 
 	private Text textBox;
 	private RawImage image;
+	private static GameObject bg;
 
 	private void Start () {
-	
+		if (bg == null) {
+			bg = GameObject.Find("Background");
+			bg.SetActive (false);
+		}
+
 		if (defaultlyActive) {
 			ShowTutorial ();
 		}
 	}
 
 	private void ShowTutorial () {
-
+		bg.SetActive (true);
 		textBox = GameObject.Find ("Text").GetComponent<Text> ();
 		image = GameObject.Find ("Image").GetComponent<RawImage> ();
 		
@@ -45,10 +50,12 @@ public class TutorialController : MonoBehaviour {
 				gameObject.SetActive (false);
 				Time.timeScale = 1f;
 
+
+
 				if (tempWall != null) {
 					Destroy (tempWall);
 				}
-
+				bg.SetActive (false);
 				Destroy (this);
 				return;
 			}

@@ -1,14 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Babies\NeoBaby.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TutorialController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Babies\BabyController.cs" Line="28" Column="45" />
+      <File FileName="Assets\Scripts\Babies\BabyController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Babies\BouncyBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Babies\StickyBaby.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BabyManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Babies\NeoBaby.cs" Line="76" Column="2" />
       <File FileName="Assets\Scripts\Babies\SoldierBaby.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TutorialController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TutorialController.cs" Line="20" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
