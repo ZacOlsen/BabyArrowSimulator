@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Mission 6 Winding Hallway.unity
-  isLoaded: 1
-  isActive: 1
