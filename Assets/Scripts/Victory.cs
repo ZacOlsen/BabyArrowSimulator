@@ -4,16 +4,27 @@ using System.Collections;
 
 public class Victory : MonoBehaviour {
 
+	private void Win (Collider other) {
+
+		BabyController baby = other.transform.parent.parent.GetComponent<BabyController> ();
+
+		if (baby.IsCurrent ()) {
+			GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ShowVictory ();
+			Destroy (baby);
+		}
+	}
+
 	private void OnTriggerEnter (Collider other) {
 
 		if (other.CompareTag ("Baby")) {
+			Win (other);
+		}
+	}
 
-			BabyController baby = other.transform.parent.parent.GetComponent<BabyController> ();
+	private void OnCollisionEnter (Collision other) {
 
-			if (baby.IsCurrent ()) {
-				GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ShowVictory ();
-				Destroy (baby);
-			}
+		if (other.gameObject.CompareTag ("Baby")) {
+			Win (other.collider);
 		}
 	}
 }

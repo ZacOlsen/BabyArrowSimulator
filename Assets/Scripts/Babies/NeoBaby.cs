@@ -65,10 +65,8 @@ public class NeoBaby : BabyController {
 		if (Input.GetMouseButtonUp (0) && aiming) {
 
 			if (grounded) {
-				bool soldier = bm.NextIsSoldierBaby ();
-				ShootBaby (bm.GetNextBaby (), soldier);
+				ShootBaby (bm.GetNextBaby (), bm.NextIsSoldierBaby ());
 			} else {
-				Debug.Log (grounded);
 				ShootBaby (regularBaby);
 			}
 		}

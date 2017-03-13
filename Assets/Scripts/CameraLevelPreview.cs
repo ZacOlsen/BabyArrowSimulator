@@ -22,6 +22,8 @@ public class CameraLevelPreview : MonoBehaviour {
 
 		transform.position = viewPoints [0].position;
 		transform.rotation = viewPoints [0].rotation;
+
+		Time.timeScale = 1f;
 	}
 	
 	void FixedUpdate () {

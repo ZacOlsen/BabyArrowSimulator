@@ -31,9 +31,9 @@ public class MenuController : MonoBehaviour {
 		int unlocks = br.ReadInt32 ();
 		br.Close ();
 
-		for (int i = 0; i < missionButtonObject.transform.transform.childCount; i++) {
+		for (int i = 1; i < missionButtonObject.transform.transform.childCount; i++) {
 						
-			missionButtonObject.transform.GetChild (i).GetComponent<Button> ().interactable = ((1 << i) & unlocks) > 0;
+			missionButtonObject.transform.GetChild (i).GetComponent<Button> ().interactable = ((1 << (i - 1)) & unlocks) > 0;
 		}
 		
 		mainMenu.SetActive (false);
@@ -69,7 +69,7 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void PlayMission (string name) {
-//		SceneManager.LoadScene (name);
+		SceneManager.LoadScene (name);
 	}
 
 	public void Options () {
