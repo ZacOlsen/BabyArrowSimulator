@@ -124,7 +124,7 @@ public class BabyController : MonoBehaviour {
 		rb.freezeRotation = true;
 
 		chargeBar = ((RectTransform) GameObject.Find ("Charge Foreground").transform);
-		chargeBarIniX = 0;//chargeBar.localPosition.x;
+		chargeBarIniX = 0;
 
 		vertRotation = transform.FindChild ("Vertical Rotation");
 		launchStartPos = vertRotation.FindChild ("Launch Start Pos");
@@ -166,7 +166,8 @@ public class BabyController : MonoBehaviour {
 
 			if (!onTreadmill) {
 				babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
-				Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y), 0, 0);
+					Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y),
+					Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.z, rb.velocity.z), 0);
 			}
 
 			if (hitGround) {

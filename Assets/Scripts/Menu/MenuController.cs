@@ -11,15 +11,10 @@ public class MenuController : MonoBehaviour {
 	[SerializeField] private GameObject mainMenu = null;
 	[SerializeField] private GameObject options = null;
 
-	[SerializeField] private string tutorialSceneName = "";
 	[SerializeField] private string levelName = "";
 	private static float audioLevel = 1f;
 
 	[SerializeField] private GameObject missionButtonObject = null;
-
-	public void Tutorial () {
-		SceneManager.LoadScene (tutorialSceneName);
-	}
 
 	public void Play () {
 		SceneManager.LoadScene (levelName);
