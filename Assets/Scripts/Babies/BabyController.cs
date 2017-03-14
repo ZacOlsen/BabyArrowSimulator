@@ -109,6 +109,8 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private float timeTilFractalizedDestroyed = 5f;
 
+	[SerializeField] private float timeTilSwitchBack = 3f;
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -162,29 +164,32 @@ public class BabyController : MonoBehaviour {
 
 	protected void FixedUpdate () {
 
-		if (!grounded) {
+		if (babyModel != null) {
+			
+			if (!grounded) {
 
-			if (!onTreadmill) {
-				babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
+				if (!onTreadmill) {
+					babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
 					Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y),
-					0, 0);
+						0, 0);
 
-				Quaternion babyRot = babyModel.rotation;
-				Quaternion camRot = vertRotation.rotation;
+					Quaternion babyRot = babyModel.rotation;
+					Quaternion camRot = vertRotation.rotation;
 
-				transform.eulerAngles = new Vector3 (0, Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.x, rb.velocity.z), 0);
+					transform.eulerAngles = new Vector3 (0, Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.x, rb.velocity.z), 0);
 
-				babyModel.rotation = babyRot;
-				vertRotation.rotation = camRot;
+					babyModel.rotation = babyRot;
+					vertRotation.rotation = camRot;
+				}
+
+				if (hitGround) {
+					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
+				}
 			}
 
-			if (hitGround) {
-				babyModel.localEulerAngles = new Vector3 (90, 0, 0);
+			if (rb.velocity.magnitude < .01f) {
+				EndMotion ();
 			}
-		}
-
-		if (rb.velocity.magnitude < .01f) {
-			EndMotion ();
 		}
 	}
 
@@ -431,14 +436,14 @@ public class BabyController : MonoBehaviour {
 
 	public void Die () {
 
-	//	ResetShootState ();
-
 		if (current) {
-			SwitchToPreviousBaby ();
+		//	Camera.main.transform.SetParent (null);
+			rb.isKinematic = true;
+			Invoke ("SwitchToPreviousBaby", timeTilSwitchBack);
 		}
 			
 		bm.OutOfBabies ();
-		Destroy (gameObject);
+		Destroy (babyModel.gameObject);
 
 		Destroy (Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
 	}
@@ -458,7 +463,8 @@ public class BabyController : MonoBehaviour {
 		}
 
 		bc.enabled = true;
-		this.enabled = false;
+		Destroy (gameObject);
+//		this.enabled = false;
 	}
 
 	public bool IsCurrent () {
