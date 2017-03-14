@@ -167,7 +167,15 @@ public class BabyController : MonoBehaviour {
 			if (!onTreadmill) {
 				babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
 					Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y),
-					Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.z, rb.velocity.z), 0);
+					0, 0);
+
+				Quaternion babyRot = babyModel.rotation;
+				Quaternion camRot = vertRotation.rotation;
+
+				transform.eulerAngles = new Vector3 (0, Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.x, rb.velocity.z), 0);
+
+				babyModel.rotation = babyRot;
+				vertRotation.rotation = camRot;
 			}
 
 			if (hitGround) {
