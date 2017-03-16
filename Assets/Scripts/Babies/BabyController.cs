@@ -111,6 +111,8 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private float timeTilSwitchBack = 3f;
 
+	[SerializeField] private Vector3 camRotation = new Vector3();
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -124,6 +126,8 @@ public class BabyController : MonoBehaviour {
 	protected void Start () {
 
 		rb.freezeRotation = true;
+
+		Camera.main.transform.localEulerAngles = camRotation;
 
 		chargeBar = ((RectTransform) GameObject.Find ("Charge Foreground").transform);
 		chargeBarIniX = 0;
@@ -453,9 +457,10 @@ public class BabyController : MonoBehaviour {
 		bm.ChangeUI (true);
 
 		Vector3 camOffsets = Camera.main.transform.localPosition;
+
 		Camera.main.transform.parent = previousBaby.transform.FindChild ("Vertical Rotation").transform;
 		Camera.main.transform.localPosition = camOffsets;
-		Camera.main.transform.localRotation = Quaternion.identity;
+		Camera.main.transform.localEulerAngles = camRotation;
 
 		BabyController bc = previousBaby.GetComponent<BabyController> ();
 		if (bc is NeoBaby) {

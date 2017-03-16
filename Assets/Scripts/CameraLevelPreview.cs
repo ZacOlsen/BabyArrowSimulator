@@ -11,7 +11,8 @@ public class CameraLevelPreview : MonoBehaviour {
 	private int index = 1;
 
 	//vert rotation offsets
-	[SerializeField] private Vector3 offsets = new Vector3(1, .5f, -3);
+	[SerializeField] private Vector3 offsets = new Vector3 (1, .5f, -3);
+	[SerializeField] private Vector3 offsetRotation = new Vector3();
 
 	private BabyController bbc;
 
@@ -24,6 +25,8 @@ public class CameraLevelPreview : MonoBehaviour {
 		transform.rotation = viewPoints [0].rotation;
 
 		Time.timeScale = 1f;
+
+		transform.rotation = Quaternion.identity;
 	}
 	
 	void FixedUpdate () {
@@ -43,7 +46,7 @@ public class CameraLevelPreview : MonoBehaviour {
 		} else {
 
 			transform.localPosition = offsets;
-			transform.localRotation = Quaternion.identity;
+			transform.localEulerAngles = offsetRotation;
 
 			bbc.enabled = true;
 			Destroy (this);
