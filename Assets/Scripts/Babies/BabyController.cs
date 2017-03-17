@@ -113,6 +113,11 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private Vector3 camRotation = new Vector3();
 
+	protected Animator anim;
+
+	[SerializeField] private SkinnedMeshRenderer bow = null;
+	[SerializeField] private SkinnedMeshRenderer gun = null;
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -126,6 +131,7 @@ public class BabyController : MonoBehaviour {
 	protected void Start () {
 
 		rb.freezeRotation = true;
+		anim = babyModel.GetComponentInChildren<Animator> ();
 
 		Camera.main.transform.localEulerAngles = camRotation;
 
@@ -143,7 +149,7 @@ public class BabyController : MonoBehaviour {
 
 		//create the arcPieces if they havent been created before
 		if (arcPieces == null) {
-			arcPieces = new GameObject[NUMBER_OF_ARC_PIECES];
+			arcPieces = new GameObject [NUMBER_OF_ARC_PIECES];
 		}
 
 		for (int i = 0; i < arcPieces.Length; i++) {
@@ -153,6 +159,9 @@ public class BabyController : MonoBehaviour {
 				arcPieces [i].SetActive (false);
 			}
 		}
+
+		anim.SetInteger ("animState", 0);
+		bow.enabled = false;
 	}
 		
 	protected void Update () {
@@ -161,6 +170,10 @@ public class BabyController : MonoBehaviour {
 			UpdateLooking ();
 
 			if (grounded) {
+
+				gun.enabled = bm.NextIsSoldierBaby ();
+				bow.enabled = !gun.enabled;
+
 				Aim ();
 			}
 		}
@@ -174,13 +187,14 @@ public class BabyController : MonoBehaviour {
 
 				if (!onTreadmill) {
 					babyModel.localEulerAngles = new Vector3 (Mathf.Rad2Deg * Mathf.Atan2 (Mathf.Sqrt (Mathf.Pow (rb.velocity.x, 2) +
-					Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y),
-						0, 0);
+					Mathf.Pow (rb.velocity.z, 2)), rb.velocity.y), 0, 0);
 
 					Quaternion babyRot = babyModel.rotation;
 					Quaternion camRot = vertRotation.rotation;
 
-					transform.eulerAngles = new Vector3 (0, Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.x, rb.velocity.z), 0);
+					if (!aiming) {
+						transform.eulerAngles = new Vector3 (0, Mathf.Rad2Deg * Mathf.Atan2 (rb.velocity.x, rb.velocity.z), 0);
+					}
 
 					babyModel.rotation = babyRot;
 					vertRotation.rotation = camRot;
@@ -188,12 +202,16 @@ public class BabyController : MonoBehaviour {
 
 				if (hitGround) {
 					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
+
+					if (rb.velocity.magnitude < .01f) {
+						EndMotion ();
+					}
 				}
 			}
 
-			if (rb.velocity.magnitude < .01f) {
-				EndMotion ();
-			}
+//			if (rb.velocity.magnitude < .01f) {
+//				EndMotion ();
+//			}
 		}
 	}
 
@@ -204,13 +222,22 @@ public class BabyController : MonoBehaviour {
 
 		rotationY -= Input.GetAxis ("Mouse Y") * sensitivity;
 
-		if (grounded || aiming) {
+		if (grounded) {
 			
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
 			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
 
+			anim.SetBool ("shuffle", x != 0 && !bm.NextIsSoldierBaby ());
+			anim.SetBool ("gun", bm.NextIsSoldierBaby ());
+		
+		} else if (aiming) {
+
+			transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
+			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
+
 		} else {
-			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), vertRotation.transform.localEulerAngles.y + x, 0);
+			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 
+				vertRotation.transform.localEulerAngles.y + x, 0);
 		}
 	}
 
@@ -242,6 +269,7 @@ public class BabyController : MonoBehaviour {
 		launchSpeed = 0;
 		UpdateChargeBar ();
 		launchX = initialCharge;
+		anim.SetFloat ("blendPB", 0);
 
 		//uncommenting this line will make the aim arc invis on launch and right click
 //		DisableAimArc();
@@ -310,6 +338,8 @@ public class BabyController : MonoBehaviour {
 			launchX = -1;
 		}
 
+		anim.SetFloat ("blendPB", Mathf.Abs (launchX));
+	
 		UpdateChargeBar ();
 
 		if (bm.NextIsSoldierBaby () && !regularArc) {
@@ -425,6 +455,7 @@ public class BabyController : MonoBehaviour {
 			}
 
 			StartCoroutine ("FixCollision");
+			anim.SetInteger ("animState", 1);
 		}
 	}
 
@@ -441,7 +472,6 @@ public class BabyController : MonoBehaviour {
 	public void Die () {
 
 		if (current) {
-		//	Camera.main.transform.SetParent (null);
 			rb.isKinematic = true;
 			Invoke ("SwitchToPreviousBaby", timeTilSwitchBack);
 		}
@@ -489,7 +519,7 @@ public class BabyController : MonoBehaviour {
 		//if the player has hit the ground
 		if (other.collider.CompareTag ("Floor")) {
 			//stop their movement and delete their collider
-			Invoke ("EndMotion", slideTime);
+//			Invoke ("EndMotion", slideTime);
 			hitGround = true;
 
 			//make the aiming arc invisible
@@ -507,6 +537,17 @@ public class BabyController : MonoBehaviour {
 				Invoke ("EndMotion", slideTime);
 				hitGround = true;
 			}
+		}
+	}
+
+	protected void OnCollisionExit (Collision other) {
+
+		if (!enabled) {
+			return;
+		}
+
+		if (other.collider.CompareTag ("Floor")) {
+			hitGround = false;
 		}
 	}
 }

@@ -24,8 +24,8 @@ public class NeoBaby : BabyController {
 		if (Time.timeScale > 0) {
 			
 			if (!launched) {
-				UpdateLooking ();
 				Aim ();
+				UpdateLooking ();
 			}
 
 			if (Input.GetMouseButtonDown (0)) {
@@ -47,7 +47,7 @@ public class NeoBaby : BabyController {
 
 			if (!grounded) {
 				transform.eulerAngles = new Vector3 (0, vertRotation.eulerAngles.y, 0);
-				vertRotation.eulerAngles = new Vector3 (vertRotation.eulerAngles.x, 0, 0);
+				vertRotation.localEulerAngles = Vector3.zero;
 			}
 
 			aiming = true;
