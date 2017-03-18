@@ -12,25 +12,21 @@ public class BouncyBaby : BabyController {
 			return;
 		}
 
-		if (other.collider.CompareTag ("Floor") || other.collider.CompareTag ("Wall")) {
-
-			if (numberOfBounces > 0) {
-
-				rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
-				numberOfBounces--;
-			
-			} else {
-				
-				Invoke ("EndMotion", slideTime);
-			}
-
-		} else if (other.collider.CompareTag ("Trampoline")) {
+		if (other.collider.CompareTag ("Trampoline")) {
 
 			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
 
 			if (rb.velocity.y < 1) {
 				Invoke ("EndMotion", slideTime);
 			}
+		
+		} else 	if (numberOfBounces > 0) {
+
+			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
+			numberOfBounces--;
+
+		} else if (other.collider.CompareTag ("Floor")) {
+			hitGround = true;
 		}
 	}
 }

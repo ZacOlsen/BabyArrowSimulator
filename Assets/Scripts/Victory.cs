@@ -6,7 +6,7 @@ public class Victory : MonoBehaviour {
 
 	private void Win (Collider other) {
 
-		BabyController baby = other.transform.parent.parent.GetComponent<BabyController> ();
+		BabyController baby = other.transform.root.GetComponent<BabyController> ();
 
 		if (baby.IsCurrent ()) {
 			GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ShowVictory ();

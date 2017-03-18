@@ -103,7 +103,7 @@ public class BabyController : MonoBehaviour {
 
 	private bool onTreadmill;
 
-	private bool hitGround;
+	protected bool hitGround;
 
 	[SerializeField] private GameObject fractalizedBaby = null;
 
