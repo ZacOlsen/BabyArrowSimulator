@@ -117,6 +117,7 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private SkinnedMeshRenderer bow = null;
 	[SerializeField] private SkinnedMeshRenderer gun = null;
+	[SerializeField] private Transform spine;
 
 	protected void Awake () {
 
@@ -226,6 +227,8 @@ public class BabyController : MonoBehaviour {
 			
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
 			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
+
+			spine.localRotation = Quaternion.Euler (0, 0, Mathf.Clamp (-rotationY, minRotationY, maxRotationY));
 
 			anim.SetBool ("shuffle", x != 0 && !bm.NextIsSoldierBaby ());
 			anim.SetBool ("gun", bm.NextIsSoldierBaby ());
