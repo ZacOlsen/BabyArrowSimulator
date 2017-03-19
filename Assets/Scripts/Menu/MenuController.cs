@@ -77,6 +77,10 @@ public class MenuController : MonoBehaviour {
 		audioLevel = al;
 	}
 
+	public static void SetAudioLevel (float al) {
+		audioLevel = al;
+	}
+
 	public void MainMenu () {
 
 		options.SetActive (false);

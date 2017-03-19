@@ -31,6 +31,12 @@ public class BabyManager : MonoBehaviour {
 
 	private bool isOnSoldierBaby;
 
+	private GameObject nextLevelButton;
+	private GameObject optionsMenu;
+	private Slider audioLevel;
+	private GameObject optionsButton;
+	private GameObject babiesUsed;
+
 	private void Start () {
 
 		babiesUsedNum = new int [babiesTable.Length];
@@ -43,7 +49,7 @@ public class BabyManager : MonoBehaviour {
 		babyMenuNumbers = new Text [babies.Length];
 		UpdateNumberDisplay (currentIndex);
 
-		GameObject babiesUsed = GameObject.Find ("Babies Used");
+		babiesUsed = GameObject.Find ("Babies Used");
 		for (int i = 0; i < babyMenuImages.Length; i++) {
 
 			GameObject go = (GameObject)Instantiate (babyMenuTemplate);
@@ -56,9 +62,16 @@ public class BabyManager : MonoBehaviour {
 			babyMenuNumbers [i] = go.GetComponentInChildren<Text> ();
 			babyMenuNumbers [i].text = "x" + babiesUsedNum [i];
 		}
-
-
+			
 		levelTime = GameObject.Find ("Level Time").GetComponent<Text> ();
+
+		nextLevelButton = GameObject.Find ("Next Level");
+		optionsMenu = GameObject.Find ("Options Menu");
+		audioLevel = GameObject.Find ("Audio Slider").GetComponent<Slider> ();
+		optionsButton = GameObject.Find ("Options");
+
+		optionsMenu.SetActive (false);
+		nextLevelButton.SetActive (false);
 
 		menuBackground = GameObject.Find ("Menu Background");
 		menuBackground.SetActive (false);
@@ -150,14 +163,39 @@ public class BabyManager : MonoBehaviour {
 	}
 
 	public void GotToMainMenu () {
+	
+		LevelStartText.ChangeLevel ();
 		SceneManager.LoadScene (mainMenuSceneName);
 	}
 
 	public void GoToNextLevel () {
+	
+		LevelStartText.ChangeLevel ();
 		SceneManager.LoadScene (nextLevelSceneName);
 	}
 
+	public void ShowOptions () {
+
+		optionsMenu.SetActive (true);
+		audioLevel.value = MenuController.GetAudioLevel ();
+		babiesUsed.SetActive (false);
+	}
+
+	public void HideOptions () {
+
+		optionsMenu.SetActive (false);
+		babiesUsed.SetActive (true);
+	}
+
+	public void SetAudioLevel (float al) {
+		MenuController.SetAudioLevel (al);
+	}
+
 	private void HideMenu () {
+
+		if (optionsMenu.activeSelf) {
+			HideOptions ();
+		}
 
 		menuBackground.SetActive (false);
 
@@ -210,6 +248,10 @@ public class BabyManager : MonoBehaviour {
 	public void ShowVictory () {
 
 		ShowMenu ();
+
+		optionsButton.SetActive (false);
+		nextLevelButton.SetActive (true);
+
 		levelOver = true;
 		GameObject.Find ("Level Name").GetComponent<Text> ().text = SceneManager.GetActiveScene().name + " Completed";
 	}

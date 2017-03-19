@@ -24,32 +24,35 @@ public class CameraLevelPreview : MonoBehaviour {
 		transform.position = viewPoints [0].position;
 		transform.rotation = viewPoints [0].rotation;
 
-		Time.timeScale = 1f;
-
 		transform.rotation = Quaternion.identity;
 	}
 	
 	void FixedUpdate () {
 	
-		if (index < viewPoints.Length) {
+		if (LevelStartText.GetShown ()) {
+			
+			Time.timeScale = 1f;
 
-			transform.position = Vector3.Lerp (transform.position, viewPoints [index].position, 
-				Time.fixedDeltaTime * speed / Vector3.Distance (transform.position, viewPoints [index].position));
-			transform.rotation = Quaternion.Slerp (transform.rotation, viewPoints [index].rotation, 
-				Time.fixedDeltaTime * rotationSpeed / Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles));
+			if (index < viewPoints.Length) {
 
-			if (Vector3.Distance (transform.position, viewPoints [index].position) < errorRange &&
-			    Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles) < errorRange) {
-				index++;
-			}
+				transform.position = Vector3.Lerp (transform.position, viewPoints [index].position, 
+					Time.fixedDeltaTime * speed / Vector3.Distance (transform.position, viewPoints [index].position));
+				transform.rotation = Quaternion.Slerp (transform.rotation, viewPoints [index].rotation, 
+					Time.fixedDeltaTime * rotationSpeed / Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles));
+
+				if (Vector3.Distance (transform.position, viewPoints [index].position) < errorRange &&
+				   Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles) < errorRange) {
+					index++;
+				}
 		
-		} else {
+			} else {
 
-			transform.localPosition = offsets;
-			transform.localEulerAngles = offsetRotation;
+				transform.localPosition = offsets;
+				transform.localEulerAngles = offsetRotation;
 
-			bbc.enabled = true;
-			Destroy (this);
+				bbc.enabled = true;
+				Destroy (this);
+			}
 		}
 	}
 }
