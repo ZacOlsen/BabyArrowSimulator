@@ -9,7 +9,7 @@ public class StickyBaby : BabyController {
 			return;
 		}
 
-		transform.parent = other.collider.transform;
+		//transform.parent = other.collider.transform;
 		EndMotion ();	
 	}
 }

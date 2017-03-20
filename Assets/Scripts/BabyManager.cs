@@ -45,6 +45,8 @@ public class BabyManager : MonoBehaviour {
 		currentBabyNumbers = GameObject.Find ("Current Numbers").GetComponent<Text> ();
 		totalBabyNumbers = GameObject.Find ("Total Numbers").GetComponent<Text> ();
 
+		currentBabySelected.texture = babyImages [0].texture;
+
 		babyMenuImages = new RawImage [babies.Length];
 		babyMenuNumbers = new Text [babies.Length];
 		UpdateNumberDisplay (currentIndex);
@@ -54,7 +56,7 @@ public class BabyManager : MonoBehaviour {
 
 			GameObject go = (GameObject)Instantiate (babyMenuTemplate);
 			go.transform.SetParent (babiesUsed.transform);
-			go.transform.localPosition = new Vector3 (i * 100f - 200f, 0, 0);
+			go.transform.localPosition = new Vector3 (i * 100f - (200f * (babies.Length - 1f) / 4f), 0, 0);
 
 			babyMenuImages [i] = go.GetComponent<RawImage> ();
 			babyMenuImages [i].texture = babyImages [i].texture;
