@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TutorialController : MonoBehaviour {
 
-	[SerializeField] private string[] messages = null;
+	[TextArea(3, 10)][SerializeField] private string[] messages = null;
 	[SerializeField] private Sprite[] images = null;
 
 	[SerializeField] private GameObject tempWall = null;
