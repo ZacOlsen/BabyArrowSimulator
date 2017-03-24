@@ -8,29 +8,20 @@ public class TutorialController : MonoBehaviour {
 	[SerializeField] private Sprite[] images = null;
 
 	[SerializeField] private GameObject tempWall = null;
-	[SerializeField] private bool defaultlyActive = false;
-
 	private int index;
 
 	private Text textBox;
 	private RawImage image;
-	private static GameObject bg;
+	[SerializeField] private GameObject background = null;
+	private bool babyInArea;
 
 	private void Start () {
-
-		if (bg == null) {
-			bg = GameObject.Find("Background");
-			bg.SetActive (false);
-		}
-
-		if (defaultlyActive) {
-			ShowTutorial ();
-		}
+		background.SetActive (false);
 	}
 
 	private void ShowTutorial () {
 		
-		bg.SetActive (true);
+		background.SetActive (true);
 		textBox = GameObject.Find ("Text").GetComponent<Text> ();
 		image = GameObject.Find ("Image").GetComponent<RawImage> ();
 		
@@ -38,12 +29,11 @@ public class TutorialController : MonoBehaviour {
 		image.texture = images [index].texture;
 		
 		Time.timeScale = 0;
-		defaultlyActive = true;
 	}
 	
 	private void Update () {
 	
-		if (defaultlyActive && Input.GetMouseButtonDown(0)) {
+		if (babyInArea && Input.GetMouseButtonDown(0)) {
 
 			index++;
 
@@ -56,7 +46,7 @@ public class TutorialController : MonoBehaviour {
 					Destroy (tempWall);
 				}
 
-				bg.SetActive (false);
+				background.SetActive (false);
 				Destroy (this);
 				return;
 			}
@@ -69,6 +59,7 @@ public class TutorialController : MonoBehaviour {
 	private void OnTriggerEnter (Collider other) {
 
 		if (other.CompareTag ("Baby")) {
+			babyInArea = true;
 			ShowTutorial ();
 		}
 	}
