@@ -117,7 +117,7 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private SkinnedMeshRenderer bow = null;
 	[SerializeField] private SkinnedMeshRenderer gun = null;
-	[SerializeField] private Transform spine;
+	[SerializeField] private Transform spine = null;
 
 	protected void Awake () {
 
@@ -204,7 +204,7 @@ public class BabyController : MonoBehaviour {
 				if (hitGround) {
 					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
 
-					if (rb.velocity.magnitude < .01f) {
+					if (rb.velocity.magnitude < .1f) {
 						EndMotion ();
 					}
 				}
@@ -314,6 +314,8 @@ public class BabyController : MonoBehaviour {
 
 			current = false;
 			ResetShootState ();
+
+			anim.SetBool ("shuffle", false);
 		}
 	}
 

@@ -18,6 +18,7 @@ public class CameraLevelPreview : MonoBehaviour {
 
 	void Start () {
 
+//		Debug.Log (GameObject.FindGameObjectWithTag ("Baby"));
 		bbc = GameObject.FindGameObjectWithTag ("Baby").GetComponent<BabyController> ();
 		bbc.enabled = false;
 
