@@ -193,6 +193,10 @@ public class BabyManager : MonoBehaviour {
 		MenuController.SetAudioLevel (al);
 	}
 
+	public void ToggleShowTimer (bool shown) {
+		levelTime.color = new Color(levelTime.color.r, levelTime.color.g, levelTime.color.b, shown ? 255 : 0);
+	}
+
 	private void HideMenu () {
 
 		if (optionsMenu.activeSelf) {
@@ -307,6 +311,5 @@ public class BabyManager : MonoBehaviour {
 		currentBabySelected.enabled = shown;
 		currentBabyNumbers.enabled = shown;
 		totalBabyNumbers.enabled = shown;
-
 	}
 }

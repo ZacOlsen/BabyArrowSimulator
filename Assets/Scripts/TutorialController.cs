@@ -15,6 +15,8 @@ public class TutorialController : MonoBehaviour {
 	[SerializeField] private GameObject background = null;
 	private bool babyInArea;
 
+	private Rigidbody rb;
+
 	private void Start () {
 		background.SetActive (false);
 	}
@@ -47,6 +49,7 @@ public class TutorialController : MonoBehaviour {
 				}
 
 				background.SetActive (false);
+				rb.GetComponent<BabyController> ().enabled = true;
 				Destroy (this);
 				return;
 			}
@@ -56,11 +59,19 @@ public class TutorialController : MonoBehaviour {
 		}
 	}
 
+	private void FixedUpdate () {
+
+		if (rb != null && rb.isKinematic) {
+			rb.GetComponent<BabyController> ().enabled = false;
+			ShowTutorial ();
+		}
+	}
+
 	private void OnTriggerEnter (Collider other) {
 
 		if (other.CompareTag ("Baby")) {
 			babyInArea = true;
-			ShowTutorial ();
+			rb = other.attachedRigidbody;
 		}
 	}
 }
