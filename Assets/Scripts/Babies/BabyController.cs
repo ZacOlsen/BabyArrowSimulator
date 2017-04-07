@@ -60,7 +60,7 @@ public class BabyController : MonoBehaviour {
 	/**
 	 * the collider of this gameobject
 	 */
-	private Collider col;
+	protected Collider col;
 
 	/**
 	 * the charging part of the chargebar
@@ -104,6 +104,8 @@ public class BabyController : MonoBehaviour {
 	private bool onTreadmill;
 
 	protected bool hitGround;
+
+	private bool dying;
 
 	[SerializeField] private GameObject fractalizedBaby = null;
 
@@ -172,8 +174,10 @@ public class BabyController : MonoBehaviour {
 
 			if (grounded) {
 
-				gun.enabled = bm.NextIsSoldierBaby ();
-				bow.enabled = !gun.enabled;
+				if (!dying) {
+					gun.enabled = bm.NextIsSoldierBaby ();
+					bow.enabled = !gun.enabled;
+				}
 
 				Aim ();
 			}
@@ -204,7 +208,7 @@ public class BabyController : MonoBehaviour {
 				if (hitGround) {
 					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
 
-					if (rb.velocity.magnitude < .1f) {
+					if (rb.velocity.magnitude < .1f && !dying) {
 						EndMotion ();
 					}
 				}
@@ -228,11 +232,12 @@ public class BabyController : MonoBehaviour {
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
 			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
 
-			spine.localRotation = Quaternion.Euler (0, 0, Mathf.Clamp (-rotationY, minRotationY, maxRotationY));
+			if (!dying) {
+				spine.localRotation = Quaternion.Euler (0, 0, Mathf.Clamp (-rotationY, minRotationY, maxRotationY));
+				anim.SetBool ("shuffle", x != 0 && !bm.NextIsSoldierBaby ());
+				anim.SetBool ("gun", bm.NextIsSoldierBaby ());
+			}
 
-			anim.SetBool ("shuffle", x != 0 && !bm.NextIsSoldierBaby ());
-			anim.SetBool ("gun", bm.NextIsSoldierBaby ());
-		
 		} else if (aiming) {
 
 			transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y + x, 0f);
@@ -284,7 +289,7 @@ public class BabyController : MonoBehaviour {
 
 			bm.ChangeUI (false);
 
-			baby = ((GameObject) Instantiate (baby, launchStartPos.position, transform.rotation));
+			baby = ((GameObject) Instantiate (baby, new Vector3(launchStartPos.position.x, launchStartPos.position.y - .3f, launchStartPos.position.z), transform.rotation));
 			baby.transform.FindChild ("Vertical Rotation").transform.localRotation = vertRotation.localRotation;
 
 			if (col != null) {
@@ -435,9 +440,9 @@ public class BabyController : MonoBehaviour {
 
 	protected void EndMotion () {
 
-		if (!grounded) {
+		if (!grounded && !dying) {
 
-			Debug.Log (name);
+//			Debug.Log ("end " + dying);
 
 			bm.ChangeUI (true);
 
@@ -466,15 +471,25 @@ public class BabyController : MonoBehaviour {
 
 	private IEnumerator FixCollision () {
 
-		yield return new WaitForFixedUpdate ();
-		yield return new WaitForFixedUpdate ();
-		yield return new WaitForFixedUpdate ();
-		yield return new WaitForFixedUpdate ();
+		if (!dying) {
+			yield return new WaitForFixedUpdate ();
+		}
+		if (!dying) {
+			yield return new WaitForFixedUpdate ();
+		}if (!dying) {
+			yield return new WaitForFixedUpdate ();
+		}if (!dying) {
+			yield return new WaitForFixedUpdate ();
+		}
 		rb.isKinematic = true;
 		Destroy (col);
 	}
 
 	public void Die () {
+
+		dying = true;
+
+		Debug.Log ("die");
 
 		if (current) {
 			rb.isKinematic = true;
