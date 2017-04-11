@@ -20,6 +20,8 @@ public class BabyManager : MonoBehaviour {
 
 	private RawImage currentBabySelected;
 	private Text currentBabyNumbers;
+	private RawImage nextBabySelected;
+	private Text nextBabyNumbers;
 	private Text totalBabyNumbers;
 
 	[SerializeField] private GameObject babyMenuTemplate = null;
@@ -43,6 +45,8 @@ public class BabyManager : MonoBehaviour {
 
 		currentBabySelected = GameObject.Find ("Current Baby").GetComponent<RawImage> ();
 		currentBabyNumbers = GameObject.Find ("Current Numbers").GetComponent<Text> ();
+		nextBabySelected = GameObject.Find ("Next Baby").GetComponent<RawImage> ();
+		nextBabyNumbers = GameObject.Find ("Next Numbers").GetComponent<Text> ();
 		totalBabyNumbers = GameObject.Find ("Total Numbers").GetComponent<Text> ();
 
 		currentBabySelected.texture = babyImages [0].texture;
@@ -57,6 +61,7 @@ public class BabyManager : MonoBehaviour {
 			GameObject go = (GameObject)Instantiate (babyMenuTemplate);
 			go.transform.SetParent (babiesUsed.transform);
 			go.transform.localPosition = new Vector3 (i * 100f - (200f * (babies.Length - 1f) / 4f), 0, 0);
+			((RectTransform) go.transform).sizeDelta = new Vector2 (50, 50);
 
 			babyMenuImages [i] = go.GetComponent<RawImage> ();
 			babyMenuImages [i].texture = babyImages [i].texture;
@@ -71,6 +76,9 @@ public class BabyManager : MonoBehaviour {
 		optionsMenu = GameObject.Find ("Options Menu");
 		audioLevel = GameObject.Find ("Audio Slider").GetComponent<Slider> ();
 		optionsButton = GameObject.Find ("Options");
+
+		currentIndex = babiesTable.Length;
+		UpdateSelection (1);
 
 		optionsMenu.SetActive (false);
 		nextLevelButton.SetActive (false);
@@ -144,6 +152,48 @@ public class BabyManager : MonoBehaviour {
 		currentBabyNumbers.text = "x" + babiesTable [currentIndex];
 
 		isOnSoldierBaby = babies[currentIndex].GetComponent<SoldierBaby>() != null;
+
+		int next = currentIndex + 1;
+
+		if (next >= babies.Length) {
+			next = 0;
+		}
+
+		if (next < 0) {
+			next = babies.Length - 1;
+		}
+
+		do {
+
+			if (babiesTable [next] == 0) {
+				next++;	
+			} else {
+				break;
+			}
+
+			if (next >= babies.Length) {
+				next = 0;
+			}
+
+			if (next < 0) {
+				next = babies.Length - 1;
+			}
+
+		} while (next != currentIndex);
+
+		if (next >= babies.Length) {
+			next = 0;
+		}
+
+		if (next == currentIndex) {
+			nextBabySelected.color = Color.clear;
+			nextBabyNumbers.text = "";
+			return;
+		}
+
+		nextBabySelected.color = Color.white;
+		nextBabySelected.texture = babyImages [next].texture;
+		nextBabyNumbers.text = "x" + babiesTable [next];
 	}
 
 	private void UpdateNumberDisplay (int index) {
@@ -215,6 +265,8 @@ public class BabyManager : MonoBehaviour {
 
 		currentBabySelected.enabled = true;
 		currentBabyNumbers.enabled = true;
+		nextBabySelected.enabled = true;
+		nextBabyNumbers.enabled = true;
 		totalBabyNumbers.enabled = true;
 
 		GameObject.Find ("Canvas").transform.FindChild ("Charge Background").gameObject.SetActive (true);
@@ -228,6 +280,8 @@ public class BabyManager : MonoBehaviour {
 
 		currentBabySelected.enabled = false;
 		currentBabyNumbers.enabled = false;
+		nextBabySelected.enabled = false;
+		nextBabyNumbers.enabled = false;
 		totalBabyNumbers.enabled = false;
 			
 		menuBackground.SetActive (true);
@@ -310,6 +364,8 @@ public class BabyManager : MonoBehaviour {
 
 		currentBabySelected.enabled = shown;
 		currentBabyNumbers.enabled = shown;
+		nextBabySelected.enabled = shown;
+		nextBabyNumbers.enabled = shown;
 		totalBabyNumbers.enabled = shown;
 	}
 }

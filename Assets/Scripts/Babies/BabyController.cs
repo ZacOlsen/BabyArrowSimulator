@@ -65,12 +65,7 @@ public class BabyController : MonoBehaviour {
 	/**
 	 * the charging part of the chargebar
 	 */
-	private RectTransform chargeBar;
-
-	/**
-	 * the initial elevation on the screen of the charge bar
-	 */
-	private float chargeBarIniX;
+	private Image chargeBar;
 
 	[SerializeField] private float maxArcDistance = 30f;
 
@@ -138,8 +133,7 @@ public class BabyController : MonoBehaviour {
 
 		Camera.main.transform.localEulerAngles = camRotation;
 
-		chargeBar = ((RectTransform) GameObject.Find ("Charge Foreground").transform);
-		chargeBarIniX = 0;
+		chargeBar = GameObject.Find ("Charge Foreground").GetComponent<Image> ();
 
 		vertRotation = transform.FindChild ("Vertical Rotation");
 		launchStartPos = vertRotation.FindChild ("Launch Start Pos");
@@ -309,9 +303,6 @@ public class BabyController : MonoBehaviour {
 
 			baby.GetComponent<BabyController> ().rotationY = rotationY;
 
-			chargeBar.localPosition = new Vector3 (chargeBarIniX, chargeBar.localPosition.y, chargeBar.localPosition.z);
-			chargeBar.localScale = Vector3.one;
-
 			Destroy (GetComponentInChildren<Camera>().gameObject);
 			launchSpeed = 0;
 
@@ -330,10 +321,7 @@ public class BabyController : MonoBehaviour {
 	private void UpdateChargeBar () {
 
 		float percent = launchSpeed / maxLaunchSpeed;
-
-		chargeBar.localScale = new Vector3 (percent, 1, 1);
-		chargeBar.localPosition = new Vector3 (chargeBarIniX - ((chargeBar.rect.width - chargeBar.rect.width * percent) / 2f), 
-			chargeBar.localPosition.y, chargeBar.localPosition.z);
+		chargeBar.fillAmount = percent;
 	}
 		
 	/**
@@ -488,8 +476,6 @@ public class BabyController : MonoBehaviour {
 	public void Die () {
 
 		dying = true;
-
-		Debug.Log ("die");
 
 		if (current) {
 			rb.isKinematic = true;
