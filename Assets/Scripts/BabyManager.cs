@@ -59,9 +59,9 @@ public class BabyManager : MonoBehaviour {
 		for (int i = 0; i < babyMenuImages.Length; i++) {
 
 			GameObject go = (GameObject)Instantiate (babyMenuTemplate);
-			go.transform.SetParent (babiesUsed.transform);
-			go.transform.localPosition = new Vector3 (i * 100f - (200f * (babies.Length - 1f) / 4f), 0, 0);
-			((RectTransform) go.transform).sizeDelta = new Vector2 (50, 50);
+			go.transform.SetParent (babiesUsed.transform, false);
+			go.transform.localPosition = new Vector3 (i * 100f - (200f * (babies.Length - 1f) / 4f), 15, 0);
+			((RectTransform) go.transform).sizeDelta = new Vector2 (55, 120);
 
 			babyMenuImages [i] = go.GetComponent<RawImage> ();
 			babyMenuImages [i].texture = babyImages [i].texture;

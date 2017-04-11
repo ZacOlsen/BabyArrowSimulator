@@ -116,6 +116,10 @@ public class BabyController : MonoBehaviour {
 	[SerializeField] private SkinnedMeshRenderer gun = null;
 	[SerializeField] private Transform spine = null;
 
+	[SerializeField] private AudioClip[] wallHitSounds = null;
+	[SerializeField] private AudioClip bowReleaseSound = null;
+	private AudioSource audioPlayer;
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -159,6 +163,8 @@ public class BabyController : MonoBehaviour {
 
 		anim.SetInteger ("animState", 0);
 		bow.enabled = false;
+
+		audioPlayer = GetComponent<AudioSource> ();
 	}
 		
 	protected void Update () {
@@ -175,6 +181,13 @@ public class BabyController : MonoBehaviour {
 
 				Aim ();
 			}
+		}
+	}
+
+	void LateUpdate () {
+		
+		if (grounded && !dying) {
+			spine.localRotation = Quaternion.Euler (0, 0, Mathf.Clamp (-rotationY, minRotationY, maxRotationY));
 		}
 	}
 
@@ -200,8 +213,8 @@ public class BabyController : MonoBehaviour {
 				}
 
 				if (hitGround) {
+					
 					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
-
 					if (rb.velocity.magnitude < .1f && !dying) {
 						EndMotion ();
 					}
@@ -227,9 +240,10 @@ public class BabyController : MonoBehaviour {
 			vertRotation.transform.localRotation = Quaternion.Euler (Mathf.Clamp (rotationY, minRotationY, maxRotationY), 0, 0);
 
 			if (!dying) {
-				spine.localRotation = Quaternion.Euler (0, 0, Mathf.Clamp (-rotationY, minRotationY, maxRotationY));
 				anim.SetBool ("shuffle", x != 0 && !bm.NextIsSoldierBaby ());
-				anim.SetBool ("gun", bm.NextIsSoldierBaby ());
+				spine.localRotation = Quaternion.Euler (0, 0, Mathf.Clamp (-rotationY, minRotationY, maxRotationY));
+//				Debug.Log (spine.localEulerAngles);
+//				anim.SetBool ("gun", bm.NextIsSoldierBaby ());
 			}
 
 		} else if (aiming) {
@@ -298,6 +312,7 @@ public class BabyController : MonoBehaviour {
 				baby.GetComponent<SoldierBaby> ().SetStats (launchSpeed / maxLaunchSpeed, vel);
 
 			} else {
+				audioPlayer.PlayOneShot (bowReleaseSound, MenuController.GetAudioLevel ());
 				rig.velocity = vel;
 			}
 
@@ -521,19 +536,21 @@ public class BabyController : MonoBehaviour {
 		if (!enabled) {
 			return;
 		}
-		
+			
+		audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetAudioLevel ());
+
 		//if the player has hit the ground
 		if (other.collider.CompareTag ("Floor")) {
 			//stop their movement and delete their collider
 //			Invoke ("EndMotion", slideTime);
 			hitGround = true;
-
 			//make the aiming arc invisible
 
 		} else if (other.collider.CompareTag ("Wall")) {
 
 //			rb.velocity = new Vector3 (0, -other.relativeVelocity.y, 0);
-	
+//			rb.velocity = new Vector3 (rb.velocity.x, Mathf.Clamp(rb.velocity.y, float.MinValue, 0), rb.velocity.z);
+
 		} else if (other.collider.CompareTag ("Trampoline")) {
 			
 			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal)
@@ -553,7 +570,7 @@ public class BabyController : MonoBehaviour {
 		}
 
 		if (other.collider.CompareTag ("Floor")) {
-			hitGround = false;
+	//		hitGround = false;
 		}
 	}
 }
