@@ -1,7 +1,7 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyArrowSimulator", "Assembly-CSharp.csproj", "{514AFB19-B286-2E38-D601-8EA0FDF87F1E}"
+# Visual Studio 2008
+
+Project("{42F035B0-190A-B4B3-5007-1E0CACC78E49}") = "BabyArrowSimulator", "Assembly-CSharp.csproj", "{514AFB19-B286-2E38-D601-8EA0FDF87F1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
