@@ -4,7 +4,6 @@ using System.Collections;
 public class CameraLevelPreview : MonoBehaviour {
 
 	[SerializeField] private float speed = 10f;
-	[SerializeField] private float rotationSpeed = 10f;
 	[SerializeField] private float errorRange = .5f;
 	[SerializeField] private Transform[] viewPoints = null;
 
@@ -18,41 +17,47 @@ public class CameraLevelPreview : MonoBehaviour {
 
 	void Start () {
 
-//		Debug.Log (GameObject.FindGameObjectWithTag ("Baby"));
 		bbc = GameObject.FindGameObjectWithTag ("Baby").GetComponent<BabyController> ();
 		bbc.enabled = false;
 
-		transform.position = viewPoints [0].position;
-		transform.rotation = viewPoints [0].rotation;
+		StartLevelPreview ();
 	}
 	
 	void FixedUpdate () {
-	
-		if (LevelStartText.GetShown ()) {
-			
-			Time.timeScale = 1f;
-
-			if (index < viewPoints.Length) {
-
-				transform.position = Vector3.Lerp (transform.position, viewPoints [index].position, 
-					Time.fixedDeltaTime * speed / Vector3.Distance (transform.position, viewPoints [index].position));
 				
-				transform.rotation = Quaternion.Slerp (transform.rotation, viewPoints [index].rotation, 
-					Time.fixedDeltaTime * rotationSpeed / Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles));
+		if (index < viewPoints.Length) {
 
-				if (Vector3.Distance (transform.position, viewPoints [index].position) < errorRange &&
-				   Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles) < errorRange) {
-					index++;
-				}
-		
-			} else {
+			transform.position = Vector3.Lerp (transform.position, viewPoints [index].position, 
+				Time.fixedDeltaTime * speed / Vector3.Distance (transform.position, viewPoints [index].position));
+			
+			transform.rotation = Quaternion.Slerp (transform.rotation, viewPoints [index].rotation, 
+				Time.fixedDeltaTime * speed / Vector3.Distance (transform.position, viewPoints [index].position));
 
-				transform.localPosition = offsets;
-				transform.localEulerAngles = offsetRotation;
-
-				bbc.enabled = true;
-				Destroy (this);
+			if (Vector3.Distance (transform.position, viewPoints [index].position) < errorRange &&
+			   Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles) < errorRange) {
+				index++;
 			}
+		
+		} else {
+			StartLevelPreview ();
 		}
+	}
+
+	void StartLevelPreview () {
+
+		transform.position = viewPoints [0].position;
+		transform.rotation = viewPoints [0].rotation;
+
+		index = 1;
+	}
+
+	public void StopLevelPreview () {
+
+		transform.localPosition = offsets;
+		transform.localEulerAngles = offsetRotation;
+
+		bbc.enabled = true;
+		bbc.EndMotion ();
+		Destroy (this);
 	}
 }

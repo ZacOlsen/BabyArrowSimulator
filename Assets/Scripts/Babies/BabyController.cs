@@ -471,7 +471,7 @@ public class BabyController : MonoBehaviour {
 		}
 	}
 
-	protected void EndMotion () {
+	public void EndMotion () {
 
 		if (!grounded && !dying) {
 
