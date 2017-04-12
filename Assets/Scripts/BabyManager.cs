@@ -216,13 +216,13 @@ public class BabyManager : MonoBehaviour {
 
 	public void GotToMainMenu () {
 	
-		LevelStartText.ChangeLevel ();
+//		LevelStartText.ChangeLevel ();
 		SceneManager.LoadScene (mainMenuSceneName);
 	}
 
 	public void GoToNextLevel () {
 	
-		LevelStartText.ChangeLevel ();
+//		LevelStartText.ChangeLevel ();
 		SceneManager.LoadScene (nextLevelSceneName);
 	}
 

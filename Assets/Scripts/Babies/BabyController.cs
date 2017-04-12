@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BabyController : MonoBehaviour {
 
@@ -38,9 +39,7 @@ public class BabyController : MonoBehaviour {
 	 * max launch speed of the new baby
 	 */
 	[SerializeField] private float maxLaunchSpeed = 10f;
-
 	[SerializeField] private float launchIterationSize = .02f;
-
 	[SerializeField][Range(0, 1)] private float initialCharge = .5f;
 
 	private float launchX = 0;
@@ -84,31 +83,25 @@ public class BabyController : MonoBehaviour {
 	 */
 	private const int NUMBER_OF_ARC_PIECES = 30;
 
-	protected bool grounded;
-
-	private bool current = true;
-
-	protected bool aiming;
-
 	protected BabyManager bm;
-
 	private static GameObject previousBaby;
 
-	private Transform babyModel;
-
+	private bool current = true;
+	protected bool aiming;
 	private bool onTreadmill;
-
+	protected bool grounded;
 	protected bool hitGround;
-
 	private bool dying;
 
+	private Transform babyModel;
 	[SerializeField] private GameObject fractalizedBaby = null;
-
 	[SerializeField] private float timeTilFractalizedDestroyed = 5f;
-
 	[SerializeField] private float timeTilSwitchBack = 3f;
 
 	[SerializeField] private Vector3 camRotation = new Vector3();
+
+	[SerializeField][Range(0, 1)] private float alphaTransparency = .5f;
+	private List<GameObject> objectsInWay;
 
 	protected Animator anim;
 
@@ -165,6 +158,8 @@ public class BabyController : MonoBehaviour {
 		bow.enabled = false;
 
 		audioPlayer = GetComponent<AudioSource> ();
+
+		objectsInWay = new List<GameObject> ();
 	}
 		
 	protected void Update () {
@@ -225,6 +220,41 @@ public class BabyController : MonoBehaviour {
 //				EndMotion ();
 //			}
 		}
+
+
+	/*	if (Camera.main.transform.IsChildOf (vertRotation)) {
+
+			Vector3 direction = transform.position - Camera.main.transform.position;
+
+			Ray ray = new Ray (Camera.main.transform.position, direction);
+			RaycastHit[] hits = Physics.RaycastAll (ray, direction.magnitude,
+				                    ~(1 << 8));//~LayerMask.NameToLayer ("BabyL"));
+
+			RaycastHit hit;
+			Physics.Raycast (ray, out hit, direction.magnitude); 
+//			Debug.Log (hit.collider.gameObject.name);
+
+			Debug.DrawLine (ray.origin, transform.position, Color.red);
+
+			for (int i = 0; i < objectsInWay.Count; i++) {
+		//		objectsInWay [i].GetComponent<MeshRenderer> ().material.color = Color.white;
+			}
+
+			objectsInWay.Clear ();
+
+			Debug.Log (hits.Length);
+
+			for (int i = 0; i < hits.Length; i++) {
+
+				if (!objectsInWay.Contains (hits [i].collider.gameObject)) {
+					objectsInWay.Add (hits [i].collider.gameObject);
+				//	Debug.Log (objectsInWay[i]);
+					objectsInWay [objectsInWay.Count - 1].GetComponent<MeshRenderer> ().material.color = 
+						new Color(1, 1, 1, alphaTransparency);
+				}
+			}
+		}
+		*/
 	}
 
 	protected void UpdateLooking () {
@@ -441,7 +471,7 @@ public class BabyController : MonoBehaviour {
 		}
 	}
 
-	protected void EndMotion () {
+	public void EndMotion () {
 
 		if (!grounded && !dying) {
 
