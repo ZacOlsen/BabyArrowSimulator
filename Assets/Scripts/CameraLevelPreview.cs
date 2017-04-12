@@ -24,8 +24,6 @@ public class CameraLevelPreview : MonoBehaviour {
 
 		transform.position = viewPoints [0].position;
 		transform.rotation = viewPoints [0].rotation;
-
-		transform.rotation = Quaternion.identity;
 	}
 	
 	void FixedUpdate () {
@@ -38,6 +36,7 @@ public class CameraLevelPreview : MonoBehaviour {
 
 				transform.position = Vector3.Lerp (transform.position, viewPoints [index].position, 
 					Time.fixedDeltaTime * speed / Vector3.Distance (transform.position, viewPoints [index].position));
+				
 				transform.rotation = Quaternion.Slerp (transform.rotation, viewPoints [index].rotation, 
 					Time.fixedDeltaTime * rotationSpeed / Vector3.Distance (transform.eulerAngles, viewPoints [index].eulerAngles));
 
