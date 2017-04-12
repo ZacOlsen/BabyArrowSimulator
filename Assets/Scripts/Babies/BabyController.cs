@@ -41,6 +41,7 @@ public class BabyController : MonoBehaviour {
 	[SerializeField] private float maxLaunchSpeed = 10f;
 	[SerializeField] private float launchIterationSize = .02f;
 	[SerializeField][Range(0, 1)] private float initialCharge = .5f;
+	private float powerDecrease;
 
 	private float launchX = 0;
 
@@ -100,7 +101,6 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private Vector3 camRotation = new Vector3();
 
-	[SerializeField][Range(0, 1)] private float alphaTransparency = .5f;
 	private List<GameObject> objectsInWay;
 
 	protected Animator anim;
@@ -222,7 +222,7 @@ public class BabyController : MonoBehaviour {
 		}
 
 
-	/*	if (Camera.main.transform.IsChildOf (vertRotation)) {
+		if (Camera.main.transform.IsChildOf (vertRotation)) {
 
 			Vector3 direction = transform.position - Camera.main.transform.position;
 
@@ -237,24 +237,33 @@ public class BabyController : MonoBehaviour {
 			Debug.DrawLine (ray.origin, transform.position, Color.red);
 
 			for (int i = 0; i < objectsInWay.Count; i++) {
-		//		objectsInWay [i].GetComponent<MeshRenderer> ().material.color = Color.white;
+
+				MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
+				if(mesh != null){
+			//		mesh.enabled = true;
+					mesh.SwapToOpaque ();
+				}
 			}
 
 			objectsInWay.Clear ();
 
-			Debug.Log (hits.Length);
+//			Debug.Log (hits.Length);
 
 			for (int i = 0; i < hits.Length; i++) {
 
 				if (!objectsInWay.Contains (hits [i].collider.gameObject)) {
+				
+					//	Debug.Log (objectsInWay[i]);
 					objectsInWay.Add (hits [i].collider.gameObject);
-				//	Debug.Log (objectsInWay[i]);
-					objectsInWay [objectsInWay.Count - 1].GetComponent<MeshRenderer> ().material.color = 
-						new Color(1, 1, 1, alphaTransparency);
+					MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
+					if(mesh != null){
+			//			mesh.enabled = false;
+						mesh.SwapToTransparent();
+					}
 				}
 			}
 		}
-		*/
+
 	}
 
 	protected void UpdateLooking () {
@@ -336,7 +345,7 @@ public class BabyController : MonoBehaviour {
 
 			Rigidbody rig = baby.GetComponent<Rigidbody> ();
 
-			Vector3 vel = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed));
+			Vector3 vel = vertRotation.TransformDirection (new Vector3 (0, 0, launchSpeed * (1 - powerDecrease)));
 		
 			if (soldier) {
 				baby.GetComponent<SoldierBaby> ().SetStats (launchSpeed / maxLaunchSpeed, vel);
@@ -390,12 +399,14 @@ public class BabyController : MonoBehaviour {
 			return;
 		}
 
-		float initialYVel = launchStartPos.TransformDirection (new Vector3(0, 0, launchSpeed)).y;
+		float launchPower = launchSpeed * (1 - powerDecrease);
+
+		float initialYVel = launchStartPos.TransformDirection (new Vector3(0, 0, launchPower)).y;
 
 		float time = 2 * (-initialYVel / Physics.gravity.y) + (-initialYVel + Mathf.Sqrt(Mathf.Pow(initialYVel, 2) - 
 			4 * -Physics.gravity.y / 2 * -(transform.position.y))) / -Physics.gravity.y;
 
-		float initialXVel = launchSpeed * Mathf.Cos (vertRotation.localEulerAngles.x * Mathf.Deg2Rad);
+		float initialXVel = launchPower * Mathf.Cos (vertRotation.localEulerAngles.x * Mathf.Deg2Rad);
 
 		float distance = 0;
 		for (float i = .1f; i < time; i += .01f) {
@@ -469,6 +480,10 @@ public class BabyController : MonoBehaviour {
 		for (int i = 0; i < arcPieces.Length; i++) {
 			arcPieces [i].SetActive (false);
 		}
+	}
+
+	public void SetPowerDecrease (float decrease) {
+		powerDecrease = decrease;
 	}
 
 	public void EndMotion () {

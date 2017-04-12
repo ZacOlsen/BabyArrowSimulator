@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Balloon.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Death.cs" />
+     <Compile Include="Assets\Scripts\Obstacles\LitterBox.cs" />
      <Compile Include="Assets\Scripts\Obstacles\PushInArea.cs" />
      <Compile Include="Assets\Scripts\Obstacles\RotateObject.cs" />
      <Compile Include="Assets\Scripts\Obstacles\Trampoline.cs" />

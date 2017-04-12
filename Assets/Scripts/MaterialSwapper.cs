@@ -11,7 +11,6 @@ public class MaterialSwapper : MonoBehaviour {
 
 	void Start () {
 		mesh = GetComponent<MeshRenderer> ();
-		mesh.material.color = new Color (1, 1, 1, 1);
 	}
 
 	public void SwapToOpaque () {
@@ -20,6 +19,5 @@ public class MaterialSwapper : MonoBehaviour {
 
 	public void SwapToTransparent () {
 		mesh.material = transparent;
-		Debug.Log ("hi");
 	}
 }

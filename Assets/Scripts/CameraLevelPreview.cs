@@ -18,6 +18,7 @@ public class CameraLevelPreview : MonoBehaviour {
 	void Start () {
 
 		bbc = GameObject.FindGameObjectWithTag ("Baby").GetComponent<BabyController> ();
+		bbc.EndMotion ();
 		bbc.enabled = false;
 
 		StartLevelPreview ();
@@ -57,7 +58,7 @@ public class CameraLevelPreview : MonoBehaviour {
 		transform.localEulerAngles = offsetRotation;
 
 		bbc.enabled = true;
-		bbc.EndMotion ();
+	//	bbc.EndMotion ();
 		Destroy (this);
 	}
 }

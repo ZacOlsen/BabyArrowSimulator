@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trampoline : MonoBehaviour {
 
-	[SerializeField] private float energyConserved = .66f;
+	[SerializeField][Range(0, 1)] private float energyConserved = .66f;
 
 	public float GetEnergyConserved () {
 		return energyConserved;
