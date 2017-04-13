@@ -92,6 +92,7 @@ public class BabyController : MonoBehaviour {
 	private bool onTreadmill;
 	protected bool grounded;
 	protected bool hitGround;
+	private bool velIsZero;
 	private bool dying;
 
 	private Transform babyModel;
@@ -214,11 +215,30 @@ public class BabyController : MonoBehaviour {
 						EndMotion ();
 					}
 				}
-			}
+			
 
 //			if (rb.velocity.magnitude < .01f) {
 //				EndMotion ();
 //			}
+
+				Debug.Log (rb.velocity.magnitude + " " + Physics.Raycast (transform.position, -Vector3.up, 
+					((BoxCollider) col).size.y / 2f, ~(1 << 8)));
+				Debug.DrawLine (transform.position, transform.position - Vector3.up * ((BoxCollider) col).size.y / 2f,
+					Color.red);
+
+				if (rb.velocity.magnitude < 1f && !dying && Physics.Raycast (transform.position, -Vector3.up, 
+					   ((BoxCollider)col).size.y / 2f, ~(1 << 8))) {
+		
+					//		RaycastHit hit;
+					//		Physics.Raycast (transform.position, -Vector3.up, ((BoxCollider) col).size.y / 2f, ~(1 << 8));
+
+					if (!velIsZero) {
+				//		velIsZero = true;
+					} else {
+				//		EndMotion ();
+					}
+				}
+			}
 		}
 
 
