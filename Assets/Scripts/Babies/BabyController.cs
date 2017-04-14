@@ -95,6 +95,8 @@ public class BabyController : MonoBehaviour {
 	private bool velIsZero;
 	private bool dying;
 
+	private int velCounter;
+
 	private Transform babyModel;
 	[SerializeField] private GameObject fractalizedBaby = null;
 	[SerializeField] private float timeTilFractalizedDestroyed = 5f;
@@ -212,7 +214,7 @@ public class BabyController : MonoBehaviour {
 					
 					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
 					if (rb.velocity.magnitude < .1f && !dying) {
-						EndMotion ();
+//						EndMotion ();
 					}
 				}
 			
@@ -221,8 +223,14 @@ public class BabyController : MonoBehaviour {
 //				EndMotion ();
 //			}
 
-				Debug.Log (rb.velocity.magnitude + " " + Physics.Raycast (transform.position, -Vector3.up, 
-					((BoxCollider) col).size.y / 2f, ~(1 << 8)));
+				if (rb.velocity.magnitude < .5f) {
+					velCounter++;
+				} else {
+					velCounter = 0;
+				}
+
+		//		Debug.Log (rb.velocity.magnitude + " " + Physics.Raycast (transform.position, -Vector3.up, 
+		//			((BoxCollider) col).size.y / 2f, ~(1 << 8)));
 				Debug.DrawLine (transform.position, transform.position - Vector3.up * ((BoxCollider) col).size.y / 2f,
 					Color.red);
 
@@ -625,6 +633,13 @@ public class BabyController : MonoBehaviour {
 				Invoke ("EndMotion", slideTime);
 				hitGround = true;
 			}
+		}
+	}
+
+	void OnCollisionStay (Collision other) {
+
+		if (velCounter >= 3) {
+			EndMotion ();
 		}
 	}
 
