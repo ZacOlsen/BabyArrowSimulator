@@ -280,11 +280,11 @@ public class BabyController : MonoBehaviour {
 				
 					//	Debug.Log (objectsInWay[i]);
 			//		objectsInWay.Add (hits [i].collider.gameObject);
-					MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
-					if(mesh != null){
+	//				MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
+	//				if(mesh != null){
 			//			mesh.enabled = false;
 			//			mesh.SwapToTransparent();
-					}
+	//				}
 				}
 			}
 		}
@@ -635,7 +635,7 @@ public class BabyController : MonoBehaviour {
 
 	void OnCollisionStay (Collision other) {
 
-		if (velCounter >= 3) {
+		if (velCounter >= 8) {
 			EndMotion ();
 		}
 	}

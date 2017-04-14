@@ -26,9 +26,8 @@ public class MenuController : MonoBehaviour {
 		int unlocks = br.ReadInt32 ();
 		br.Close ();
 
-		for (int i = 1; i < missionButtonObject.transform.transform.childCount; i++) {
-						
-			missionButtonObject.transform.GetChild (i).GetComponent<Button> ().interactable = ((1 << (i - 1)) & unlocks) > 0;
+		for (int i = 0; i < missionButtonObject.transform.childCount; i++) {
+			missionButtonObject.transform.GetChild (i).GetComponent<Button> ().interactable = i < unlocks;
 		}
 		
 		mainMenu.SetActive (false);
@@ -42,13 +41,8 @@ public class MenuController : MonoBehaviour {
 			return;
 		}
 
-		int binUnlocks = 0;
-		for (int i = 0; i < unlocks; i++) {
-			binUnlocks |= 1 << i;
-		}
-
 		BinaryWriter bw = new BinaryWriter (new FileStream ("Assets\\Game File IO\\Mission_Unlocks.sav", FileMode.Create));
-		bw.Write (binUnlocks);
+		bw.Write (unlocks);
 		bw.Close ();
 
 		Missions ();
