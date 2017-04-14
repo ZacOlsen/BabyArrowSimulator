@@ -257,9 +257,6 @@ public class BabyController : MonoBehaviour {
 			Ray ray = new Ray (Camera.main.transform.position, direction);
 			RaycastHit[] hits = Physics.RaycastAll (ray, direction.magnitude,
 				                    ~(1 << 8));//~LayerMask.NameToLayer ("BabyL"));
-
-			RaycastHit hit;
-			Physics.Raycast (ray, out hit, direction.magnitude); 
 //			Debug.Log (hit.collider.gameObject.name);
 
 			Debug.DrawLine (ray.origin, transform.position, Color.red);
@@ -269,7 +266,7 @@ public class BabyController : MonoBehaviour {
 				MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
 				if(mesh != null){
 			//		mesh.enabled = true;
-					mesh.SwapToOpaque ();
+			//		mesh.SwapToOpaque ();
 				}
 			}
 
@@ -282,11 +279,11 @@ public class BabyController : MonoBehaviour {
 				if (!objectsInWay.Contains (hits [i].collider.gameObject)) {
 				
 					//	Debug.Log (objectsInWay[i]);
-					objectsInWay.Add (hits [i].collider.gameObject);
+			//		objectsInWay.Add (hits [i].collider.gameObject);
 					MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
 					if(mesh != null){
 			//			mesh.enabled = false;
-						mesh.SwapToTransparent();
+			//			mesh.SwapToTransparent();
 					}
 				}
 			}
