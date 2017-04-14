@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -66,6 +69,9 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -93,9 +99,11 @@
     <Compile Include="Assets\Scripts\BackgroundSoundEmitter.cs" />
     <Compile Include="Assets\Scripts\CameraLevelPreview.cs" />
     <Compile Include="Assets\Scripts\LevelStartText.cs" />
+    <Compile Include="Assets\Scripts\MaterialSwapper.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Balloon.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Death.cs" />
+    <Compile Include="Assets\Scripts\Obstacles\LitterBox.cs" />
     <Compile Include="Assets\Scripts\Obstacles\PushInArea.cs" />
     <Compile Include="Assets\Scripts\Obstacles\RotateObject.cs" />
     <Compile Include="Assets\Scripts\Obstacles\Trampoline.cs" />
