@@ -15,6 +15,8 @@ public class CameraLevelPreview : MonoBehaviour {
 
 	private BabyController bbc;
 
+	private static float timeFromStart;
+
 	void Start () {
 
 		bbc = GameObject.FindGameObjectWithTag ("Baby").GetComponent<BabyController> ();
@@ -25,7 +27,9 @@ public class CameraLevelPreview : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-				
+
+		timeFromStart = Time.timeSinceLevelLoad;
+
 		if (index < viewPoints.Length) {
 
 			transform.position = Vector3.Lerp (transform.position, viewPoints [index].position, 
@@ -59,6 +63,16 @@ public class CameraLevelPreview : MonoBehaviour {
 
 		bbc.enabled = true;
 	//	bbc.EndMotion ();
+		timeFromStart = Time.timeSinceLevelLoad;
+
 		Destroy (this);
+	}
+
+	public static float GetTimeFromStart () {
+		return timeFromStart;
+	}
+
+	void OnDestroy () {
+//		timeFromStart = 0;
 	}
 }

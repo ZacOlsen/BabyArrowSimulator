@@ -105,7 +105,8 @@ public class BabyManager : MonoBehaviour {
 
 		if (!levelOver) {
 
-			levelTime.text = string.Format ("{0:0.00}", Time.timeSinceLevelLoad);
+			float time = Time.timeSinceLevelLoad - CameraLevelPreview.GetTimeFromStart ();
+			levelTime.text = string.Format ("{0}:{1:00}", (int)time / 60, (int)time % 60);
 
 			if (Input.GetAxisRaw ("Mouse ScrollWheel") != 0) {
 				UpdateSelection (Input.GetAxisRaw ("Mouse ScrollWheel") > 0 ? -1 : 1);
