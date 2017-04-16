@@ -50,8 +50,6 @@ public class BabyController : MonoBehaviour {
 	 */
 	private float launchSpeed;
 
-	[SerializeField] protected float slideTime = 2.5f;
-
 	/**
 	 * this gameobjects rigidbody
 	 */
@@ -60,7 +58,7 @@ public class BabyController : MonoBehaviour {
 	/**
 	 * the collider of this gameobject
 	 */
-	protected Collider col;
+	protected BoxCollider col;
 
 	/**
 	 * the charging part of the chargebar
@@ -121,7 +119,7 @@ public class BabyController : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 
 		babyModel = transform.FindChild ("Baby Model");
-		col = transform.GetComponentInChildren<Collider> ();
+		col = transform.GetComponentInChildren<BoxCollider> ();
 
 		bm = GameObject.Find ("Baby Manager").GetComponent<BabyManager> ();
 	}
@@ -213,38 +211,12 @@ public class BabyController : MonoBehaviour {
 				if (hitGround) {
 					
 					babyModel.localEulerAngles = new Vector3 (90, 0, 0);
-					if (rb.velocity.magnitude < .1f && !dying) {
-//						EndMotion ();
-					}
 				}
-			
-
-//			if (rb.velocity.magnitude < .01f) {
-//				EndMotion ();
-//			}
 
 				if (rb.velocity.magnitude < .5f) {
 					velCounter++;
 				} else {
 					velCounter = 0;
-				}
-
-		//		Debug.Log (rb.velocity.magnitude + " " + Physics.Raycast (transform.position, -Vector3.up, 
-		//			((BoxCollider) col).size.y / 2f, ~(1 << 8)));
-				Debug.DrawLine (transform.position, transform.position - Vector3.up * ((BoxCollider) col).size.y / 2f,
-					Color.red);
-
-				if (rb.velocity.magnitude < 1f && !dying && Physics.Raycast (transform.position, -Vector3.up, 
-					   ((BoxCollider)col).size.y / 2f, ~(1 << 8))) {
-		
-					//		RaycastHit hit;
-					//		Physics.Raycast (transform.position, -Vector3.up, ((BoxCollider) col).size.y / 2f, ~(1 << 8));
-
-					if (!velIsZero) {
-				//		velIsZero = true;
-					} else {
-				//		EndMotion ();
-					}
 				}
 			}
 		}
@@ -443,14 +415,8 @@ public class BabyController : MonoBehaviour {
 		}
 			
 		Vector3 landPos = transform.TransformDirection (new Vector3 (0, 0, distance)) + launchStartPos.position;
-
-/**	Debug Code creates straight line aiming
- 		float angle = Mathf.Atan2 (landPos.x - transform.position.x, landPos.z - transform.position.z) * Mathf.Rad2Deg;
-		Transform arc = ((GameObject) Instantiate (aimArc, (landPos + transform.position) / 2, 
-			Quaternion.Euler(new Vector3(90, angle, 0)))).transform;
-		arc.localScale = new Vector3 (arc.localScale.x, distance / 2, arc.localScale.z); */
-
 		Vector3 previousPoint = transform.position;
+
 		int counter = 0;
 		float increment = time / (float) arcPieces.Length;
 		for (float i = increment; i <= time + .01f; i += increment, counter++) {
@@ -515,8 +481,6 @@ public class BabyController : MonoBehaviour {
 
 		if (!grounded && !dying) {
 
-//			Debug.Log ("end " + dying);
-
 			bm.ChangeUI (true);
 
 			rb.velocity = Vector3.zero;
@@ -537,25 +501,11 @@ public class BabyController : MonoBehaviour {
 				this.enabled = false;
 			}
 
-			StartCoroutine ("FixCollision");
 			anim.SetInteger ("animState", 1);
-		}
-	}
 
-	private IEnumerator FixCollision () {
-
-		if (!dying) {
-			yield return new WaitForFixedUpdate ();
+			rb.isKinematic = true;
+			Destroy (col);
 		}
-		if (!dying) {
-			yield return new WaitForFixedUpdate ();
-		}if (!dying) {
-			yield return new WaitForFixedUpdate ();
-		}if (!dying) {
-			yield return new WaitForFixedUpdate ();
-		}
-		rb.isKinematic = true;
-		Destroy (col);
 	}
 
 	public void Die () {
@@ -611,15 +561,9 @@ public class BabyController : MonoBehaviour {
 
 		//if the player has hit the ground
 		if (other.collider.CompareTag ("Floor")) {
-			//stop their movement and delete their collider
-//			Invoke ("EndMotion", slideTime);
 			hitGround = true;
-			//make the aiming arc invisible
 
 		} else if (other.collider.CompareTag ("Wall")) {
-
-//			rb.velocity = new Vector3 (0, -other.relativeVelocity.y, 0);
-//			rb.velocity = new Vector3 (rb.velocity.x, Mathf.Clamp(rb.velocity.y, float.MinValue, 0), rb.velocity.z);
 
 		} else if (other.collider.CompareTag ("Trampoline")) {
 			
@@ -627,16 +571,50 @@ public class BabyController : MonoBehaviour {
 				* other.collider.GetComponent<Trampoline> ().GetEnergyConserved ();
 
 			if (rb.velocity.y < 1) {
-				Invoke ("EndMotion", slideTime);
 				hitGround = true;
 			}
+		}
+
+		if (other.contacts[0].point.y < transform.position.y && !other.collider.CompareTag ("Wall")) {
+			hitGround = true;
 		}
 	}
 
 	void OnCollisionStay (Collision other) {
 
-		if (velCounter >= 8) {
-			EndMotion ();
+		if (velCounter >= 8 && !grounded) {
+
+			RaycastHit hit;
+
+			Matrix4x4 mat = babyModel.GetChild (0).localToWorldMatrix;
+			Vector3 pointUR = mat.MultiplyPoint3x4 (col.center + col.size / 2f);
+			Vector3 pointUL = mat.MultiplyPoint3x4 (col.center + new Vector3(-col.size.x, col.size.y, col.size.z) / 2f);
+			Vector3 pointBR = mat.MultiplyPoint3x4 (col.center + new Vector3(col.size.x, -col.size.y, col.size.z) / 2f);
+			Vector3 pointBL = mat.MultiplyPoint3x4 (col.center + new Vector3(-col.size.x, -col.size.y, col.size.z) / 2f);
+
+			bool succeed = false;
+
+			if (Physics.Raycast (transform.position, -Vector3.up, out hit, col.size.z / 2f + .1f, ~(1 << 8))) {
+				succeed = true;
+			} else if (Physics.Raycast (pointBR, -Vector3.up, out hit, .1f, ~(1 << 8))) {
+				succeed = true;
+			} else if (Physics.Raycast (pointBL, -Vector3.up, out hit, .1f, ~(1 << 8))) {
+				succeed = true;
+			} else if (Physics.Raycast (pointUR, -Vector3.up, out hit, .1f, ~(1 << 8))) {
+				succeed = true;
+			} else if (Physics.Raycast (pointUL, -Vector3.up, out hit, .1f, ~(1 << 8))) {
+				succeed = true;
+			}
+
+			if (!succeed) {
+				Debug.LogError ("point detection failure");
+			} else {
+
+				transform.position = new Vector3 (hit.point.x, hit.point.y + col.size.y / 2f + .05f, hit.point.z);
+				babyModel.transform.localRotation = Quaternion.identity;
+
+				EndMotion ();
+			}
 		}
 	}
 
