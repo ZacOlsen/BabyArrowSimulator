@@ -17,7 +17,7 @@ public class BouncyBaby : BabyController {
 			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
 
 			if (rb.velocity.y < 1) {
-				Invoke ("EndMotion", slideTime);
+				hitGround = true;
 			}
 		
 		} else 	if (numberOfBounces > 0) {

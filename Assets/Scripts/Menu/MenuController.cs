@@ -40,12 +40,16 @@ public class MenuController : MonoBehaviour {
 		if (!int.TryParse (missions, out unlocks)) {
 			return;
 		}
+			
+		UnlockMissions (unlocks);
+		Missions ();
+	}
+
+	public static void UnlockMissions (int unlocks) {
 
 		BinaryWriter bw = new BinaryWriter (new FileStream ("Assets\\Game File IO\\Mission_Unlocks.sav", FileMode.Create));
 		bw.Write (unlocks);
 		bw.Close ();
-
-		Missions ();
 	}
 
 	public void ResetMissions () {

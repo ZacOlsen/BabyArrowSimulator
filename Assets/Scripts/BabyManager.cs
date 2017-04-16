@@ -11,9 +11,6 @@ public class BabyManager : MonoBehaviour {
 	private int[] babiesUsedNum;
 	private int currentIndex;
 
-//	[SerializeField] private Color highlighted = Color.white;
-//	[SerializeField] private Color unhighlighted = Color.black;
-
 	[SerializeField] private string mainMenuSceneName = "";
 	[SerializeField] private string nextLevelSceneName = "";
 	private GameObject menuBackground;
@@ -28,6 +25,7 @@ public class BabyManager : MonoBehaviour {
 	private RawImage[] babyMenuImages;
 	private Text[] babyMenuNumbers;
 
+	[SerializeField] private int missionNumber;
 	private Text levelTime;
 	private bool levelOver;
 
@@ -216,14 +214,10 @@ public class BabyManager : MonoBehaviour {
 	}
 
 	public void GotToMainMenu () {
-	
-//		LevelStartText.ChangeLevel ();
 		SceneManager.LoadScene (mainMenuSceneName);
 	}
 
 	public void GoToNextLevel () {
-	
-//		LevelStartText.ChangeLevel ();
 		SceneManager.LoadScene (nextLevelSceneName);
 	}
 
@@ -232,12 +226,14 @@ public class BabyManager : MonoBehaviour {
 		optionsMenu.SetActive (true);
 		audioLevel.value = MenuController.GetAudioLevel ();
 		babiesUsed.SetActive (false);
+		optionsButton.SetActive (false);
 	}
 
 	public void HideOptions () {
 
 		optionsMenu.SetActive (false);
 		babiesUsed.SetActive (true);
+		optionsButton.SetActive (true);
 	}
 
 	public void SetAudioLevel (float al) {
@@ -315,6 +311,7 @@ public class BabyManager : MonoBehaviour {
 
 		levelOver = true;
 		GameObject.Find ("Level Name").GetComponent<Text> ().text = SceneManager.GetActiveScene().name + " Completed";
+		MenuController.UnlockMissions (missionNumber);
 	}
 
 	private void ShowDefeat () {
