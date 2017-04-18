@@ -93,9 +93,9 @@ public class BabyController : MonoBehaviour {
 	private bool velIsZero;
 	private bool dying;
 
-	private int velCounter;
+	protected int velCounter;
 
-	private Transform babyModel;
+	protected Transform babyModel;
 	[SerializeField] private GameObject fractalizedBaby = null;
 	[SerializeField] private float timeTilFractalizedDestroyed = 5f;
 	[SerializeField] private float timeTilSwitchBack = 3f;
@@ -580,7 +580,7 @@ public class BabyController : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionStay (Collision other) {
+	protected void OnCollisionStay (Collision other) {
 
 		if (velCounter >= 8 && !grounded) {
 

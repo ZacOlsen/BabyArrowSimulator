@@ -64,6 +64,9 @@ public class NeoBaby : BabyController {
 
 		if (Input.GetMouseButtonUp (0) && aiming) {
 
+			Time.timeScale = startingTimeScale;
+			Time.fixedDeltaTime = startingfixedTime;
+
 			if (grounded) {
 				ShootBaby (bm.GetNextBaby (), bm.NextIsSoldierBaby ());
 			} else {
