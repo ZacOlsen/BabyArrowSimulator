@@ -60,6 +60,8 @@ public class BouncyBaby : BabyController {
 				Debug.LogError ("point detection failure");
 			} else {
 
+				Debug.Log (hit.point);
+
 				transform.position = new Vector3 (hit.point.x, hit.point.y + col.size.y / 2f + .05f, hit.point.z);
 				babyModel.transform.localRotation = Quaternion.identity;
 

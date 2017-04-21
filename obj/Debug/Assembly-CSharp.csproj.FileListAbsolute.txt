@@ -139,3 +139,7 @@ C:\Users\GameDesign\Desktop\BabyArrowSimulator\obj\Debug\Assembly-CSharp.dll
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\obj\Debug\Assembly-CSharp.pdb
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.dll
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.PlaymodeTestsRunner.xml
+C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Advertisements.dll
+C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Purchasing.dll
+C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Advertisements.xml
+C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Purchasing.xml
