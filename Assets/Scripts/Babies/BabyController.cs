@@ -112,6 +112,7 @@ public class BabyController : MonoBehaviour {
 
 	[SerializeField] private AudioClip[] wallHitSounds = null;
 	[SerializeField] private AudioClip bowReleaseSound = null;
+	[SerializeField] private AudioClip splatterSound = null;
 	private AudioSource audioPlayer;
 
 	protected void Awake () {
@@ -509,6 +510,8 @@ public class BabyController : MonoBehaviour {
 	}
 
 	public void Die () {
+
+		audioPlayer.PlayOneShot (splatterSound);
 
 		dying = true;
 

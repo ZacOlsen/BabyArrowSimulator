@@ -71,8 +71,4 @@ public class CameraLevelPreview : MonoBehaviour {
 	public static float GetTimeFromStart () {
 		return timeFromStart;
 	}
-
-	void OnDestroy () {
-//		timeFromStart = 0;
-	}
 }
