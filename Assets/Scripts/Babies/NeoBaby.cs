@@ -22,7 +22,13 @@ public class NeoBaby : BabyController {
 	protected new void Update () {
 
 		if (Time.timeScale > 0) {
-			
+
+			if (grounded && !dying) {
+
+				gun.enabled = bm.NextIsSoldierBaby ();
+				bow.enabled = !gun.enabled;
+			}
+
 			if (!launched) {
 				Aim ();
 				UpdateLooking ();
@@ -48,6 +54,7 @@ public class NeoBaby : BabyController {
 			if (!grounded) {
 				transform.eulerAngles = new Vector3 (0, vertRotation.eulerAngles.y, 0);
 				vertRotation.localEulerAngles = Vector3.zero;
+				anim.SetInteger ("animState", 2);
 			}
 
 			aiming = true;
@@ -72,6 +79,8 @@ public class NeoBaby : BabyController {
 			} else {
 				ShootBaby (regularBaby);
 			}
+
+			anim.SetInteger ("animState", 0);
 		}
 	}
 

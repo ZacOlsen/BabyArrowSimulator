@@ -91,7 +91,7 @@ public class BabyController : MonoBehaviour {
 	protected bool grounded;
 	protected bool hitGround;
 	private bool velIsZero;
-	private bool dying;
+	protected bool dying;
 
 	protected int velCounter;
 
@@ -106,8 +106,8 @@ public class BabyController : MonoBehaviour {
 
 	protected Animator anim;
 
-	[SerializeField] private SkinnedMeshRenderer bow = null;
-	[SerializeField] private SkinnedMeshRenderer gun = null;
+	[SerializeField] protected SkinnedMeshRenderer bow = null;
+	[SerializeField] protected SkinnedMeshRenderer gun = null;
 	[SerializeField] private Transform spine = null;
 
 	[SerializeField] private AudioClip[] wallHitSounds = null;
