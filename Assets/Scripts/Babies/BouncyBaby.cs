@@ -34,41 +34,8 @@ public class BouncyBaby : BabyController {
 
 	protected new void OnCollisionStay (Collision other) {
 
-		if (numberOfBounces <= 0 && velCounter >= 8 && !grounded) {
-
-			RaycastHit hit;
-
-			Matrix4x4 mat = babyModel.GetChild (0).localToWorldMatrix;
-			Vector3 pointUR = mat.MultiplyPoint3x4 (col.center + col.size / 2f);
-			Vector3 pointUL = mat.MultiplyPoint3x4 (col.center + new Vector3(-col.size.x, col.size.y, col.size.z) / 2f);
-			Vector3 pointBR = mat.MultiplyPoint3x4 (col.center + new Vector3(col.size.x, -col.size.y, col.size.z) / 2f);
-			Vector3 pointBL = mat.MultiplyPoint3x4 (col.center + new Vector3(-col.size.x, -col.size.y, col.size.z) / 2f);
-
-			bool succeed = false;
-
-			if (Physics.Raycast (transform.position, -Vector3.up, out hit, col.size.z / 2f + .1f, ~(1 << 8))) {
-				succeed = true;
-			} else if (Physics.Raycast (pointBR, -Vector3.up, out hit, .1f, ~(1 << 8))) {
-				succeed = true;
-			} else if (Physics.Raycast (pointBL, -Vector3.up, out hit, .1f, ~(1 << 8))) {
-				succeed = true;
-			} else if (Physics.Raycast (pointUR, -Vector3.up, out hit, .1f, ~(1 << 8))) {
-				succeed = true;
-			} else if (Physics.Raycast (pointUL, -Vector3.up, out hit, .1f, ~(1 << 8))) {
-				succeed = true;
-			}
-
-			if (!succeed) {
-				Debug.LogError ("point detection failure");
-			} else {
-
-			//	Debug.Log (hit.point);
-
-				transform.position = new Vector3 (hit.point.x, hit.point.y + col.size.y / 2f + .05f, hit.point.z);
-				babyModel.transform.localRotation = Quaternion.identity;
-
-				EndMotion ();
-			}
+		if (numberOfBounces <= 0) {
+			base.OnCollisionStay (other);
 		}
 	}
 }

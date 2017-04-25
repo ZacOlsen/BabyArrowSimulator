@@ -14,6 +14,7 @@ public class CameraLevelPreview : MonoBehaviour {
 	[SerializeField] private Vector3 offsetRotation = new Vector3();
 
 	private BabyController bbc;
+	private GameObject lst;
 
 	private static float timeFromStart;
 
@@ -23,9 +24,19 @@ public class CameraLevelPreview : MonoBehaviour {
 		bbc.EndMotion ();
 		bbc.enabled = false;
 
+		lst = GameObject.Find ("Level Start Background");
+		lst.SetActive (false);
+
 		StartLevelPreview ();
 	}
-	
+
+	void Update () {
+
+		if (Input.GetMouseButtonDown (0)) {
+			StopLevelPreview ();
+		}
+	}
+
 	void FixedUpdate () {
 
 		timeFromStart = Time.timeSinceLevelLoad;
@@ -61,8 +72,7 @@ public class CameraLevelPreview : MonoBehaviour {
 		transform.localPosition = offsets;
 		transform.localEulerAngles = offsetRotation;
 
-		bbc.enabled = true;
-	//	bbc.EndMotion ();
+		lst.SetActive (true);
 		timeFromStart = Time.timeSinceLevelLoad;
 
 		Destroy (this);

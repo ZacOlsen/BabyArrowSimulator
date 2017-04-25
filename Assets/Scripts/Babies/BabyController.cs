@@ -609,15 +609,24 @@ public class BabyController : MonoBehaviour {
 				succeed = true;
 			}
 
-			if (!succeed) {
-				Debug.LogError ("point detection failure");
+			Vector3 point = Vector3.zero;
+
+			if (succeed) {
+				point = hit.point;
+		
 			} else {
-
-				transform.position = new Vector3 (hit.point.x, hit.point.y + col.size.y / 2f + .05f, hit.point.z);
-				babyModel.transform.localRotation = Quaternion.identity;
-
-				EndMotion ();
+				
+				for (int i = 0; i < other.contacts.Length; i++) {
+					point += other.contacts [i].point;
+				}
+				
+				point /= other.contacts.Length;
 			}
+
+			transform.position = new Vector3 (point.x, point.y + col.size.y / 2f + .05f, point.z);
+			babyModel.transform.localRotation = Quaternion.identity;
+
+			EndMotion ();
 		}
 	}
 

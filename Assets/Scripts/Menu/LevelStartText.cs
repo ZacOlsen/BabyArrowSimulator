@@ -10,10 +10,14 @@ public class LevelStartText : MonoBehaviour {
 	private Text text;
 	private int index;
 
+	private BabyController bbc;
+
 	void Start () {
 
 		text = GetComponentInChildren<Text> ();
 		text.text = texts [index];
+
+		bbc = GameObject.FindWithTag ("Baby").GetComponent<BabyController> ();
 	}
 	
 	void Update () {
@@ -26,7 +30,8 @@ public class LevelStartText : MonoBehaviour {
 				return;
 			}
 
-			Camera.main.GetComponent<CameraLevelPreview> ().StopLevelPreview();
+	//		Camera.main.GetComponent<CameraLevelPreview> ().StopLevelPreview();
+			bbc.enabled = true;
 			gameObject.SetActive (false);
 		}
 	}

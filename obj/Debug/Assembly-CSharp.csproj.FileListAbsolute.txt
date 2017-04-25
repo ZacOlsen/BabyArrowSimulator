@@ -143,3 +143,8 @@ C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Advert
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Purchasing.dll
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Advertisements.xml
 C:\Users\GameDesign\Desktop\BabyArrowSimulator\Temp\bin\Debug\UnityEngine.Purchasing.xml
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\BabyArrowSimulator\Temp\bin\Debug\KDTree.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\BabyArrowSimulator\Temp\bin\Debug\pb_Stl.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\BabyArrowSimulator\Temp\bin\Debug\ProBuilderCore-Unity5.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\BabyArrowSimulator\Temp\bin\Debug\ProBuilderMeshOps-Unity5.dll
+C:\Users\Default.SixCore-PC\Desktop\Baby Arrow Simulator\BabyArrowSimulator\Temp\bin\Debug\Triangle.dll
