@@ -118,6 +118,10 @@ public class BabyManager : MonoBehaviour {
 		}
 	}
 
+	public bool GetLevelOver () {
+		return levelOver;
+	}
+
 	private void UpdateSelection (int increment) {
 
 		int previous = currentIndex;

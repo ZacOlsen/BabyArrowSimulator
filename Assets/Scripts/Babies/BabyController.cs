@@ -110,10 +110,10 @@ public class BabyController : MonoBehaviour {
 	[SerializeField] protected SkinnedMeshRenderer gun = null;
 	[SerializeField] private Transform spine = null;
 
-	[SerializeField] private AudioClip[] wallHitSounds = null;
+	[SerializeField] protected AudioClip[] wallHitSounds = null;
 	[SerializeField] private AudioClip bowReleaseSound = null;
 	[SerializeField] private AudioClip splatterSound = null;
-	private AudioSource audioPlayer;
+	protected AudioSource audioPlayer;
 
 	protected void Awake () {
 
