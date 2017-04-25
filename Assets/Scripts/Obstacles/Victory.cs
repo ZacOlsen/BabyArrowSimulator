@@ -6,11 +6,15 @@ public class Victory : MonoBehaviour {
 
 	private void Win (Collider other) {
 
-		BabyController baby = other.transform.root.GetComponent<BabyController> ();
+		BabyManager bm = GameObject.Find ("Baby Manager").GetComponent<BabyManager> ();
 
-		if (baby.IsCurrent ()) {
-			GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ShowVictory ();
-			Destroy (baby);
+		if (!bm.GetLevelOver ()) {
+			BabyController baby = other.transform.root.GetComponent<BabyController> ();
+
+			if (baby.IsCurrent ()) {
+				bm.ShowVictory ();
+				Destroy (baby);
+			}
 		}
 	}
 
