@@ -94,6 +94,9 @@
      <None Include="Assets\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
      <None Include="Assets\ProCore\ProBuilder\readme.txt" />
      <None Include="Assets\ProCore\ProBuilder\About\Credits.txt" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -109,20 +112,23 @@
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
  <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
- <Reference Include="pb_Stl">
- <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
+ <Reference Include="ProBuilderMeshOps-Unity5">
+ <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KDTree">
  <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
- <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <Reference Include="pb_Stl">
+ <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll</HintPath>
  </Reference>
  <Reference Include="Triangle">
  <HintPath>C:/Users/tmfma/OneDrive/Documents/GitHub/BabyArrowSimulator/Assets/ProCore/ProBuilder/Classes/ClassesLib/Triangle.dll</HintPath>
