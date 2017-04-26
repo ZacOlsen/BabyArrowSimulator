@@ -25,7 +25,7 @@ public class BabyManager : MonoBehaviour {
 	private RawImage[] babyMenuImages;
 	private Text[] babyMenuNumbers;
 
-	[SerializeField] private int missionNumber;
+	[SerializeField] private int missionNumber = 0;
 	private Text levelTime;
 	private bool levelOver;
 

@@ -232,19 +232,8 @@ public class BabyController : MonoBehaviour {
 				                    ~(1 << 8));//~LayerMask.NameToLayer ("BabyL"));
 //			Debug.Log (hit.collider.gameObject.name);
 
+			ResetObjectsInWay ();
 			Debug.DrawLine (ray.origin, transform.position, Color.red);
-
-			for (int i = 0; i < objectsInWay.Count; i++) {
-
-				MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
-				if(mesh != null){
-			//		mesh.enabled = true;
-			//		mesh.SwapToOpaque ();
-				}
-			}
-
-			objectsInWay.Clear ();
-
 //			Debug.Log (hits.Length);
 
 			for (int i = 0; i < hits.Length; i++) {
@@ -252,16 +241,29 @@ public class BabyController : MonoBehaviour {
 				if (!objectsInWay.Contains (hits [i].collider.gameObject)) {
 				
 					//	Debug.Log (objectsInWay[i]);
-			//		objectsInWay.Add (hits [i].collider.gameObject);
-	//				MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
-	//				if(mesh != null){
-			//			mesh.enabled = false;
-			//			mesh.SwapToTransparent();
-	//				}
+					objectsInWay.Add (hits [i].collider.gameObject);
+					MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
+					if(mesh != null){
+						mesh.enabled = false;
+						mesh.SwapToTransparent();
+					}
 				}
 			}
 		}
+	}
 
+	protected void ResetObjectsInWay () {
+
+		for (int i = 0; i < objectsInWay.Count; i++) {
+
+			MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
+			if(mesh != null){
+				mesh.enabled = true;
+				mesh.SwapToOpaque ();
+			}
+		}
+
+		objectsInWay.Clear ();
 	}
 
 	protected void UpdateLooking () {
@@ -364,6 +366,8 @@ public class BabyController : MonoBehaviour {
 			ResetShootState ();
 
 			anim.SetBool ("shuffle", false);
+
+			ResetObjectsInWay ();
 		}
 	}
 
@@ -544,6 +548,8 @@ public class BabyController : MonoBehaviour {
 		bc.enabled = true;
 		Destroy (gameObject);
 //		this.enabled = false;
+
+		ResetObjectsInWay ();
 	}
 
 	public bool IsCurrent () {
