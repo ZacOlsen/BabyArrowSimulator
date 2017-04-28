@@ -351,7 +351,7 @@ public class BabyController : MonoBehaviour {
 				baby.GetComponent<SoldierBaby> ().SetStats (launchSpeed / maxLaunchSpeed, vel);
 
 			} else {
-				audioPlayer.PlayOneShot (bowReleaseSound, MenuController.GetAudioLevel ());
+				audioPlayer.PlayOneShot (bowReleaseSound, MenuController.GetFXLevel ());
 				rig.velocity = vel;
 			}
 
@@ -566,7 +566,7 @@ public class BabyController : MonoBehaviour {
 			return;
 		}
 			
-		audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetAudioLevel ());
+		audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetFXLevel ());
 
 		//if the player has hit the ground
 		if (other.collider.CompareTag ("Floor")) {

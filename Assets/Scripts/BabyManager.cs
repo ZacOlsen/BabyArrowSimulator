@@ -33,7 +33,8 @@ public class BabyManager : MonoBehaviour {
 
 	private GameObject nextLevelButton;
 	private GameObject optionsMenu;
-	private Slider audioLevel;
+	private Slider musicLevel;
+	private Slider fxLevel;
 	private GameObject optionsButton;
 	private GameObject babiesUsed;
 
@@ -72,7 +73,8 @@ public class BabyManager : MonoBehaviour {
 
 		nextLevelButton = GameObject.Find ("Next Level");
 		optionsMenu = GameObject.Find ("Options Menu");
-		audioLevel = GameObject.Find ("Audio Slider").GetComponent<Slider> ();
+		musicLevel = GameObject.Find ("Music Slider").GetComponent<Slider> ();
+		fxLevel = GameObject.Find ("FX Slider").GetComponent<Slider> ();
 		optionsButton = GameObject.Find ("Options");
 
 		currentIndex = babiesTable.Length;
@@ -234,7 +236,8 @@ public class BabyManager : MonoBehaviour {
 	public void ShowOptions () {
 
 		optionsMenu.SetActive (true);
-		audioLevel.value = MenuController.GetAudioLevel ();
+		musicLevel.value = MenuController.GetMusicLevel ();
+		fxLevel.value = MenuController.GetFXLevel ();
 		babiesUsed.SetActive (false);
 		optionsButton.SetActive (false);
 	}
@@ -246,8 +249,12 @@ public class BabyManager : MonoBehaviour {
 		optionsButton.SetActive (true);
 	}
 
-	public void SetAudioLevel (float al) {
-		MenuController.SetAudioLevel (al);
+	public void SetMusicLevel (float level) {
+		MenuController.SetMusicLevel (level);
+	}
+
+	public void SetFXLevel (float level) {
+		MenuController.SetFXLevel (level);
 	}
 
 	public void ToggleShowTimer (bool shown) {

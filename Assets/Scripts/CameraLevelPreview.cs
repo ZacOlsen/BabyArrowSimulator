@@ -16,6 +16,10 @@ public class CameraLevelPreview : MonoBehaviour {
 	private BabyController bbc;
 	private GameObject lst;
 
+	private GameObject lpt;
+	private GameObject chargeB;
+	private GameObject currentB;
+
 	private static float timeFromStart;
 
 	void Start () {
@@ -26,6 +30,13 @@ public class CameraLevelPreview : MonoBehaviour {
 
 		lst = GameObject.Find ("Level Start Background");
 		lst.SetActive (false);
+
+		lpt = GameObject.Find ("Level Preview Text");
+		chargeB = GameObject.Find ("Charge Background");
+		currentB = GameObject.Find ("Current Baby");
+
+		chargeB.SetActive (false);
+		currentB.SetActive (false);
 
 		StartLevelPreview ();
 	}
@@ -74,6 +85,10 @@ public class CameraLevelPreview : MonoBehaviour {
 
 		lst.SetActive (true);
 		timeFromStart = Time.timeSinceLevelLoad;
+
+		chargeB.SetActive (true);
+		currentB.SetActive (true);
+		lpt.SetActive (false);
 
 		Destroy (this);
 	}

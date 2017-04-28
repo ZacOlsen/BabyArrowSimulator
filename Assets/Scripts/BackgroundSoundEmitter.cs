@@ -19,7 +19,7 @@ public class BackgroundSoundEmitter : MonoBehaviour {
 	}
 
 	void Update () {
-		source.volume = MenuController.GetAudioLevel ();
+		source.volume = MenuController.GetMusicLevel ();
 		timeInClip = source.time;
 	}
 }

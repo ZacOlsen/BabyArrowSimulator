@@ -15,7 +15,7 @@ public class BouncyBaby : BabyController {
 		if (other.collider.CompareTag ("Trampoline")) {
 
 			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
-			audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetAudioLevel ());
+			audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetFXLevel ());
 
 			if (rb.velocity.y < 1) {
 				hitGround = true;
@@ -24,7 +24,7 @@ public class BouncyBaby : BabyController {
 		} else 	if (numberOfBounces > 0) {
 
 			rb.velocity = Vector3.Reflect (-other.relativeVelocity, other.contacts [0].normal) * energyConserved;
-			audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetAudioLevel ());
+			audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetFXLevel ());
 			numberOfBounces--;
 
 		} else if (other.collider.CompareTag ("Floor")) {

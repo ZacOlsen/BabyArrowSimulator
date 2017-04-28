@@ -12,7 +12,8 @@ public class MenuController : MonoBehaviour {
 	[SerializeField] private GameObject options = null;
 
 	[SerializeField] private string levelName = "";
-	private static float audioLevel = 1f;
+	private static float musicLevel = .4f;
+	private static float fxLevel = 1f;
 
 	[SerializeField] private GameObject missionButtonObject = null;
 
@@ -71,12 +72,20 @@ public class MenuController : MonoBehaviour {
 		options.SetActive (true);
 	}
 
-	public void UpdateAudioLevel (float al) {
-		audioLevel = al;
+	public void UpdateMusicLevel (float level) {
+		musicLevel = level;
 	}
 
-	public static void SetAudioLevel (float al) {
-		audioLevel = al;
+	public void UpdateFXLevel (float level) {
+		fxLevel = level;
+	}
+
+	public static void SetMusicLevel (float level) {
+		musicLevel = level;
+	}
+
+	public static void SetFXLevel (float level) {
+		fxLevel = level;
 	}
 
 	public void MainMenu () {
@@ -86,8 +95,12 @@ public class MenuController : MonoBehaviour {
 		mainMenu.SetActive (true);
 	}
 
-	public static float GetAudioLevel () {
-		return audioLevel;
+	public static float GetMusicLevel () {
+		return musicLevel;
+	}
+
+	public static float GetFXLevel () {
+		return fxLevel;
 	}
 
 	public void Quit () {
