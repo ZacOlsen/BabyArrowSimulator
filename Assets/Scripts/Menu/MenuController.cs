@@ -11,14 +11,15 @@ public class MenuController : MonoBehaviour {
 	[SerializeField] private GameObject mainMenu = null;
 	[SerializeField] private GameObject options = null;
 
-	[SerializeField] private string levelName = "";
+	private bool freeplay;
 	private static float musicLevel = .4f;
 	private static float fxLevel = 1f;
 
 	[SerializeField] private GameObject missionButtonObject = null;
 
 	public void Play () {
-		SceneManager.LoadScene (levelName);
+		freeplay = true;
+		Missions ();
 	}
 
 	public void Missions () {
@@ -63,6 +64,8 @@ public class MenuController : MonoBehaviour {
 	}
 
 	public void PlayMission (string name) {
+
+		name = (freeplay ? "Freeplay " : "Mission ") + name;
 		SceneManager.LoadScene (name);
 	}
 
@@ -93,6 +96,8 @@ public class MenuController : MonoBehaviour {
 		options.SetActive (false);
 		missions.SetActive (false);
 		mainMenu.SetActive (true);
+
+		freeplay = false;
 	}
 
 	public static float GetMusicLevel () {
