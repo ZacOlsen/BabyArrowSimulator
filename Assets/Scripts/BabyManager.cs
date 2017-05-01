@@ -85,12 +85,14 @@ public class BabyManager : MonoBehaviour {
 
 		menuBackground = GameObject.Find ("Menu Background");
 		menuBackground.SetActive (false);
+
+		ChangeUI (false);
 	}
 
 	private void Update () {
 
 		//mouse lock and unlock mouse on pause
-		if (Input.GetKeyDown(KeyCode.Escape)) {
+		if (Input.GetKeyDown(KeyCode.Escape) && !levelOver) {
 
 			if (Cursor.visible == false) {
 				ShowMenu ();
@@ -105,7 +107,7 @@ public class BabyManager : MonoBehaviour {
 
 		if (!levelOver) {
 
-			float time = Time.timeSinceLevelLoad - CameraLevelPreview.GetTimeFromStart ();
+			float time = Time.timeSinceLevelLoad - LevelStartText.timeFromStart;
 
 			if (time < .1f) {
 				levelTime.enabled = false;
@@ -277,13 +279,8 @@ public class BabyManager : MonoBehaviour {
 		levelTime.rectTransform.anchoredPosition = new Vector2 (-90, -15);
 		levelTime.alignment = TextAnchor.MiddleRight;
 
-		currentBabySelected.enabled = true;
-		currentBabyNumbers.enabled = true;
-		nextBabySelected.enabled = true;
-		nextBabyNumbers.enabled = true;
-		totalBabyNumbers.enabled = true;
-
-		GameObject.Find ("Canvas").transform.FindChild ("Charge Background").gameObject.SetActive (true);
+		ChangeUI (true);
+	//	GameObject.Find ("Canvas").transform.FindChild ("Charge Background").gameObject.SetActive (true);
 	}
 
 	private void ShowMenu () {
@@ -292,12 +289,7 @@ public class BabyManager : MonoBehaviour {
 			return;
 		}
 
-		currentBabySelected.enabled = false;
-		currentBabyNumbers.enabled = false;
-		nextBabySelected.enabled = false;
-		nextBabyNumbers.enabled = false;
-		totalBabyNumbers.enabled = false;
-			
+		ChangeUI (false);			
 		menuBackground.SetActive (true);
 
 		GameObject babiesUsed = GameObject.Find ("Babies Used");
@@ -313,7 +305,7 @@ public class BabyManager : MonoBehaviour {
 		levelTime.rectTransform.anchoredPosition = new Vector2 (0, -50);
 		levelTime.alignment = TextAnchor.MiddleCenter;
 
-		GameObject.Find ("Charge Background").SetActive (false);
+		//GameObject.Find ("Charge Background").SetActive (false);
 
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
@@ -382,5 +374,8 @@ public class BabyManager : MonoBehaviour {
 		nextBabySelected.enabled = shown;
 		nextBabyNumbers.enabled = shown;
 		totalBabyNumbers.enabled = shown;
+
+		GameObject.Find ("Charge Background").GetComponent<Image>().enabled = shown;
+		GameObject.Find ("Charge Background").GetComponentInChildren<Image>().enabled = shown;
 	}
 }

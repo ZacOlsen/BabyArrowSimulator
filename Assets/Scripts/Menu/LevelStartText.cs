@@ -12,6 +12,8 @@ public class LevelStartText : MonoBehaviour {
 
 	private BabyController bbc;
 
+	public static float timeFromStart;
+
 	void Start () {
 
 		text = GetComponentInChildren<Text> ();
@@ -22,6 +24,8 @@ public class LevelStartText : MonoBehaviour {
 	
 	void Update () {
 
+		timeFromStart = Time.timeSinceLevelLoad;
+
 		if (Input.GetMouseButtonDown (0)) {
 
 			index++;
@@ -30,8 +34,11 @@ public class LevelStartText : MonoBehaviour {
 				return;
 			}
 
-	//		Camera.main.GetComponent<CameraLevelPreview> ().StopLevelPreview();
 			bbc.enabled = true;
+
+			timeFromStart = Time.timeSinceLevelLoad;
+			GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ChangeUI (true);
+
 			gameObject.SetActive (false);
 		}
 	}

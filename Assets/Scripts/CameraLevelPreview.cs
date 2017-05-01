@@ -17,10 +17,6 @@ public class CameraLevelPreview : MonoBehaviour {
 	private GameObject lst;
 
 	private GameObject lpt;
-	private GameObject chargeB;
-	private GameObject currentB;
-
-	private static float timeFromStart;
 
 	void Start () {
 
@@ -32,11 +28,10 @@ public class CameraLevelPreview : MonoBehaviour {
 		lst.SetActive (false);
 
 		lpt = GameObject.Find ("Level Preview Text");
-		chargeB = GameObject.Find ("Charge Background");
-		currentB = GameObject.Find ("Current Baby");
+		//GameObject.Find ("Charge Background").SetActive (false);
+		//GameObject.Find ("Current Baby").SetActive (false);
 
-		chargeB.SetActive (false);
-		currentB.SetActive (false);
+		GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ChangeUI (false);
 
 		StartLevelPreview ();
 	}
@@ -50,7 +45,7 @@ public class CameraLevelPreview : MonoBehaviour {
 
 	void FixedUpdate () {
 
-		timeFromStart = Time.timeSinceLevelLoad;
+		LevelStartText.timeFromStart = Time.timeSinceLevelLoad;
 
 		if (index < viewPoints.Length) {
 
@@ -78,22 +73,14 @@ public class CameraLevelPreview : MonoBehaviour {
 		index = 1;
 	}
 
-	public void StopLevelPreview () {
+	void StopLevelPreview () {
 
 		transform.localPosition = offsets;
 		transform.localEulerAngles = offsetRotation;
 
 		lst.SetActive (true);
-		timeFromStart = Time.timeSinceLevelLoad;
-
-		chargeB.SetActive (true);
-		currentB.SetActive (true);
 		lpt.SetActive (false);
 
 		Destroy (this);
-	}
-
-	public static float GetTimeFromStart () {
-		return timeFromStart;
 	}
 }

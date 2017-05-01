@@ -30,10 +30,16 @@ public class BouncyBaby : BabyController {
 		} else if (other.collider.CompareTag ("Floor")) {
 			hitGround = true;
 		}
+
+		if (numberOfBounces <= 0 && rb.velocity.magnitude < .1f) {
+		//	Debug.Log (numberOfBounces);
+			hitGround = true;
+		}
 	}
 
 	protected new void OnCollisionStay (Collision other) {
 
+		//Debug.Log ("hi");
 		if (numberOfBounces <= 0) {
 			base.OnCollisionStay (other);
 		}
