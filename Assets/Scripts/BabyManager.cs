@@ -302,7 +302,7 @@ public class BabyManager : MonoBehaviour {
 		levelTime.rectTransform.anchorMax = new Vector2 (.5f, 1f);
 		levelTime.rectTransform.anchorMin = new Vector2 (.5f, 1f);
 
-		levelTime.rectTransform.anchoredPosition = new Vector2 (0, -50);
+		levelTime.rectTransform.anchoredPosition = new Vector2 (-0, -70);
 		levelTime.alignment = TextAnchor.MiddleCenter;
 
 		//GameObject.Find ("Charge Background").SetActive (false);

@@ -35,7 +35,7 @@ public class MenuController : MonoBehaviour {
 		mainMenu.SetActive (false);
 		missions.SetActive (true);
 	}
-
+		
 	public void UnlockMissions (string missions) {
 
 		int unlocks;
@@ -66,6 +66,10 @@ public class MenuController : MonoBehaviour {
 	public void PlayMission (string name) {
 
 		name = (freeplay ? "Freeplay " : "Mission ") + name;
+		SceneManager.LoadScene (name);
+	}
+
+	public void PlayTutorial (string name) {
 		SceneManager.LoadScene (name);
 	}
 
