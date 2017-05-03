@@ -327,7 +327,7 @@ public class BabyController : MonoBehaviour {
 		anim.SetFloat ("blendPB", 0);
 
 		//uncommenting this line will make the aim arc invis on launch and right click
-//		DisableAimArc();
+		DisableAimArc();
 	}
 
 	protected void ShootBaby (GameObject baby, bool soldier = false) {
@@ -530,7 +530,6 @@ public class BabyController : MonoBehaviour {
 		}
 			
 		Destroy (babyModel.gameObject);
-
 		Destroy (Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
 	}
 
