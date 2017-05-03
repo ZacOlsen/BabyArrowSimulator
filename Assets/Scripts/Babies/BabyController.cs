@@ -521,10 +521,14 @@ public class BabyController : MonoBehaviour {
 
 		if (current) {
 			rb.isKinematic = true;
-			Invoke ("SwitchToPreviousBaby", timeTilSwitchBack);
+
+			if (bm.OutOfBabies ()) {
+				enabled = false;
+			} else {
+				Invoke ("SwitchToPreviousBaby", timeTilSwitchBack);
+			}
 		}
 			
-		bm.OutOfBabies ();
 		Destroy (babyModel.gameObject);
 
 		Destroy (Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);

@@ -228,11 +228,15 @@ public class BabyManager : MonoBehaviour {
 	}
 
 	public void GotToMainMenu () {
+		
 		SceneManager.LoadScene (mainMenuSceneName);
+		Time.timeScale = 1;
 	}
 
 	public void GoToNextLevel () {
+		
 		SceneManager.LoadScene (nextLevelSceneName);
+		Time.timeScale = 1;
 	}
 
 	public void ShowOptions () {
