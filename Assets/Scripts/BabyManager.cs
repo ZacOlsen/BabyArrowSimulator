@@ -380,6 +380,6 @@ public class BabyManager : MonoBehaviour {
 		totalBabyNumbers.enabled = shown;
 
 		GameObject.Find ("Charge Background").GetComponent<Image>().enabled = shown;
-		GameObject.Find ("Charge Background").GetComponentInChildren<Image>().enabled = shown;
+//		GameObject.Find ("Charge Background").transform.GetChild(0).GetComponent<Image>().enabled = shown;
 	}
 }

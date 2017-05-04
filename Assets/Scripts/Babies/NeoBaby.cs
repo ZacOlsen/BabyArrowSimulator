@@ -29,20 +29,39 @@ public class NeoBaby : BabyController {
 				bow.enabled = !gun.enabled;
 			}
 
+			if (Input.GetMouseButtonDown (0) && !dying) {
+
+				if (!grounded) {
+					Time.fixedDeltaTime = timeSpeedSlowAmount;
+					Time.timeScale = timeAimSpeed;
+				}
+
+				aiming = true;
+			}
+
 			if (!launched) {
 				Aim ();
 				UpdateLooking ();
 			}
-
-			if (Input.GetMouseButtonDown (0)) {
-				Time.fixedDeltaTime = timeSpeedSlowAmount;
-				Time.timeScale = timeAimSpeed;
-			}
-
+			
 			if (Input.GetMouseButtonUp (0)) {
 				Time.timeScale = startingTimeScale;
 				Time.fixedDeltaTime = startingfixedTime;
-				launched = true;
+
+				if (aiming) {
+					launched = true;
+				}
+			}
+
+			if (Input.GetMouseButtonDown (1)) {
+				Time.timeScale = startingTimeScale;
+				Time.fixedDeltaTime = startingfixedTime;
+				launched = false;
+				aiming = false;
+
+				if (!grounded && !dying) {
+					anim.SetInteger ("animState", 0);
+				}
 			}
 		}
 	}
@@ -51,17 +70,17 @@ public class NeoBaby : BabyController {
 
 		if (Input.GetMouseButtonDown (0)) {
 
-			if (!grounded) {
+			if (!grounded && !dying) {
 				transform.eulerAngles = new Vector3 (0, vertRotation.eulerAngles.y, 0);
 				vertRotation.localEulerAngles = Vector3.zero;
 				anim.SetInteger ("animState", 2);
 			}
 
-			aiming = true;
+	//		aiming = true;
 		}
 
 		if (Input.GetMouseButtonDown (1)) {
-			aiming = false;
+	//		aiming = false;
 			ResetShootState ();
 		}
 
@@ -69,7 +88,7 @@ public class NeoBaby : BabyController {
 			UpdateAimArc (!grounded);
 		}
 
-		if (Input.GetMouseButtonUp (0) && aiming) {
+		if (Input.GetMouseButtonUp (0) && aiming && !dying) {
 
 			Time.timeScale = startingTimeScale;
 			Time.fixedDeltaTime = startingfixedTime;
@@ -79,7 +98,7 @@ public class NeoBaby : BabyController {
 			} else {
 				ShootBaby (regularBaby);
 			}
-
+				
 			anim.SetInteger ("animState", 0);
 		}
 	}

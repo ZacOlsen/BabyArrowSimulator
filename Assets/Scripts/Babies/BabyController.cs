@@ -324,7 +324,10 @@ public class BabyController : MonoBehaviour {
 		launchSpeed = 0;
 		UpdateChargeBar ();
 		launchX = initialCharge;
-		anim.SetFloat ("blendPB", 0);
+
+		if (!dying) {
+			anim.SetFloat ("blendPB", 0);
+		}
 
 		//uncommenting this line will make the aim arc invis on launch and right click
 		DisableAimArc();
@@ -332,7 +335,7 @@ public class BabyController : MonoBehaviour {
 
 	protected void ShootBaby (GameObject baby, bool soldier = false) {
 
-		if (baby != null) {
+		if (baby != null && !dying) {
 
 			bm.ChangeUI (false);
 
@@ -392,8 +395,11 @@ public class BabyController : MonoBehaviour {
 			launchX = -1;
 		}
 
-		anim.SetFloat ("blendPB", Mathf.Abs (launchX));
-	
+		//neo baby stuff
+		if (!dying) {
+			anim.SetFloat ("blendPB", Mathf.Abs (launchX));
+		}
+
 		UpdateChargeBar ();
 
 		if (bm.NextIsSoldierBaby () && !regularArc) {
@@ -426,7 +432,7 @@ public class BabyController : MonoBehaviour {
 		float increment = time / (float) arcPieces.Length;
 		for (float i = increment; i <= time + .01f; i += increment, counter++) {
 
-			if (counter >= arcPieces.Length) {
+			if (counter >= arcPieces.Length || dying) {
 				break;
 			}
 
@@ -484,6 +490,8 @@ public class BabyController : MonoBehaviour {
 
 	public void EndMotion () {
 
+		Time.timeScale = 1f;
+
 		if (!grounded && !dying) {
 
 			bm.ChangeUI (true);
@@ -515,8 +523,10 @@ public class BabyController : MonoBehaviour {
 
 	public void Die () {
 
-		audioPlayer.PlayOneShot (splatterSound);
+		Time.timeScale = 1f;
+		DisableAimArc ();
 
+		audioPlayer.PlayOneShot (splatterSound);
 		dying = true;
 
 		if (current) {
