@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Victory : MonoBehaviour {
 
+	[SerializeField] private GameObject brokenJar = null;
+
 	private void Win (Collider other) {
 
 		BabyManager bm = GameObject.Find ("Baby Manager").GetComponent<BabyManager> ();
@@ -12,10 +14,22 @@ public class Victory : MonoBehaviour {
 			BabyController baby = other.transform.root.GetComponent<BabyController> ();
 
 			if (baby.IsCurrent ()) {
-				bm.ShowVictory ();
+
+				Destroy(Instantiate (brokenJar, transform.position, transform.rotation), 5f);
+				Destroy (GetComponent<BoxCollider> ());
+				Destroy (GetComponent<MeshRenderer> ());
+				Destroy (transform.GetChild(0).GetComponent<MeshRenderer> ());
+
+				//bm.ShowVictory ();
+				Invoke("ShowWin", 3f);
 				Destroy (baby);
 			}
 		}
+	}
+
+	void ShowWin () {
+		GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ShowVictory ();
+		Destroy (gameObject);
 	}
 
 	private void OnTriggerEnter (Collider other) {

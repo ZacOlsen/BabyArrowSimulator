@@ -1,0 +1,522 @@
+fileFormatVersion: 2
+guid: d312d3582f5c4e3438a735864974c2dd
+timeCreated: 1494013104
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cookie 1
+    100002: Cookie 10
+    100004: Cookie 11
+    100006: Cookie 2
+    100008: Cookie 3
+    100010: Cookie 4
+    100012: Cookie 5
+    100014: Cookie 6
+    100016: Cookie 7
+    100018: Cookie 8
+    100020: Cookie 9
+    100022: //RootNode
+    100024: CookieJar
+    100026: CookieJar_Part_1
+    100028: CookieJar_Part_10
+    100030: CookieJar_Part_11
+    100032: CookieJar_Part_12
+    100034: CookieJar_Part_13
+    100036: CookieJar_Part_14
+    100038: CookieJar_Part_15
+    100040: CookieJar_Part_16
+    100042: CookieJar_Part_17
+    100044: CookieJar_Part_18
+    100046: CookieJar_Part_19
+    100048: CookieJar_Part_2
+    100050: CookieJar_Part_20
+    100052: CookieJar_Part_21
+    100054: CookieJar_Part_22
+    100056: CookieJar_Part_23
+    100058: CookieJar_Part_24
+    100060: CookieJar_Part_25
+    100062: CookieJar_Part_26
+    100064: CookieJar_Part_27
+    100066: CookieJar_Part_28
+    100068: CookieJar_Part_29
+    100070: CookieJar_Part_3
+    100072: CookieJar_Part_30
+    100074: CookieJar_Part_4
+    100076: CookieJar_Part_5
+    100078: CookieJar_Part_6
+    100080: CookieJar_Part_7
+    100082: CookieJar_Part_8
+    100084: CookieJar_Part_9
+    100086: CookieJarGlass
+    100088: CookieJarGlass_Part_1
+    100090: CookieJarGlass_Part_10
+    100092: CookieJarGlass_Part_11
+    100094: CookieJarGlass_Part_12
+    100096: CookieJarGlass_Part_13
+    100098: CookieJarGlass_Part_14
+    100100: CookieJarGlass_Part_15
+    100102: CookieJarGlass_Part_16
+    100104: CookieJarGlass_Part_17
+    100106: CookieJarGlass_Part_18
+    100108: CookieJarGlass_Part_19
+    100110: CookieJarGlass_Part_2
+    100112: CookieJarGlass_Part_20
+    100114: CookieJarGlass_Part_21
+    100116: CookieJarGlass_Part_22
+    100118: CookieJarGlass_Part_23
+    100120: CookieJarGlass_Part_24
+    100122: CookieJarGlass_Part_25
+    100124: CookieJarGlass_Part_26
+    100126: CookieJarGlass_Part_27
+    100128: CookieJarGlass_Part_28
+    100130: CookieJarGlass_Part_29
+    100132: CookieJarGlass_Part_3
+    100134: CookieJarGlass_Part_30
+    100136: CookieJarGlass_Part_31
+    100138: CookieJarGlass_Part_32
+    100140: CookieJarGlass_Part_33
+    100142: CookieJarGlass_Part_34
+    100144: CookieJarGlass_Part_35
+    100146: CookieJarGlass_Part_36
+    100148: CookieJarGlass_Part_37
+    100150: CookieJarGlass_Part_38
+    100152: CookieJarGlass_Part_39
+    100154: CookieJarGlass_Part_4
+    100156: CookieJarGlass_Part_40
+    100158: CookieJarGlass_Part_41
+    100160: CookieJarGlass_Part_42
+    100162: CookieJarGlass_Part_43
+    100164: CookieJarGlass_Part_44
+    100166: CookieJarGlass_Part_45
+    100168: CookieJarGlass_Part_46
+    100170: CookieJarGlass_Part_47
+    100172: CookieJarGlass_Part_48
+    100174: CookieJarGlass_Part_49
+    100176: CookieJarGlass_Part_5
+    100178: CookieJarGlass_Part_50
+    100180: CookieJarGlass_Part_6
+    100182: CookieJarGlass_Part_7
+    100184: CookieJarGlass_Part_8
+    100186: CookieJarGlass_Part_9
+    400000: Cookie 1
+    400002: Cookie 10
+    400004: Cookie 11
+    400006: Cookie 2
+    400008: Cookie 3
+    400010: Cookie 4
+    400012: Cookie 5
+    400014: Cookie 6
+    400016: Cookie 7
+    400018: Cookie 8
+    400020: Cookie 9
+    400022: //RootNode
+    400024: CookieJar
+    400026: CookieJar_Part_1
+    400028: CookieJar_Part_10
+    400030: CookieJar_Part_11
+    400032: CookieJar_Part_12
+    400034: CookieJar_Part_13
+    400036: CookieJar_Part_14
+    400038: CookieJar_Part_15
+    400040: CookieJar_Part_16
+    400042: CookieJar_Part_17
+    400044: CookieJar_Part_18
+    400046: CookieJar_Part_19
+    400048: CookieJar_Part_2
+    400050: CookieJar_Part_20
+    400052: CookieJar_Part_21
+    400054: CookieJar_Part_22
+    400056: CookieJar_Part_23
+    400058: CookieJar_Part_24
+    400060: CookieJar_Part_25
+    400062: CookieJar_Part_26
+    400064: CookieJar_Part_27
+    400066: CookieJar_Part_28
+    400068: CookieJar_Part_29
+    400070: CookieJar_Part_3
+    400072: CookieJar_Part_30
+    400074: CookieJar_Part_4
+    400076: CookieJar_Part_5
+    400078: CookieJar_Part_6
+    400080: CookieJar_Part_7
+    400082: CookieJar_Part_8
+    400084: CookieJar_Part_9
+    400086: CookieJarGlass
+    400088: CookieJarGlass_Part_1
+    400090: CookieJarGlass_Part_10
+    400092: CookieJarGlass_Part_11
+    400094: CookieJarGlass_Part_12
+    400096: CookieJarGlass_Part_13
+    400098: CookieJarGlass_Part_14
+    400100: CookieJarGlass_Part_15
+    400102: CookieJarGlass_Part_16
+    400104: CookieJarGlass_Part_17
+    400106: CookieJarGlass_Part_18
+    400108: CookieJarGlass_Part_19
+    400110: CookieJarGlass_Part_2
+    400112: CookieJarGlass_Part_20
+    400114: CookieJarGlass_Part_21
+    400116: CookieJarGlass_Part_22
+    400118: CookieJarGlass_Part_23
+    400120: CookieJarGlass_Part_24
+    400122: CookieJarGlass_Part_25
+    400124: CookieJarGlass_Part_26
+    400126: CookieJarGlass_Part_27
+    400128: CookieJarGlass_Part_28
+    400130: CookieJarGlass_Part_29
+    400132: CookieJarGlass_Part_3
+    400134: CookieJarGlass_Part_30
+    400136: CookieJarGlass_Part_31
+    400138: CookieJarGlass_Part_32
+    400140: CookieJarGlass_Part_33
+    400142: CookieJarGlass_Part_34
+    400144: CookieJarGlass_Part_35
+    400146: CookieJarGlass_Part_36
+    400148: CookieJarGlass_Part_37
+    400150: CookieJarGlass_Part_38
+    400152: CookieJarGlass_Part_39
+    400154: CookieJarGlass_Part_4
+    400156: CookieJarGlass_Part_40
+    400158: CookieJarGlass_Part_41
+    400160: CookieJarGlass_Part_42
+    400162: CookieJarGlass_Part_43
+    400164: CookieJarGlass_Part_44
+    400166: CookieJarGlass_Part_45
+    400168: CookieJarGlass_Part_46
+    400170: CookieJarGlass_Part_47
+    400172: CookieJarGlass_Part_48
+    400174: CookieJarGlass_Part_49
+    400176: CookieJarGlass_Part_5
+    400178: CookieJarGlass_Part_50
+    400180: CookieJarGlass_Part_6
+    400182: CookieJarGlass_Part_7
+    400184: CookieJarGlass_Part_8
+    400186: CookieJarGlass_Part_9
+    2300000: Cookie 1
+    2300002: Cookie 10
+    2300004: Cookie 11
+    2300006: Cookie 2
+    2300008: Cookie 3
+    2300010: Cookie 4
+    2300012: Cookie 5
+    2300014: Cookie 6
+    2300016: Cookie 7
+    2300018: Cookie 8
+    2300020: Cookie 9
+    2300022: CookieJar
+    2300024: CookieJar_Part_1
+    2300026: CookieJar_Part_10
+    2300028: CookieJar_Part_11
+    2300030: CookieJar_Part_12
+    2300032: CookieJar_Part_13
+    2300034: CookieJar_Part_14
+    2300036: CookieJar_Part_15
+    2300038: CookieJar_Part_16
+    2300040: CookieJar_Part_18
+    2300042: CookieJar_Part_19
+    2300044: CookieJar_Part_2
+    2300046: CookieJar_Part_21
+    2300048: CookieJar_Part_23
+    2300050: CookieJar_Part_24
+    2300052: CookieJar_Part_25
+    2300054: CookieJar_Part_26
+    2300056: CookieJar_Part_27
+    2300058: CookieJar_Part_28
+    2300060: CookieJar_Part_29
+    2300062: CookieJar_Part_3
+    2300064: CookieJar_Part_4
+    2300066: CookieJar_Part_6
+    2300068: CookieJar_Part_8
+    2300070: CookieJar_Part_9
+    2300072: CookieJarGlass
+    2300074: CookieJarGlass_Part_1
+    2300076: CookieJarGlass_Part_10
+    2300078: CookieJarGlass_Part_11
+    2300080: CookieJarGlass_Part_12
+    2300082: CookieJarGlass_Part_13
+    2300084: CookieJarGlass_Part_14
+    2300086: CookieJarGlass_Part_15
+    2300088: CookieJarGlass_Part_16
+    2300090: CookieJarGlass_Part_17
+    2300092: CookieJarGlass_Part_18
+    2300094: CookieJarGlass_Part_19
+    2300096: CookieJarGlass_Part_2
+    2300098: CookieJarGlass_Part_20
+    2300100: CookieJarGlass_Part_21
+    2300102: CookieJarGlass_Part_22
+    2300104: CookieJarGlass_Part_23
+    2300106: CookieJarGlass_Part_24
+    2300108: CookieJarGlass_Part_25
+    2300110: CookieJarGlass_Part_26
+    2300112: CookieJarGlass_Part_27
+    2300114: CookieJarGlass_Part_28
+    2300116: CookieJarGlass_Part_29
+    2300118: CookieJarGlass_Part_3
+    2300120: CookieJarGlass_Part_30
+    2300122: CookieJarGlass_Part_31
+    2300124: CookieJarGlass_Part_32
+    2300126: CookieJarGlass_Part_33
+    2300128: CookieJarGlass_Part_34
+    2300130: CookieJarGlass_Part_35
+    2300132: CookieJarGlass_Part_36
+    2300134: CookieJarGlass_Part_37
+    2300136: CookieJarGlass_Part_38
+    2300138: CookieJarGlass_Part_39
+    2300140: CookieJarGlass_Part_4
+    2300142: CookieJarGlass_Part_40
+    2300144: CookieJarGlass_Part_41
+    2300146: CookieJarGlass_Part_42
+    2300148: CookieJarGlass_Part_43
+    2300150: CookieJarGlass_Part_44
+    2300152: CookieJarGlass_Part_45
+    2300154: CookieJarGlass_Part_46
+    2300156: CookieJarGlass_Part_47
+    2300158: CookieJarGlass_Part_48
+    2300160: CookieJarGlass_Part_49
+    2300162: CookieJarGlass_Part_50
+    2300164: CookieJarGlass_Part_6
+    2300166: CookieJarGlass_Part_7
+    2300168: CookieJarGlass_Part_8
+    2300170: CookieJarGlass_Part_9
+    3300000: Cookie 1
+    3300002: Cookie 10
+    3300004: Cookie 11
+    3300006: Cookie 2
+    3300008: Cookie 3
+    3300010: Cookie 4
+    3300012: Cookie 5
+    3300014: Cookie 6
+    3300016: Cookie 7
+    3300018: Cookie 8
+    3300020: Cookie 9
+    3300022: CookieJar
+    3300024: CookieJar_Part_1
+    3300026: CookieJar_Part_10
+    3300028: CookieJar_Part_11
+    3300030: CookieJar_Part_12
+    3300032: CookieJar_Part_13
+    3300034: CookieJar_Part_14
+    3300036: CookieJar_Part_15
+    3300038: CookieJar_Part_16
+    3300040: CookieJar_Part_18
+    3300042: CookieJar_Part_19
+    3300044: CookieJar_Part_2
+    3300046: CookieJar_Part_21
+    3300048: CookieJar_Part_23
+    3300050: CookieJar_Part_24
+    3300052: CookieJar_Part_25
+    3300054: CookieJar_Part_26
+    3300056: CookieJar_Part_27
+    3300058: CookieJar_Part_28
+    3300060: CookieJar_Part_29
+    3300062: CookieJar_Part_3
+    3300064: CookieJar_Part_4
+    3300066: CookieJar_Part_6
+    3300068: CookieJar_Part_8
+    3300070: CookieJar_Part_9
+    3300072: CookieJarGlass
+    3300074: CookieJarGlass_Part_1
+    3300076: CookieJarGlass_Part_10
+    3300078: CookieJarGlass_Part_11
+    3300080: CookieJarGlass_Part_12
+    3300082: CookieJarGlass_Part_13
+    3300084: CookieJarGlass_Part_14
+    3300086: CookieJarGlass_Part_15
+    3300088: CookieJarGlass_Part_16
+    3300090: CookieJarGlass_Part_17
+    3300092: CookieJarGlass_Part_18
+    3300094: CookieJarGlass_Part_19
+    3300096: CookieJarGlass_Part_2
+    3300098: CookieJarGlass_Part_20
+    3300100: CookieJarGlass_Part_21
+    3300102: CookieJarGlass_Part_22
+    3300104: CookieJarGlass_Part_23
+    3300106: CookieJarGlass_Part_24
+    3300108: CookieJarGlass_Part_25
+    3300110: CookieJarGlass_Part_26
+    3300112: CookieJarGlass_Part_27
+    3300114: CookieJarGlass_Part_28
+    3300116: CookieJarGlass_Part_29
+    3300118: CookieJarGlass_Part_3
+    3300120: CookieJarGlass_Part_30
+    3300122: CookieJarGlass_Part_31
+    3300124: CookieJarGlass_Part_32
+    3300126: CookieJarGlass_Part_33
+    3300128: CookieJarGlass_Part_34
+    3300130: CookieJarGlass_Part_35
+    3300132: CookieJarGlass_Part_36
+    3300134: CookieJarGlass_Part_37
+    3300136: CookieJarGlass_Part_38
+    3300138: CookieJarGlass_Part_39
+    3300140: CookieJarGlass_Part_4
+    3300142: CookieJarGlass_Part_40
+    3300144: CookieJarGlass_Part_41
+    3300146: CookieJarGlass_Part_42
+    3300148: CookieJarGlass_Part_43
+    3300150: CookieJarGlass_Part_44
+    3300152: CookieJarGlass_Part_45
+    3300154: CookieJarGlass_Part_46
+    3300156: CookieJarGlass_Part_47
+    3300158: CookieJarGlass_Part_48
+    3300160: CookieJarGlass_Part_49
+    3300162: CookieJarGlass_Part_50
+    3300164: CookieJarGlass_Part_6
+    3300166: CookieJarGlass_Part_7
+    3300168: CookieJarGlass_Part_8
+    3300170: CookieJarGlass_Part_9
+    4300000: CookieJar
+    4300002: CookieJarGlass
+    4300004: CookieJarGlass_Part_1
+    4300006: CookieJarGlass_Part_2
+    4300008: CookieJarGlass_Part_3
+    4300010: CookieJarGlass_Part_4
+    4300012: CookieJarGlass_Part_6
+    4300014: CookieJarGlass_Part_7
+    4300016: CookieJarGlass_Part_8
+    4300018: CookieJarGlass_Part_9
+    4300020: CookieJarGlass_Part_10
+    4300022: CookieJarGlass_Part_11
+    4300024: CookieJarGlass_Part_12
+    4300026: CookieJarGlass_Part_13
+    4300028: CookieJarGlass_Part_14
+    4300030: CookieJarGlass_Part_15
+    4300032: CookieJarGlass_Part_16
+    4300034: CookieJarGlass_Part_17
+    4300036: CookieJarGlass_Part_18
+    4300038: CookieJarGlass_Part_19
+    4300040: CookieJarGlass_Part_20
+    4300042: CookieJarGlass_Part_21
+    4300044: CookieJarGlass_Part_22
+    4300046: CookieJarGlass_Part_23
+    4300048: CookieJarGlass_Part_24
+    4300050: CookieJarGlass_Part_25
+    4300052: CookieJarGlass_Part_26
+    4300054: CookieJarGlass_Part_27
+    4300056: CookieJarGlass_Part_28
+    4300058: CookieJarGlass_Part_29
+    4300060: CookieJarGlass_Part_30
+    4300062: CookieJarGlass_Part_31
+    4300064: CookieJarGlass_Part_32
+    4300066: CookieJarGlass_Part_33
+    4300068: CookieJarGlass_Part_34
+    4300070: CookieJarGlass_Part_35
+    4300072: CookieJarGlass_Part_36
+    4300074: CookieJarGlass_Part_37
+    4300076: CookieJarGlass_Part_38
+    4300078: CookieJarGlass_Part_39
+    4300080: CookieJarGlass_Part_40
+    4300082: CookieJarGlass_Part_41
+    4300084: CookieJarGlass_Part_42
+    4300086: CookieJarGlass_Part_43
+    4300088: CookieJarGlass_Part_44
+    4300090: CookieJarGlass_Part_45
+    4300092: CookieJarGlass_Part_46
+    4300094: CookieJarGlass_Part_47
+    4300096: CookieJarGlass_Part_48
+    4300098: CookieJarGlass_Part_49
+    4300100: CookieJarGlass_Part_50
+    4300102: CookieJar_Part_1
+    4300104: CookieJar_Part_2
+    4300106: CookieJar_Part_3
+    4300108: CookieJar_Part_4
+    4300110: CookieJar_Part_6
+    4300112: CookieJar_Part_8
+    4300114: CookieJar_Part_9
+    4300116: CookieJar_Part_10
+    4300118: CookieJar_Part_11
+    4300120: CookieJar_Part_12
+    4300122: CookieJar_Part_13
+    4300124: CookieJar_Part_14
+    4300126: CookieJar_Part_15
+    4300128: CookieJar_Part_16
+    4300130: CookieJar_Part_18
+    4300132: CookieJar_Part_19
+    4300134: CookieJar_Part_21
+    4300136: CookieJar_Part_23
+    4300138: CookieJar_Part_24
+    4300140: CookieJar_Part_25
+    4300142: CookieJar_Part_26
+    4300144: CookieJar_Part_27
+    4300146: CookieJar_Part_28
+    4300148: CookieJar_Part_29
+    4300150: Cookie 1
+    4300152: Cookie 11
+    4300154: Cookie 9
+    4300156: Cookie 10
+    4300158: Cookie 8
+    4300160: Cookie 3
+    4300162: Cookie 7
+    4300164: Cookie 6
+    4300166: Cookie 5
+    4300168: Cookie 4
+    4300170: Cookie 2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

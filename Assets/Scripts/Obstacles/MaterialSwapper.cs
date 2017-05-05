@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MaterialSwapper : MonoBehaviour {
 
-	[SerializeField] private Material[] opaque = null;
+	[SerializeField] protected Material[] opaque = null;
 	[SerializeField] private Material[] transparent = null;
 
-	private MeshRenderer mesh;
+	protected MeshRenderer mesh;
 
-	void Start () {
+	protected void Start () {
 		mesh = GetComponent<MeshRenderer> ();
 	}
 
