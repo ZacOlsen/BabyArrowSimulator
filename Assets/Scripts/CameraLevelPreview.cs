@@ -34,6 +34,9 @@ public class CameraLevelPreview : MonoBehaviour {
 		GameObject.Find ("Baby Manager").GetComponent<BabyManager> ().ChangeUI (false);
 
 		StartLevelPreview ();
+
+		//hot fix for forcing bow showing at level start
+		GameObject.Find ("Bow").GetComponent<SkinnedMeshRenderer> ().enabled = true;
 	}
 
 	void Update () {

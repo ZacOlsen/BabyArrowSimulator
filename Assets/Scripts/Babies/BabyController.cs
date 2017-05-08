@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -226,23 +227,46 @@ public class BabyController : MonoBehaviour {
 		if (Camera.main.transform.IsChildOf (vertRotation)) {
 
 			Vector3 direction = transform.position - Camera.main.transform.position;
+			float length = direction.magnitude;
 
-			Ray ray = new Ray (Camera.main.transform.position, direction);
-			RaycastHit[] hits = Physics.RaycastAll (ray, direction.magnitude,
-				                    ~(1 << 8));//~LayerMask.NameToLayer ("BabyL"));
-//			Debug.Log (hit.collider.gameObject.name);
+			Ray rayMid = new Ray (Camera.main.transform.position, direction);
+			RaycastHit[] hitsMid = Physics.RaycastAll (rayMid, length, ~(1 << 8));//~LayerMask.NameToLayer ("BabyL"));
 
 			ResetObjectsInWay ();
-			Debug.DrawLine (ray.origin, transform.position, Color.red);
-//			Debug.Log (hits.Length);
+			//Debug.DrawLine (ray.origin, transform.position, Color.red);
 
+			Vector3 pointTL = Camera.main.ViewportPointToRay (Vector3.up).GetPoint (length);
+			Ray rayTL = new Ray (Camera.main.transform.position, pointTL - Camera.main.transform.position);
+			RaycastHit[] hitsTL = Physics.RaycastAll (rayTL, length, ~(1 << 8));
+
+			Vector3 pointBL = Camera.main.ViewportPointToRay (Vector3.zero).GetPoint (length);
+			Ray rayBL = new Ray (Camera.main.transform.position, pointBL - Camera.main.transform.position);
+			RaycastHit[] hitsBL = Physics.RaycastAll (rayBL, length, ~(1 << 8));
+
+			Vector3 pointTR = Camera.main.ViewportPointToRay (new Vector3 (1, 1, 0)).GetPoint (length);
+			Ray rayTR = new Ray (Camera.main.transform.position, pointTR - Camera.main.transform.position);
+			RaycastHit[] hitsTR = Physics.RaycastAll (rayTR, length, ~(1 << 8));
+
+			Vector3 pointBR = Camera.main.ViewportPointToRay (Vector3.right).GetPoint (length);
+			Ray rayBR = new Ray (Camera.main.transform.position, pointBR - Camera.main.transform.position);
+			RaycastHit[] hitsBR = Physics.RaycastAll (rayBR, length, ~(1 << 8));
+
+			RaycastHit[] hits = new RaycastHit[hitsMid.Length + hitsTL.Length + hitsBL.Length + hitsBR.Length + hitsTR.Length];
+
+			Array.Copy (hitsMid, 0, hits, 0, hitsMid.Length);
+			Array.Copy (hitsTL, 0, hits, hitsMid.Length, hitsTL.Length);
+			Array.Copy (hitsBL, 0, hits, hitsTL.Length, hitsBL.Length);
+			Array.Copy (hitsTR, 0, hits, hitsBL.Length, hitsTR.Length);
+			Array.Copy (hitsBR, 0, hits, hitsTR.Length, hitsBR.Length);
+
+			Debug.Log (hits.Length);
 			for (int i = 0; i < hits.Length; i++) {
 
-				if (!objectsInWay.Contains (hits [i].collider.gameObject)) {
+				if (hits[i].collider != null && !objectsInWay.Contains (hits [i].collider.gameObject)) {
 				
 					//	Debug.Log (objectsInWay[i]);
 					objectsInWay.Add (hits [i].collider.gameObject);
-					MaterialSwapper mesh = objectsInWay [i].GetComponent<MaterialSwapper> ();
+					MaterialSwapper mesh = hits [i].collider.GetComponent<MaterialSwapper> ();
 					if(mesh != null){
 						mesh.enabled = false;
 						mesh.SwapToTransparent();
@@ -579,7 +603,7 @@ public class BabyController : MonoBehaviour {
 			return;
 		}
 			
-		audioPlayer.PlayOneShot (wallHitSounds[Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetFXLevel ());
+		audioPlayer.PlayOneShot (wallHitSounds[UnityEngine.Random.Range(0, wallHitSounds.Length - 1)], MenuController.GetFXLevel ());
 
 		//if the player has hit the ground
 		if (other.collider.CompareTag ("Floor")) {
