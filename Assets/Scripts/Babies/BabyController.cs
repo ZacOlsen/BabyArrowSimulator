@@ -233,8 +233,9 @@ public class BabyController : MonoBehaviour {
 			RaycastHit[] hitsMid = Physics.RaycastAll (rayMid, length, ~(1 << 8));//~LayerMask.NameToLayer ("BabyL"));
 
 			ResetObjectsInWay ();
-			//Debug.DrawLine (ray.origin, transform.position, Color.red);
+			Debug.DrawLine (rayMid.origin, transform.position, Color.red);
 
+			/*
 			Vector3 pointTL = Camera.main.ViewportPointToRay (Vector3.up).GetPoint (length);
 			Ray rayTL = new Ray (Camera.main.transform.position, pointTL - Camera.main.transform.position);
 			RaycastHit[] hitsTL = Physics.RaycastAll (rayTL, length, ~(1 << 8));
@@ -252,14 +253,31 @@ public class BabyController : MonoBehaviour {
 			RaycastHit[] hitsBR = Physics.RaycastAll (rayBR, length, ~(1 << 8));
 
 			RaycastHit[] hits = new RaycastHit[hitsMid.Length + hitsTL.Length + hitsBL.Length + hitsBR.Length + hitsTR.Length];
-
 			Array.Copy (hitsMid, 0, hits, 0, hitsMid.Length);
 			Array.Copy (hitsTL, 0, hits, hitsMid.Length, hitsTL.Length);
 			Array.Copy (hitsBL, 0, hits, hitsTL.Length, hitsBL.Length);
 			Array.Copy (hitsTR, 0, hits, hitsBL.Length, hitsTR.Length);
-			Array.Copy (hitsBR, 0, hits, hitsTR.Length, hitsBR.Length);
+			Array.Copy (hitsBR, 0, hits, hitsTR.Length, hitsBR.Length); 
+			*/
 
-			Debug.Log (hits.Length);
+			Vector3 pointL = Camera.main.transform.TransformPoint (new Vector3 (-length * .5f, 0, 0));
+			Ray rayL = new Ray (pointL, transform.position - pointL);
+			RaycastHit[] hitsL = Physics.RaycastAll (rayL, (pointL - transform.position).magnitude, ~(1 << 8));
+
+			Debug.DrawLine (pointL, transform.position, Color.red);
+
+			Vector3 pointR = Camera.main.transform.TransformPoint (new Vector3 (length * .5f, 0, 0));
+			Ray rayR = new Ray (pointR, transform.position - pointR);
+			RaycastHit[] hitsR = Physics.RaycastAll (rayR, (pointR - transform.position).magnitude, ~(1 << 8));
+
+			Debug.DrawLine (pointR, transform.position, Color.red);
+
+			RaycastHit[] hits = new RaycastHit[hitsMid.Length + hitsL.Length + hitsR.Length];
+			Array.Copy (hitsMid, 0, hits, 0, hitsMid.Length);
+			Array.Copy (hitsL, 0, hits, hitsMid.Length, hitsL.Length);
+			Array.Copy (hitsR, 0, hits, hitsL.Length, hitsR.Length);
+
+//			Debug.Log (hits.Length);
 			for (int i = 0; i < hits.Length; i++) {
 
 				if (hits[i].collider != null && !objectsInWay.Contains (hits [i].collider.gameObject)) {

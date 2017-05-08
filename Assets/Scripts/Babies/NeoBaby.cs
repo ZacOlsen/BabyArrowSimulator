@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class NeoBaby : BabyController {
@@ -12,11 +13,14 @@ public class NeoBaby : BabyController {
 	private const float startingTimeScale = 1f;
 	private const float startingfixedTime = .02f;
 
+	private Image chargeBackground;
+
 	protected new void Start () {
 
 		base.Start();
 
 		timeSpeedSlowAmount = timeAimSpeed * Time.fixedDeltaTime;
+		chargeBackground = GameObject.Find ("Charge Background").GetComponent<Image> ();
 	}
 
 	protected new void Update () {
@@ -37,6 +41,7 @@ public class NeoBaby : BabyController {
 				}
 
 				aiming = true;
+				chargeBackground.enabled = true;
 			}
 
 			if (!launched) {
@@ -61,6 +66,7 @@ public class NeoBaby : BabyController {
 
 				if (!grounded && !dying) {
 					anim.SetInteger ("animState", 0);
+					chargeBackground.enabled = false;
 				}
 			}
 		}

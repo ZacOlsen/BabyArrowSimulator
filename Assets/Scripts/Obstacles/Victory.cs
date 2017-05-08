@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Victory : MonoBehaviour {
 
+	[SerializeField] private float timeTilEndShown = 3f;
 	[SerializeField] private GameObject brokenJar = null;
 
 	private void Win (Collider other) {
@@ -21,7 +22,7 @@ public class Victory : MonoBehaviour {
 				Destroy (transform.GetChild(0).GetComponent<MeshRenderer> ());
 
 				//bm.ShowVictory ();
-				Invoke("ShowWin", 3f);
+				Invoke("ShowWin", timeTilEndShown);
 				Destroy (baby);
 			}
 		}
