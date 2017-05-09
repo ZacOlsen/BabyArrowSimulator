@@ -116,8 +116,8 @@ public class BabyController : MonoBehaviour {
 	[SerializeField] private AudioClip splatterSound = null;
 	protected AudioSource audioPlayer;
 
-	[SerializeField] private GameObject blood;
-	[SerializeField] private GameObject smoke;
+	[SerializeField] private GameObject blood = null;
+	[SerializeField] private GameObject smoke = null;
 
 	protected void Awake () {
 
