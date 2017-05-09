@@ -116,6 +116,9 @@ public class BabyController : MonoBehaviour {
 	[SerializeField] private AudioClip splatterSound = null;
 	protected AudioSource audioPlayer;
 
+	[SerializeField] private GameObject blood;
+	[SerializeField] private GameObject smoke;
+
 	protected void Awake () {
 
 		rb = GetComponent<Rigidbody> ();
@@ -563,7 +566,7 @@ public class BabyController : MonoBehaviour {
 		}
 	}
 
-	public void Die () {
+	public void Die (bool smokeB = false) {
 
 		Time.timeScale = 1f;
 		DisableAimArc ();
@@ -583,6 +586,12 @@ public class BabyController : MonoBehaviour {
 			
 		Destroy (babyModel.gameObject);
 		Destroy (Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
+
+		if (!smokeB) {
+			Destroy (Instantiate (blood, transform.position, babyModel.rotation), 1f);
+		} else {
+			Destroy (Instantiate (smoke, transform.position, babyModel.rotation), 1f);
+		}
 	}
 
 	private void SwitchToPreviousBaby () {
