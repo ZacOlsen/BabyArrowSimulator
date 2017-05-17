@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CameraLevelPreview : MonoBehaviour {
@@ -16,7 +17,8 @@ public class CameraLevelPreview : MonoBehaviour {
 	private BabyController bbc;
 	private GameObject lst;
 
-	private GameObject lpt;
+	private Text lpt;
+	private bool paused;
 
 	void Start () {
 
@@ -27,7 +29,7 @@ public class CameraLevelPreview : MonoBehaviour {
 		lst = GameObject.Find ("Level Start Background");
 		lst.SetActive (false);
 
-		lpt = GameObject.Find ("Level Preview Text");
+		lpt = GameObject.Find ("Level Preview Text").GetComponent<Text> ();
 		//GameObject.Find ("Charge Background").SetActive (false);
 		//GameObject.Find ("Current Baby").SetActive (false);
 
@@ -41,7 +43,12 @@ public class CameraLevelPreview : MonoBehaviour {
 
 	void Update () {
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			lpt.enabled = paused;
+			paused = !paused;
+		}
+
+		if (!paused && Input.GetMouseButtonDown (0)) {
 			StopLevelPreview ();
 		}
 	}
@@ -82,7 +89,7 @@ public class CameraLevelPreview : MonoBehaviour {
 		transform.localEulerAngles = offsetRotation;
 
 		lst.SetActive (true);
-		lpt.SetActive (false);
+		lpt.gameObject.SetActive (false);
 
 		Destroy (this);
 	}

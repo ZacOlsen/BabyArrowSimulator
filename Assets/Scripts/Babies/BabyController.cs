@@ -462,14 +462,17 @@ public class BabyController : MonoBehaviour {
 		float initialXVel = launchPower * Mathf.Cos (vertRotation.localEulerAngles.x * Mathf.Deg2Rad);
 
 		float distance = 0;
-		for (float i = .1f; i < time; i += .01f) {
+		for (float i = .1f; i < 100; i += .01f) {
 			
-			distance = Mathf.Sqrt (Mathf.Pow(initialXVel * i, 2) + Mathf.Pow(.5f * -Physics.gravity.y * i * i + initialYVel * i + transform.position.y, 2));
+			distance = Mathf.Sqrt (Mathf.Pow(initialXVel * i, 2) + Mathf.Pow(.5f * -Physics.gravity.y * 
+				i * i + initialYVel * i, 2));
+
 			if (distance > maxArcDistance) {
 				time = i;
+				break;
 			}
 		}
-			
+
 		Vector3 landPos = transform.TransformDirection (new Vector3 (0, 0, distance)) + launchStartPos.position;
 		Vector3 previousPoint = transform.position;
 
@@ -560,6 +563,7 @@ public class BabyController : MonoBehaviour {
 			}
 
 			anim.SetInteger ("animState", 1);
+	//		anim.SetTime (.5f);
 
 			rb.isKinematic = true;
 			Destroy (col);
@@ -588,9 +592,9 @@ public class BabyController : MonoBehaviour {
 		Destroy (Instantiate (fractalizedBaby, transform.position, babyModel.rotation), timeTilFractalizedDestroyed);
 
 		if (!smokeB) {
-			Destroy (Instantiate (blood, transform.position, babyModel.rotation), 1f);
+			Destroy (Instantiate (blood, transform.position, blood.transform.rotation), 1f);
 		} else {
-			Destroy (Instantiate (smoke, transform.position, babyModel.rotation), 1f);
+			Destroy (Instantiate (smoke, transform.position, smoke.transform.rotation), 1f);
 		}
 	}
 

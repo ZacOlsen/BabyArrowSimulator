@@ -13,29 +13,68 @@ public class TutorialController : MonoBehaviour {
 	private Text textBox;
 	private RawImage image;
 	[SerializeField] private GameObject background = null;
+	private RawImage backgroundImage;
 	private bool babyInArea;
 
 	private Rigidbody rb;
+	private BabyManager bm;
+	private bool paused;
 
 	private void Start () {
-		background.SetActive (false);
+		
+		backgroundImage = background.GetComponent<RawImage> ();
+		textBox = GameObject.Find ("BText").GetComponent<Text> ();
+		image = GameObject.Find ("Commander").GetComponent<RawImage> ();
+
+		//background.SetActive (false);
+		ChangeText (false);
+
+		bm = GameObject.Find ("Baby Manager").GetComponent<BabyManager> ();
 	}
 
 	private void ShowTutorial () {
 		
-		background.SetActive (true);
-		textBox = GameObject.Find ("Text").GetComponent<Text> ();
-		image = GameObject.Find ("Image").GetComponent<RawImage> ();
-		
+		//background.SetActive (true);
+		ChangeText (true);
 		textBox.text = messages [index];
 		image.texture = images [index].texture;
-		
+
+		bm.ChangeUI (false);
+
+		WaitOneFrame ();
 		Time.timeScale = 0;
 	}
-	
+
+	//cancer being worked on
+	private IEnumerable WaitOneFrame(){
+		yield return new WaitForEndOfFrame ();
+		yield return new WaitForEndOfFrame ();
+		yield return new WaitForEndOfFrame ();
+		yield return new WaitForEndOfFrame ();
+		yield return new WaitForEndOfFrame ();
+		yield return new WaitForEndOfFrame ();
+		Time.timeScale = 0;
+	}
+
+	private void ChangeText (bool shown) {
+
+		backgroundImage.enabled = shown;
+		textBox.enabled = shown;
+		image.enabled = shown;
+	}
+
 	private void Update () {
 	
-		if (babyInArea && Input.GetMouseButtonDown(0)) {
+		if (babyInArea && Input.GetKeyDown (KeyCode.Escape)) {
+
+			backgroundImage.enabled = paused;
+			textBox.enabled = paused;
+			image.enabled = paused;
+
+			paused = !paused;
+		}
+
+		if (!paused && babyInArea && Input.GetMouseButtonDown(0)) {
 
 			index++;
 
@@ -48,7 +87,9 @@ public class TutorialController : MonoBehaviour {
 					Destroy (tempWall);
 				}
 
-				background.SetActive (false);
+				//background.SetActive (false);
+				ChangeText (false);
+				bm.ChangeUI (true);
 				rb.GetComponent<BabyController> ().enabled = true;
 				Destroy (this);
 				return;

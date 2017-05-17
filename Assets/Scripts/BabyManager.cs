@@ -373,13 +373,15 @@ public class BabyManager : MonoBehaviour {
 
 	public void ChangeUI (bool shown) {
 
-		currentBabySelected.enabled = shown;
-		currentBabyNumbers.enabled = shown;
-		nextBabySelected.enabled = shown;
-		nextBabyNumbers.enabled = shown;
-		totalBabyNumbers.enabled = shown;
+		if (!LevelStartText.inProgress) {
+			currentBabySelected.enabled = shown;
+			currentBabyNumbers.enabled = shown;
+			nextBabySelected.enabled = shown;
+			nextBabyNumbers.enabled = shown;
+			totalBabyNumbers.enabled = shown;
 
-		GameObject.Find ("Charge Background").GetComponent<Image>().enabled = shown;
-//		GameObject.Find ("Charge Background").transform.GetChild(0).GetComponent<Image>().enabled = shown;
+			GameObject.Find ("Charge Background").GetComponent<Image>().enabled = shown;
+//			GameObject.Find ("Charge Background").transform.GetChild(0).GetComponent<Image>().enabled = shown;
+		}
 	}
 }
