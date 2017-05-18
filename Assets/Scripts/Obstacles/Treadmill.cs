@@ -11,7 +11,7 @@ public class Treadmill : MonoBehaviour {
 		if (other.collider.CompareTag ("Baby")) {
 
 			other.transform.GetComponent<Rigidbody> ().velocity = 
-				transform.TransformDirection (new Vector3 (0, 0, -speed));
+				transform.TransformDirection (new Vector3 (0, speed, 0));
 
 			other.transform.GetComponent<BabyController> ().SetOnTreadmill (true);
 		}

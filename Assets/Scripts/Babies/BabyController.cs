@@ -170,6 +170,10 @@ public class BabyController : MonoBehaviour {
 		
 	protected void Update () {
 
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			ResetShootState ();
+		}
+
 		if (Time.timeScale > 0) {
 			UpdateLooking ();
 
@@ -539,6 +543,7 @@ public class BabyController : MonoBehaviour {
 	public void EndMotion () {
 
 		Time.timeScale = 1f;
+		Time.fixedDeltaTime = .02f;
 
 		if (!grounded && !dying) {
 

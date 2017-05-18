@@ -25,6 +25,10 @@ public class NeoBaby : BabyController {
 
 	protected new void Update () {
 
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			ResetShootState ();
+		}
+
 		if (Time.timeScale > 0) {
 
 			if (grounded && !dying) {
@@ -50,7 +54,7 @@ public class NeoBaby : BabyController {
 			}
 			
 			if (Input.GetMouseButtonUp (0)) {
-				Time.timeScale = startingTimeScale;
+				Time.timeScale = 1;
 				Time.fixedDeltaTime = startingfixedTime;
 
 				if (aiming) {
@@ -59,7 +63,7 @@ public class NeoBaby : BabyController {
 			}
 
 			if (Input.GetMouseButtonDown (1)) {
-				Time.timeScale = startingTimeScale;
+				Time.timeScale = 1;
 				Time.fixedDeltaTime = startingfixedTime;
 				launched = false;
 				aiming = false;
@@ -96,7 +100,7 @@ public class NeoBaby : BabyController {
 
 		if (Input.GetMouseButtonUp (0) && aiming && !dying) {
 
-			Time.timeScale = startingTimeScale;
+			Time.timeScale = 1;
 			Time.fixedDeltaTime = startingfixedTime;
 
 			if (grounded) {
@@ -111,7 +115,7 @@ public class NeoBaby : BabyController {
 
 	private void OnDisable () {
 
-		Time.timeScale = startingTimeScale;
+		Time.timeScale = 1;
 		Time.fixedDeltaTime = startingfixedTime;
 	}
 

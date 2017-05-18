@@ -19,8 +19,6 @@ public class RotateObject : MonoBehaviour {
 			vec = Vector3.up;
 		}
 
-//		Debug.Log (vec);
-
 		transform.RotateAround (transform.position, transform.parent.TransformDirection (vec),
 			rotationAngleSec * Time.fixedDeltaTime);
 	}
