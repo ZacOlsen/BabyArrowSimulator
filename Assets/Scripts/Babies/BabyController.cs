@@ -123,7 +123,7 @@ public class BabyController : MonoBehaviour {
 
 		rb = GetComponent<Rigidbody> ();
 
-		babyModel = transform.FindChild ("Baby Model");
+		babyModel = transform.Find ("Baby Model");
 		col = transform.GetComponentInChildren<BoxCollider> ();
 
 		bm = GameObject.Find ("Baby Manager").GetComponent<BabyManager> ();
@@ -138,8 +138,8 @@ public class BabyController : MonoBehaviour {
 
 		chargeBar = GameObject.Find ("Charge Foreground").GetComponent<Image> ();
 
-		vertRotation = transform.FindChild ("Vertical Rotation");
-		launchStartPos = vertRotation.FindChild ("Launch Start Pos");
+		vertRotation = transform.Find ("Vertical Rotation");
+		launchStartPos = vertRotation.Find ("Launch Start Pos");
 
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
@@ -389,7 +389,7 @@ public class BabyController : MonoBehaviour {
 			bm.ChangeUI (false);
 
 			baby = ((GameObject) Instantiate (baby, new Vector3(launchStartPos.position.x, launchStartPos.position.y - .3f, launchStartPos.position.z), transform.rotation));
-			baby.transform.FindChild ("Vertical Rotation").transform.localRotation = vertRotation.localRotation;
+			baby.transform.Find ("Vertical Rotation").transform.localRotation = vertRotation.localRotation;
 
 			if (col != null) {
 				Physics.IgnoreCollision (col, baby.GetComponentInChildren<Collider> ());
@@ -609,7 +609,7 @@ public class BabyController : MonoBehaviour {
 
 		Vector3 camOffsets = Camera.main.transform.localPosition;
 
-		Camera.main.transform.parent = previousBaby.transform.FindChild ("Vertical Rotation").transform;
+		Camera.main.transform.parent = previousBaby.transform.Find ("Vertical Rotation").transform;
 		Camera.main.transform.localPosition = camOffsets;
 		Camera.main.transform.localEulerAngles = camRotation;
 

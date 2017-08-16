@@ -14,7 +14,7 @@ public class MouseTrap : MonoBehaviour {
 
 	void Start () {
 
-		wireKiller = transform.FindChild ("wired_square");
+		wireKiller = transform.Find ("wired_square");
 		startingRotation = wireKiller.rotation;
 	}
 	
