@@ -24,9 +24,7 @@ public class MenuController : MonoBehaviour {
 
 	public void Missions () {
 
-		BinaryReader br = new BinaryReader (new FileStream("Assets\\Game File IO\\Mission_Unlocks.sav", FileMode.Open));
-		int unlocks = br.ReadInt32 ();
-		br.Close ();
+		int unlocks = PlayerPrefs.GetInt("LevelUnlock");
 
 		for (int i = 0; i < missionButtonObject.transform.childCount; i++) {
 			missionButtonObject.transform.GetChild (i).GetComponent<Button> ().interactable = i < unlocks;
@@ -49,23 +47,15 @@ public class MenuController : MonoBehaviour {
 
 	public static void UnlockMissions (int unlocks) {
 
-		BinaryReader br = new BinaryReader (new FileStream("Assets\\Game File IO\\Mission_Unlocks.sav", FileMode.Open));
-		int currentUnlocks = br.ReadInt32 ();
-		br.Close ();
+		int currentUnlocks = PlayerPrefs.GetInt("LevelUnlock");
 
 		if (currentUnlocks < unlocks + 1) {
-			BinaryWriter bw = new BinaryWriter (new FileStream ("Assets\\Game File IO\\Mission_Unlocks.sav", FileMode.Create));
-			bw.Write (unlocks + 1);
-			bw.Close ();
+			PlayerPrefs.SetInt ("LevelUnlock", unlocks + 1);
 		}
 	}
 
 	public void ResetMissions () {
-
-		BinaryWriter bw = new BinaryWriter (new FileStream ("Assets\\Game File IO\\Mission_Unlocks.sav", FileMode.Create));
-		bw.Write (1);
-		bw.Close ();
-
+		PlayerPrefs.SetInt ("LevelUnlock", 1);
 		Missions ();
 	}
 
